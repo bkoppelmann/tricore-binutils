@@ -1,0 +1,52 @@
+#!/bin/sh
+#Xsrcdir=../../../binutils-2.13
+Xsrcdir=`(cd \`dirname $0\`; pwd)`
+Xinstdir=/gnu/install-tricore
+Xrelease=V337
+
+psep=":"
+mtmode=--enable-maintainer-mode
+case `uname -s` in
+Linux)		Xtdir=Linux ;;
+SunOS)		Xtdir=Solaris; mtmode="" ;;
+CYGWIN_NT-*)	Xtdir=Win32 ;;
+MINGW32*)	Xtdir=MinGW32; mtmode=""; psep=" " ;;
+*)		echo "Can't configure on system \"`uname -s`\".  Stop."
+		exit 1;;
+esac
+
+if [ `pwd` = $Xsrcdir ]
+then
+  echo "You should _not_ configure these tools in their source directory!"
+  exit 2
+fi
+
+export CPPFLAGS=`echo -DREPORT_BUGS_TO=\'"\"<support@hightec-rt.com>\""\' \
+  -DHTC_SUPPORT -DHTC_TRICORE -I$Xsrcdir`
+$Xsrcdir/configure --target=tricore --program-prefix=tricore- --prefix=$Xinstdir/$Xtdir.$Xrelease $mtmode
+
+if [ ! -f binutils/Makefile ]
+then
+  echo "Error: binutils/Makefile doesn't exist"
+  exit 1;
+fi
+sed -e "s,^VPATH = $Xsrcdir/binutils\$,VPATH = $Xsrcdir/htc${psep}$Xsrcdir/binutils," binutils/Makefile > tmp.bu.Makefile
+$Xsrcdir/move-if-change tmp.bu.Makefile binutils/Makefile
+
+if [ ! -f ld/Makefile ]
+then
+  echo "Error: ld/Makefile doesn't exist"
+  exit 1;
+fi
+sed -e "s,^VPATH = $Xsrcdir/ld\$,VPATH = $Xsrcdir/htc${psep}$Xsrcdir/ld," -e "s,\(-DSCRIPTDIR=\)'[^']*',\\1'({extern char *tricore_elf32_get_scriptdir (char *); char *__path = tricore_elf32_get_scriptdir (program_name); __path;})'," ld/Makefile > tmp.ld.Makefile
+$Xsrcdir/move-if-change tmp.ld.Makefile ld/Makefile
+
+if [ ! -f gas/doc/Makefile ]
+then
+  echo "Error: gas/doc/Makefile doesn't exist"
+  exit 1;
+fi
+sed -e "s,^CONFIG = all\$,CONFIG = tricore," gas/doc/Makefile > tmp.gasdoc.Makefile
+$Xsrcdir/move-if-change tmp.gasdoc.Makefile gas/doc/Makefile
+exit 0
+

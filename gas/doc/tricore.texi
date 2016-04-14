@@ -1,0 +1,85 @@
+@c Copyright 1992, 1993, 1994, 1996, 1997, 1999, 2000, 2001, 2002
+@c Free Software Foundation, Inc.
+@c This file is part of the documentation for the GAS manual
+
+@c Configuration settings for all-inclusive version of manual
+
+@c switches:------------------------------------------------------------
+@c Properties of the manual
+@c ========================
+@c Discuss all architectures?
+@c @set ALL-ARCH
+@c A generic form of manual (not tailored to specific target)?
+@set GENERIC
+@c Include text on assembler internals?
+@clear INTERNALS
+@c Many object formats supported in this config?
+@c @set MULTI-OBJ
+
+@c Object formats of interest
+@c ==========================
+@c @set AOUT
+@c @set BOUT
+@c @set COFF
+@set ELF
+@c @set SOM
+
+@c CPUs of interest
+@c ================
+@c @set A29K
+@c @set ALPHA
+@c @set ARC
+@c @set ARM
+@c @set CRIS
+@c @set D10V
+@c @set D30V
+@c @set H8/300
+@c @set H8/500
+@c @set HPPA
+@c @set I370
+@c @set I80386
+@c @set I860
+@c @set I960
+@c @set M32R
+@c @set M68HC11
+@c @set M680X0
+@c @set M880X0
+@c @set MCORE
+@c @set MIPS
+@c @set MMIX
+@c @set PDP11
+@c @set PJ
+@c @set PPC
+@c @set SH
+@c @set SPARC
+@set TRICORE
+@c @set C54X
+@c @set V850
+@c @set VAX
+@c @set VXWORKS
+@c @set Z8000
+
+@c Does this version of the assembler use the difference-table kluge?
+@c @set DIFF-TBL-KLUGE
+
+@c Do all machines described use IEEE floating point?
+@set IEEEFLOAT
+
+@c Is a word 32 bits, or 16?
+@c @set W32
+@set W16
+
+@c Do symbols have different characters than usual?
+@clear SPECIAL-SYMS
+
+@c strings:------------------------------------------------------------
+@c Name of the assembler:
+@set AS GNU as
+@c Name of C compiler:
+@set GCC GNU cc
+@c Name of linker:
+@set LD GNU ld
+@c Text for target machine (best not used in generic case; but just in case...)
+@set TARGET TriCore
+@c Name of object format NOT SET in generic version
+@clear OBJ-NAME

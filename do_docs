@@ -1,0 +1,39 @@
+#!/bin/sh
+
+export RELEASE=33
+export INSTDIR=/gnu/install-tricore
+export SRCDIR=/gnu/source/binutils-2.13
+export LANG=en_US
+
+if [ "`uname -n`" != "mix" ]
+then
+  echo "This script must be run on server \"mix\"!"
+  exit 1
+fi
+
+if [ ! -f gas/doc/do_docs ]
+then
+  if [ ! -f $SRCDIR/gas/doc/do_docs ]
+  then
+    echo "Can't find $SRCDIR/gas/doc/do_docs"
+    exit 1
+  else
+    echo "Symlinking $SRCDIR/gas/doc/do_docs -> gas/doc"
+    ln -s $SRCDIR/gas/doc/do_docs gas/doc
+  fi  
+fi
+
+if [ ! -f binutils/doc/do_docs ]
+then
+  if [ ! -f $SRCDIR/binutils/doc/do_docs ]
+  then
+    echo "Can't find $SRCDIR/binutils/doc/do_docs"
+    exit 1
+  else
+    echo "Symlinking $SRCDIR/binutils/doc/do_docs -> binutils/doc"
+    ln -s $SRCDIR/binutils/doc/do_docs binutils/doc
+  fi  
+fi
+
+(cd gas/doc; ./do_docs)
+(cd binutils/doc; ./do_docs)

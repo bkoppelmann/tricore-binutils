@@ -1,0 +1,122 @@
+#!/bin/sh -x
+if [ x"$INSTDIR" = x ]
+then
+  gen_only=1
+else
+  gen_only=0
+fi
+SRCDIR=${SRCDIR-/gnu/source/binutils-2.13}
+LINDIR=$INSTDIR/Linux.$RELEASE
+#SOLDIR=$INSTDIR/Solaris.$RELEASE
+WINDIR=$INSTDIR/MinGW32.$RELEASE
+PFX=tricore-
+export LANG=en_US
+
+if true
+then
+
+make CONFIG=tricore info as.1	    
+#texi2pdf $SRCDIR/gas/doc/gasp.texi
+#rm -f gasp.{aux,cp,fn,log,ky,pg,tp,vr,tmp,cps,fns,toc,op,ops}
+#makeinfo --force -I $SRCDIR/gas/doc $SRCDIR/gas/doc/gasp.texi	    
+#makeinfo --force -I $SRCDIR/gas/doc --html $SRCDIR/gas/doc/gasp.texi	    
+texi2pdf $SRCDIR/gas/doc/as.texinfo
+rm -f as.{aux,cp,fn,log,ky,pg,tp,vr,tmp,cps,fns,toc,op,ops}
+makeinfo -I $SRCDIR/gas/doc \
+	    $SRCDIR/gas/doc/as.texinfo
+makeinfo -I $SRCDIR/gas/doc --html \
+	    $SRCDIR/gas/doc/as.texinfo
+fi
+
+[ $gen_only -eq 1 ] && exit 0
+
+#
+# install info files
+#
+mkdir -p $LINDIR/info
+rm -f $LINDIR/info/as.info* $LINDIR/info/${PFX}as.info*
+rm -f $LINDIR/info/gasp.info* $LINDIR/info/${PFX}gasp.info*
+#mkdir -p $SOLDIR/info
+#rm -f $SOLDIR/info/as.info* $SOLDIR/info/${PFX}as.info*
+#rm -f $SOLDIR/info/gasp.info* $SOLDIR/info/${PFX}gasp.info*
+mkdir -p $WINDIR/info
+rm -f $WINDIR/info/as.info* $WINDIR/info/${PFX}as.info*
+rm -f $WINDIR/info/gasp.info* $WINDIR/info/${PFX}gasp.info*
+for i in as.info* #gasp.info*
+do
+  cp -a $i $LINDIR/info/$i
+  chmod 644 $LINDIR/info/$i
+#  cp -a $i $SOLDIR/info/$i
+#  chmod 644 $SOLDIR/info/$i
+  cp -a $i $WINDIR/info/$i
+  chmod 644 $WINDIR/info/$i
+done
+
+#
+# install man page
+#
+mkdir -p $LINDIR/man/man1
+rm -f $LINDIR/man/man1/as.1
+rm -f $LINDIR/man/man1/${PFX}as.1
+#mkdir -p $SOLDIR/man/man1
+#rm -f $SOLDIR/man/man1/as.1
+#rm -f $SOLDIR/man/man1/${PFX}as.1
+mkdir -p $WINDIR/man/man1
+rm -f $WINDIR/man/man1/as.1
+rm -f $WINDIR/man/man1/${PFX}as.1
+cp -a as.1 $LINDIR/man/man1/${PFX}as.1
+chmod 644 $LINDIR/man/man1/${PFX}as.1
+#cp -a as.1 $SOLDIR/man/man1/${PFX}as.1
+#chmod 644 $SOLDIR/man/man1/${PFX}as.1
+cp -a as.1 $WINDIR/man/man1/${PFX}as.1
+chmod 644 $WINDIR/man/man1/${PFX}as.1
+
+#
+# install pdf files
+#
+mkdir -p $LINDIR/pdf
+rm -f $LINDIR/pdf/as.pdf $LINDIR/pdf/${PFX}as.pdf
+rm -f $LINDIR/pdf/gasp.pdf $LINDIR/pdf/${PFX}gasp.pdf
+#mkdir -p $SOLDIR/pdf
+#rm -f $SOLDIR/pdf/as.pdf $SOLDIR/pdf/${PFX}as.pdf
+#rm -f $SOLDIR/pdf/gasp.pdf $SOLDIR/pdf/${PFX}gasp.pdf
+mkdir -p $WINDIR/pdf
+rm -f $WINDIR/pdf/as.pdf $WINDIR/pdf/${PFX}as.pdf
+rm -f $WINDIR/pdf/gasp.pdf $WINDIR/pdf/${PFX}gasp.pdf
+cp -a as.pdf $LINDIR/pdf/${PFX}as.pdf
+chmod 644 $LINDIR/pdf/${PFX}as.pdf
+#cp -a as.pdf $SOLDIR/pdf/${PFX}as.pdf
+#chmod 644 $SOLDIR/pdf/${PFX}as.pdf
+cp -a as.pdf $WINDIR/pdf/${PFX}as.pdf
+chmod 644 $WINDIR/pdf/${PFX}as.pdf
+#cp -a gasp.pdf $LINDIR/pdf/${PFX}gasp.pdf
+#chmod 644 $LINDIR/pdf/${PFX}gasp.pdf
+#cp -a gasp.pdf $SOLDIR/pdf/${PFX}gasp.pdf
+#chmod 644 $SOLDIR/pdf/${PFX}gasp.pdf
+#cp -a gasp.pdf $WINDIR/pdf/${PFX}gasp.pdf
+#chmod 644 $WINDIR/pdf/${PFX}gasp.pdf
+
+#
+# install html files
+#
+mkdir -p $LINDIR/html
+rm -f $LINDIR/html/as*.html $LINDIR/html/${PFX}as*.html
+rm -f $LINDIR/html/gasp*.html $LINDIR/html/${PFX}gasp*.html
+#mkdir -p $SOLDIR/html
+#rm -f $SOLDIR/html/as*.html $SOLDIR/html/${PFX}as*.html
+#rm -f $SOLDIR/html/gasp*.html $SOLDIR/html/${PFX}gasp*.html
+mkdir -p $WINDIR/html
+rm -f $WINDIR/html/as*.html $WINDIR/html/${PFX}as*.html
+rm -f $WINDIR/html/gasp*.html $WINDIR/html/${PFX}gasp*.html
+cp -a as.html $LINDIR/html/${PFX}as.html
+chmod 644 $LINDIR/html/${PFX}as.html
+#cp -a gasp.html $LINDIR/html/${PFX}gasp.html
+#chmod 644 $LINDIR/html/${PFX}gasp.html
+#cp -a as.html $SOLDIR/html/${PFX}as.html
+#chmod 644 $SOLDIR/html/${PFX}as.html
+#cp -a gasp.html $SOLDIR/html/${PFX}gasp.html
+#chmod 644 $SOLDIR/html/${PFX}gasp.html
+cp -a as.html $WINDIR/html/${PFX}as.html
+chmod 644 $WINDIR/html/${PFX}as.html
+#cp -a gasp.html $WINDIR/html/${PFX}gasp.html
+#chmod 644 $WINDIR/html/${PFX}gasp.html

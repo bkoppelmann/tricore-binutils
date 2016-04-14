@@ -1,0 +1,130 @@
+#!/bin/sh -x
+if [ x"$INSTDIR" = x ]
+then
+  gen_only=1
+else
+  gen_only=0
+fi
+SRCDIR=${SRCDIR-/gnu/source/binutils-2.13}
+LINDIR=$INSTDIR/Linux.$RELEASE
+#SOLDIR=$INSTDIR/Solaris.$RELEASE
+WINDIR=$INSTDIR/MinGW32.$RELEASE
+PFX=tricore-
+export LANG=en_US
+
+if true
+then
+
+make info c++filt.1	    
+(cd ../../ld; make info ld.1)	    
+texi2pdf $SRCDIR/binutils/doc/binutils.texi
+rm -f binutils.{aux,cp,fn,log,ky,pg,tp,vr,tmp,cps,fns,toc,op,ops}
+makeinfo -I $SRCDIR/binutils/doc --html \
+	    $SRCDIR/binutils/doc/binutils.texi
+texi2pdf -I ../../ld \
+	 -I $SRCDIR/bfd/doc \
+	    $SRCDIR/ld/ld.texinfo
+rm -f ld.{aux,cp,fn,log,ky,pg,tp,vr,tmp,cps,fns,toc,op,ops}
+makeinfo -I $SRCDIR/ld --html \
+	 -I ../../ld \
+	 -I $SRCDIR/bfd/doc \
+	    $SRCDIR/ld/ld.texinfo
+
+fi
+
+[ $gen_only -eq 1 ] && exit 0
+
+#
+# install info files
+#
+mkdir -p $LINDIR/info
+rm -f $LINDIR/info/binutils.info*
+rm -f $LINDIR/info/${PFX}binutils.info*
+rm -f $LINDIR/info/ld.info*
+rm -f $LINDIR/info/${PFX}ld.info*
+#mkdir -p $SOLDIR/info
+#rm -f $SOLDIR/info/binutils.info*
+#rm -f $SOLDIR/info/${PFX}binutils.info*
+#rm -f $SOLDIR/info/ld.info*
+#rm -f $SOLDIR/info/${PFX}ld.info*
+mkdir -p $WINDIR/info
+rm -f $WINDIR/info/binutils.info*
+rm -f $WINDIR/info/${PFX}binutils.info*
+rm -f $WINDIR/info/ld.info*
+rm -f $WINDIR/info/${PFX}ld.info*
+
+for i in binutils.info* ../../ld/ld.info*
+do
+  cp -a $i $LINDIR/info/`basename $i`
+  chmod 644 $LINDIR/info/`basename $i`
+#  cp -a $i $SOLDIR/info/`basename $i`
+#  chmod 644 $SOLDIR/info/`basename $i`
+  cp -a $i $WINDIR/info/`basename $i`
+  chmod 644 $WINDIR/info/`basename $i`
+done
+
+#
+# install man pages
+#
+mkdir -p $LINDIR/man/man1
+#mkdir -p $SOLDIR/man/man1
+mkdir -p $WINDIR/man/man1
+for m in ../../ld/*.1 $SRCDIR/binutils/doc/*.1 *.1
+do
+  if [ ! -f $m ]; then continue; fi
+  base=`basename $m`
+  rm -f $LINDIR/man/man1/$base $LINDIR/man/man1/${PFX}$base
+#  rm -f $SOLDIR/man/man1/$base $SOLDIR/man/man1/${PFX}$base
+  rm -f $WINDIR/man/man1/$base $WINDIR/man/man1/${PFX}$base
+  cp -a $m $LINDIR/man/man1/${PFX}$base
+#  cp -a $m $SOLDIR/man/man1/${PFX}$base
+  cp -a $m $WINDIR/man/man1/${PFX}$base
+  chmod 644 $LINDIR/man/man1/${PFX}$base
+#  chmod 644 $SOLDIR/man/man1/${PFX}$base
+  chmod 644 $WINDIR/man/man1/${PFX}$base
+done
+
+#
+# install pdf files
+#
+mkdir -p $LINDIR/pdf
+#mkdir -p $SOLDIR/pdf
+mkdir -p $WINDIR/pdf
+for p in ld.pdf binutils.pdf
+do
+  rm -f $LINDIR/pdf/$p $LINDIR/pdf/${PFX}$p
+#  rm -f $SOLDIR/pdf/$p $SOLDIR/pdf/${PFX}$p
+  rm -f $WINDIR/pdf/$p $WINDIR/pdf/${PFX}$p
+  cp -a $p $LINDIR/pdf/${PFX}$p
+#  cp -a $p $SOLDIR/pdf/${PFX}$p
+  cp -a $p $WINDIR/pdf/${PFX}$p
+  chmod 644 $LINDIR/pdf/${PFX}$p
+#  chmod 644 $SOLDIR/pdf/${PFX}$p
+  chmod 644 $WINDIR/pdf/${PFX}$p
+done
+
+#
+# install html files
+#
+mkdir -p $LINDIR/html
+#mkdir -p $SOLDIR/html
+mkdir -p $WINDIR/html
+rm -f $LINDIR/html/ld*.html $LINDIR/html/${PFX}ld*.html
+rm -f $LINDIR/html/binutils*.html $LINDIR/html/${PFX}binutils*.html
+#rm -f $SOLDIR/html/ld*.html $SOLDIR/html/${PFX}ld*.html
+#rm -f $SOLDIR/html/binutils*.html $SOLDIR/html/${PFX}binutils*.html
+rm -f $WINDIR/html/ld*.html $WINDIR/html/${PFX}ld*.html
+rm -f $WINDIR/html/binutils*.html $WINDIR/html/${PFX}binutils*.html
+for h in ld.html binutils.html
+do
+  base=`basename $h .html`
+  rm -f $LINDIR/html/$base*.html $LINDIR/html/${PFX}$base*.html
+#  rm -f $SOLDIR/html/$base*.html $SOLDIR/html/${PFX}$base*.html
+  rm -f $WINDIR/html/$base*.html $WINDIR/html/${PFX}$base*.html
+  cp -a $h $LINDIR/html/${PFX}$h
+#  cp -a $h $SOLDIR/html/${PFX}$h
+  cp -a $h $WINDIR/html/${PFX}$h
+  chmod 644 $LINDIR/html/${PFX}$h
+#  chmod 644 $SOLDIR/html/${PFX}$h
+  chmod 644 $WINDIR/html/${PFX}$h
+done
