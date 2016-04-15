@@ -48,28 +48,28 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 /* Section flags for dynamic relocation sections.  */
 
-#define RELGOTSECFLAGS	(SEC_ALLOC | SEC_LOAD | SEC_HAS_CONTENTS \
-			 | SEC_IN_MEMORY | SEC_LINKER_CREATED | SEC_READONLY)
+#define RELGOTSECFLAGS  (SEC_ALLOC | SEC_LOAD | SEC_HAS_CONTENTS \
+             | SEC_IN_MEMORY | SEC_LINKER_CREATED | SEC_READONLY)
 #define DYNOBJSECFLAGS  (SEC_HAS_CONTENTS | SEC_IN_MEMORY \
-			 | SEC_LINKER_CREATED | SEC_READONLY)
+             | SEC_LINKER_CREATED | SEC_READONLY)
 
 /* Will references to this symbol always reference the symbol in this obj?  */
 
-#define SYMBOL_REFERENCES_LOCAL(INFO, H)				\
-  ((!INFO->shared							\
-    || INFO->symbolic							\
-    || (H->dynindx == -1)						\
-    || (ELF_ST_VISIBILITY (H->other) == STV_INTERNAL)			\
-    || (ELF_ST_VISIBILITY (H->other) == STV_HIDDEN))			\
+#define SYMBOL_REFERENCES_LOCAL(INFO, H)                \
+  ((!INFO->shared                           \
+    || INFO->symbolic                           \
+    || (H->dynindx == -1)                       \
+    || (ELF_ST_VISIBILITY (H->other) == STV_INTERNAL)           \
+    || (ELF_ST_VISIBILITY (H->other) == STV_HIDDEN))            \
    && ((H->elf_link_hash_flags & ELF_LINK_HASH_DEF_REGULAR) != 0))
 
 /* Will _calls_ to this symbol always call the version in this object?  */
 
-#define SYMBOL_CALLS_LOCAL(INFO, H)					\
-  ((!INFO->shared							\
-    || INFO->symbolic							\
-    || (H->dynindx == -1)						\
-    || (ELF_ST_VISIBILITY (H->other) != STV_DEFAULT))			\
+#define SYMBOL_CALLS_LOCAL(INFO, H)                 \
+  ((!INFO->shared                           \
+    || INFO->symbolic                           \
+    || (H->dynindx == -1)                       \
+    || (ELF_ST_VISIBILITY (H->other) != STV_DEFAULT))           \
    && ((H->elf_link_hash_flags & ELF_LINK_HASH_DEF_REGULAR) != 0))
 
 /* Describe "short addressable" memory areas (SDAs, Small Data Areas).  */
@@ -239,1174 +239,1174 @@ typedef struct _memreg
 static reloc_howto_type tricore_elf32_howto_table[] =
 {
   /* No relocation (ignored).  */
-  HOWTO (R_TRICORE_NONE,	/* type */
-	 0,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
-	 0,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_NONE",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0,			/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_NONE,    /* type */
+     0,         /* rightshift */
+     0,         /* size (0 = byte, 1 = short, 2 = long) */
+     0,         /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_NONE",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0,         /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* 32 bit PC-relative relocation.  */
-  HOWTO (R_TRICORE_32REL,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 32,			/* bitsize */
-	 true,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_32REL",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffffffff,		/* dst_mask */
-	 true),			/* pcrel_offset */
+  HOWTO (R_TRICORE_32REL,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     32,            /* bitsize */
+     true,          /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_32REL", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffffffff,        /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* 32 bit absolute relocation.  */
-  HOWTO (R_TRICORE_32ABS,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 32,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_32ABS",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffffffff,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_32ABS,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     32,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_32ABS", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffffffff,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* relB 25 bit PC-relative relocation.  */
-  HOWTO (R_TRICORE_24REL,	/* type */
-	 1,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 25,			/* bitsize */
-	 true,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc, /* special_function */
-	 "R_TRICORE_24REL",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffffff00,		/* dst_mask */
-	 true),			/* pcrel_offset */
+  HOWTO (R_TRICORE_24REL,   /* type */
+     1,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     25,            /* bitsize */
+     true,          /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_24REL", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffffff00,        /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* absB 24 bit absolute address relocation.  */
-  HOWTO (R_TRICORE_24ABS,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 32,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_24ABS",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffffff00,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_24ABS,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     32,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_24ABS", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffffff00,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* bolC 16 bit small data section relocation.  */
-  HOWTO (R_TRICORE_16SM,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_16SM",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff0000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_16SM,    /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_16SM",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff0000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* RLC High 16 bits of symbol value, adjusted.  */
-  HOWTO (R_TRICORE_HIADJ,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_HIADJ",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_HIADJ,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_HIADJ", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* RLC Low 16 bits of symbol value.  */
-  HOWTO (R_TRICORE_LO,		/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_LO",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_LO,      /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_LO",    /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* BOL Low 16 bits of symbol value.  */
-  HOWTO (R_TRICORE_LO2,		/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_LO2",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff0000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_LO2,     /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_LO2",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff0000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* ABS 18 bit absolute address relocation.  */
-  HOWTO (R_TRICORE_18ABS,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 18,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc, /* special_function */
-	 "R_TRICORE_18ABS",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xf3fff000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_18ABS,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     18,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_18ABS", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xf3fff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* BO 10 bit relative small data relocation.  */
-  HOWTO (R_TRICORE_10SM,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 10,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc, /* special_function */
-	 "R_TRICORE_10SM",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xf03f0000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_10SM,    /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     10,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_10SM",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xf03f0000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* BR 15 bit PC-relative relocation.  */
-  HOWTO (R_TRICORE_15REL,	/* type */
-	 1,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 true,			/* pc_relative */
-	 16,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_15REL",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x7fff0000,		/* dst_mask */
-	 true),			/* pcrel_offset */
+  HOWTO (R_TRICORE_15REL,   /* type */
+     1,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     true,          /* pc_relative */
+     16,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_15REL", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x7fff0000,        /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* RLC High 16 bits of symbol value.  */
-  HOWTO (R_TRICORE_HI,		/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc, /* special_function */
-	 "R_TRICORE_HI",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_HI,      /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_HI",    /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rlcC 16 bit signed constant.  */
-  HOWTO (R_TRICORE_16CONST,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_16CONST",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_16CONST, /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_16CONST",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rcC2 9 bit unsigned constant.  */
-  HOWTO (R_TRICORE_9ZCONST,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 9,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_9ZCONST",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x001ff000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_9ZCONST, /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     9,         /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_9ZCONST",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x001ff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* RcC 9 bit signed constant.  */
-  HOWTO (R_TRICORE_9SCONST,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 9,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_9SCONST",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x001ff000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_9SCONST, /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     9,         /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_9SCONST",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x001ff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* sbD 9 bit PC-relative displacement.  */
-  HOWTO (R_TRICORE_8REL,	/* type */
-	 1,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 9,			/* bitsize */
-	 true,			/* pc_relative */
-	 8,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_8REL",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xff00,		/* dst_mask */
-	 true),			/* pcrel_offset */
+  HOWTO (R_TRICORE_8REL,    /* type */
+     1,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     9,         /* bitsize */
+     true,          /* pc_relative */
+     8,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_8REL",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xff00,        /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* scC 8 bit unsigned constant.  */
-  HOWTO (R_TRICORE_8CONST,	/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 8,			/* bitsize */
-	 false,			/* pc_relative */
-	 8,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_8CONST",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xff00,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_8CONST,  /* type */
+     0,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     8,         /* bitsize */
+     false,         /* pc_relative */
+     8,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_8CONST",    /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xff00,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* BO 10 bit data offset.  */
-  HOWTO (R_TRICORE_10OFF,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 10,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_10OFF",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xf03f0000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_10OFF,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     10,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_10OFF", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xf03f0000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* bolC 16 bit data offset.  */
-  HOWTO (R_TRICORE_16OFF,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_16OFF",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff0000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_16OFF,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_16OFF", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff0000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* 8 bit absolute data relocation.  */
-  HOWTO (R_TRICORE_8ABS,	/* type */
-	 0,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
-	 8,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc, /* special_function */
-	 "R_TRICORE_8ABS",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xff,			/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_8ABS,    /* type */
+     0,         /* rightshift */
+     0,         /* size (0 = byte, 1 = short, 2 = long) */
+     8,         /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_8ABS",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xff,          /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* 16 bit absolute data relocation.  */
-  HOWTO (R_TRICORE_16ABS,	/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_16ABS",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_16ABS,   /* type */
+     0,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_16ABS", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* absBb 1 bit relocation.  */
-  HOWTO (R_TRICORE_1BIT,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 1,			/* bitsize */
-	 false,			/* pc_relative */
-	 11,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_1BIT",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x00000800,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_1BIT,    /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     1,         /* bitsize */
+     false,         /* pc_relative */
+     11,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_1BIT",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x00000800,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* absBp 3 bit bit position.  */
-  HOWTO (R_TRICORE_3POS,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 3,			/* bitsize */
-	 false,			/* pc_relative */
-	 8,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_3POS",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x00000700,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_3POS,    /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     3,         /* bitsize */
+     false,         /* pc_relative */
+     8,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_3POS",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x00000700,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* bitP1 5 bit bit position.  */
-  HOWTO (R_TRICORE_5POS,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 5,			/* bitsize */
-	 false,			/* pc_relative */
-	 16,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_5POS",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x001f0000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_5POS,    /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     5,         /* bitsize */
+     false,         /* pc_relative */
+     16,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_5POS",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x001f0000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* PCP HI relocation.  */
-  HOWTO (R_TRICORE_PCPHI,	/* type */
-	 1,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_PCPHI",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_PCPHI,   /* type */
+     1,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_PCPHI", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* PCP LO relocation.  */
-  HOWTO (R_TRICORE_PCPLO,	/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_PCPLO",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_PCPLO,   /* type */
+     0,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_PCPLO", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* PCP PAGE relocation.  */
-  HOWTO (R_TRICORE_PCPPAGE,	/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_PCPPAGE",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xff00,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_PCPPAGE, /* type */
+     0,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_PCPPAGE",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xff00,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* PCP OFF relocation.  */
-  HOWTO (R_TRICORE_PCPOFF,	/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_PCPOFF",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x003f,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_PCPOFF,  /* type */
+     0,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_PCPOFF",    /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x003f,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* PCP TEXT relocation.  */
-  HOWTO (R_TRICORE_PCPTEXT,	/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_PCPTEXT",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_PCPTEXT, /* type */
+     0,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_PCPTEXT",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* bitP2 5 bit bit position.  */
-  HOWTO (R_TRICORE_5POS2,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 5,			/* bitsize */
-	 false,			/* pc_relative */
-	 23,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_5POS2",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0f800000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_5POS2,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     5,         /* bitsize */
+     false,         /* pc_relative */
+     23,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_5POS2", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0f800000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* brcC 4 bit signed offset.  */
-  HOWTO (R_TRICORE_BRCC,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 4,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_BRCC",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0000f000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_BRCC,    /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     4,         /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_BRCC",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0000f000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* brcC2 4 bit unsigned offset.  */
-  HOWTO (R_TRICORE_BRCZ,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 4,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_BRCZ",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0000f000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_BRCZ,    /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     4,         /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_BRCZ",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0000f000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* brnN 5 bit bit position.  */
-  HOWTO (R_TRICORE_BRNN,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 5,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_BRNN",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0000f080,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_BRNN,    /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     5,         /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_BRNN",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0000f080,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rrN 2 bit unsigned constant.  */
-  HOWTO (R_TRICORE_RRN,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 2,			/* bitsize */
-	 false,			/* pc_relative */
-	 16,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_RRN",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x00030000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_RRN, /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     2,         /* bitsize */
+     false,         /* pc_relative */
+     16,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_RRN",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x00030000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* sbcC 4 bit signed constant.  */
-  HOWTO (R_TRICORE_4CONST,	/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 4,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_signed, /* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_4CONST",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xf000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_4CONST,  /* type */
+     0,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     4,         /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_signed, /* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_4CONST",    /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xf000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* sbcD/sbrD 5 bit PC-relative, zero-extended displacement.  */
-  HOWTO (R_TRICORE_4REL,	/* type */
-	 1,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
-	 5,			/* bitsize */
-	 true,			/* pc_relative */
-	 8,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_4REL",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0f00,		/* dst_mask */
-	 true),			/* pcrel_offset */
+  HOWTO (R_TRICORE_4REL,    /* type */
+     1,         /* rightshift */
+     0,         /* size (0 = byte, 1 = short, 2 = long) */
+     5,         /* bitsize */
+     true,          /* pc_relative */
+     8,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_4REL",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0f00,        /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* sbrD 5 bit PC-relative, one-extended displacement.  */
-  HOWTO (R_TRICORE_4REL2,	/* type */
-	 1,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
-	 5,			/* bitsize */
-	 true,			/* pc_relative */
-	 8,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_4REL2",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0f00,		/* dst_mask */
-	 true),			/* pcrel_offset */
+  HOWTO (R_TRICORE_4REL2,   /* type */
+     1,         /* rightshift */
+     0,         /* size (0 = byte, 1 = short, 2 = long) */
+     5,         /* bitsize */
+     true,          /* pc_relative */
+     8,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_4REL2", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0f00,        /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* sbrN 5 bit bit position.  */
-  HOWTO (R_TRICORE_5POS3,	/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 5,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_5POS3",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xf080,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_5POS3,   /* type */
+     0,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     5,         /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_5POS3", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xf080,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* slroO 4 bit zero-extended offset.  */
-  HOWTO (R_TRICORE_4OFF,	/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 4,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_4OFF",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xf000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_4OFF,    /* type */
+     0,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     4,         /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_4OFF",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xf000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* slroO2 5 bit zero-extended offset.  */
-  HOWTO (R_TRICORE_4OFF2,	/* type */
-	 1,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 5,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_4OFF2",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xf000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_4OFF2,   /* type */
+     1,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     5,         /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_4OFF2", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xf000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* slroO4 6 bit zero-extended offset.  */
-  HOWTO (R_TRICORE_4OFF4,	/* type */
-	 2,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 6,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_4OFF4",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xf000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_4OFF4,   /* type */
+     2,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     6,         /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_4OFF4", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xf000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* sroO 4 bit zero-extended offset.  */
-  HOWTO (R_TRICORE_42OFF,	/* type */
-	 0,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
-	 4,			/* bitsize */
-	 false,			/* pc_relative */
-	 8,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_42OFF",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0f00,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_42OFF,   /* type */
+     0,         /* rightshift */
+     0,         /* size (0 = byte, 1 = short, 2 = long) */
+     4,         /* bitsize */
+     false,         /* pc_relative */
+     8,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_42OFF", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0f00,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* sroO2 5 bit zero-extended offset.  */
-  HOWTO (R_TRICORE_42OFF2,	/* type */
-	 1,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 5,			/* bitsize */
-	 false,			/* pc_relative */
-	 8,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_42OFF2",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0f00,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_42OFF2,  /* type */
+     1,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     5,         /* bitsize */
+     false,         /* pc_relative */
+     8,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_42OFF2",    /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0f00,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* slroO4 6 bit zero-extended offset.  */
-  HOWTO (R_TRICORE_42OFF4,	/* type */
-	 2,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 6,			/* bitsize */
-	 false,			/* pc_relative */
-	 8,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_42OFF4",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0f00,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_42OFF4,  /* type */
+     2,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     6,         /* bitsize */
+     false,         /* pc_relative */
+     8,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_42OFF4",    /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0f00,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* srrsN 2 bit zero-extended constant.  */
-  HOWTO (R_TRICORE_2OFF,	/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 2,			/* bitsize */
-	 false,			/* pc_relative */
-	 6,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_2OFF",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x00c0,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_2OFF,    /* type */
+     0,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     2,         /* bitsize */
+     false,         /* pc_relative */
+     6,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_2OFF",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x00c0,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* scC 8 bit zero-extended offset.  */
-  HOWTO (R_TRICORE_8CONST2,	/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 8,			/* bitsize */
-	 false,			/* pc_relative */
-	 8,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_8CONST2",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xff00,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_8CONST2, /* type */
+     0,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     8,         /* bitsize */
+     false,         /* pc_relative */
+     8,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_8CONST2",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xff00,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* sbrnN 4 bit zero-extended constant.  */
-  HOWTO (R_TRICORE_4POS,	/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 4,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_4POS",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xf000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_4POS,    /* type */
+     0,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     4,         /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_4POS",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xf000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rlcC 16 bit small data section relocation.  */
-  HOWTO (R_TRICORE_16SM2,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_16SM2",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_16SM2,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_16SM2", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* sbcD/sbrD 6 bit PC-relative, zero-extended displacement.  */
-  HOWTO (R_TRICORE_5REL,	/* type */
-	 1,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
-	 5,			/* bitsize */
-	 true,			/* pc_relative */
-	 8,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_5REL",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0f00,		/* dst_mask */
-	 true),			/* pcrel_offset */
+  HOWTO (R_TRICORE_5REL,    /* type */
+     1,         /* rightshift */
+     0,         /* size (0 = byte, 1 = short, 2 = long) */
+     5,         /* bitsize */
+     true,          /* pc_relative */
+     8,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_5REL",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0f00,        /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* Special reloc for optimizing virtual tables.  */
-  HOWTO (R_TRICORE_GNU_VTENTRY,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 0,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GNU_VTENTRY",/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0,			/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GNU_VTENTRY, /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     0,         /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GNU_VTENTRY",/* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0,         /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* Special reloc for optimizing virtual tables.  */
   HOWTO (R_TRICORE_GNU_VTINHERIT,/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 0,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GNU_VTINHERIT",/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0,			/* dst_mask */
-	 false),  		/* pcrel_offset */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     0,         /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GNU_VTINHERIT",/* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0,         /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* 16 bit PC-relative relocation.  */
-  HOWTO (R_TRICORE_PCREL16,	/* type */
-	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 true,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_PCREL16",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff,		/* dst_mask */
-	 true),			/* pcrel_offset */
+  HOWTO (R_TRICORE_PCREL16, /* type */
+     0,         /* rightshift */
+     1,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     true,          /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_PCREL16",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff,        /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* 8 bit PC-relative relocation.  */
-  HOWTO (R_TRICORE_PCREL8,	/* type */
-	 0,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
-	 8,			/* bitsize */
-	 true,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_PCREL8",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xff,			/* dst_mask */
-	 true),			/* pcrel_offset */
+  HOWTO (R_TRICORE_PCREL8,  /* type */
+     0,         /* rightshift */
+     0,         /* size (0 = byte, 1 = short, 2 = long) */
+     8,         /* bitsize */
+     true,          /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_PCREL8",    /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xff,          /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* rlcC 16 bit GOT symbol entry.  */
-  HOWTO (R_TRICORE_GOT,		/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOT",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOT,     /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOT",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* bolC 16 bit GOT symbol entry.  */
-  HOWTO (R_TRICORE_GOT2,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOT2",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff0000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOT2,    /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOT2",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff0000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rlcC 16 bit GOTHI symbol entry.  */
-  HOWTO (R_TRICORE_GOTHI,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTHI",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTHI,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTHI", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rlcC 16 bit GOTLO symbol entry.  */
-  HOWTO (R_TRICORE_GOTLO,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTLO",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTLO,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTLO", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* bolC 16 bit GOTLO symbol entry.  */
-  HOWTO (R_TRICORE_GOTLO2,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTLO2",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff0000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTLO2,  /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTLO2",    /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff0000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rlcC 16 bit GOTUP symbol entry.  */
-  HOWTO (R_TRICORE_GOTUP,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTUP",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTUP,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTUP", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rlcC 16 bit GOTOFF symbol entry.  */
-  HOWTO (R_TRICORE_GOTOFF,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTOFF",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTOFF,  /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTOFF",    /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* bolC 16 bit GOTOFF symbol entry.  */
-  HOWTO (R_TRICORE_GOTOFF2,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTOFF2",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff0000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTOFF2, /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTOFF2",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff0000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rlcC 16 bit GOTOFFHI symbol entry.  */
-  HOWTO (R_TRICORE_GOTOFFHI,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTOFFHI",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTOFFHI,    /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTOFFHI",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rlcC 16 bit GOTOFFLO symbol entry.  */
-  HOWTO (R_TRICORE_GOTOFFLO,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTOFFLO",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTOFFLO,    /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTOFFLO",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* bolC 16 bit GOTOFFLO symbol entry.  */
-  HOWTO (R_TRICORE_GOTOFFLO2,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTOFFLO2",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff0000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTOFFLO2,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTOFFLO2", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff0000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rlcC 16 bit GOTOFFUP symbol entry.  */
-  HOWTO (R_TRICORE_GOTOFFUP,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTOFFUP",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTOFFUP,    /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTOFFUP",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rlcC 16 bit GOTPC symbol entry.  */
-  HOWTO (R_TRICORE_GOTPC,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTPC",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTPC,   /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTPC", /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* bolC 16 bit GOTPC symbol entry.  */
-  HOWTO (R_TRICORE_GOTPC2,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTPC2",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff0000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTPC2,  /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTPC2",    /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff0000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rlcC 16 bit GOTPCHI symbol entry.  */
-  HOWTO (R_TRICORE_GOTPCHI,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTPCHI",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTPCHI, /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTPCHI",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rlcC 16 bit GOTPCLO symbol entry.  */
-  HOWTO (R_TRICORE_GOTPCLO,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTPCLO",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTPCLO, /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTPCLO",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* bolC 16 bit GOTPCLO symbol entry.  */
-  HOWTO (R_TRICORE_GOTPCLO2,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTPCLO2",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffff0000,		/* dst_mask */
-	 false),		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTPCLO2,    /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTPCLO2",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffff0000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* rlcC 16 bit GOTPCUP symbol entry.  */
-  HOWTO (R_TRICORE_GOTPCUP,	/* type */
-	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 16,			/* bitsize */
-	 false,			/* pc_relative */
-	 12,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GOTPCUP",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0x0ffff000,		/* dst_mask */
-	 false), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GOTPCUP, /* type */
+     0,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     16,            /* bitsize */
+     false,         /* pc_relative */
+     12,            /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GOTPCUP",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0x0ffff000,        /* dst_mask */
+     false),        /* pcrel_offset */
 
   /* relB PLT entry.  */
-  HOWTO (R_TRICORE_PLT,		/* type */
-	 1,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
-	 25,			/* bitsize */
-	 true,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc, /* special_function */
-	 "R_TRICORE_PLT",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0xffffff00,		/* dst_mask */
-	 true),			/* pcrel_offset */
+  HOWTO (R_TRICORE_PLT,     /* type */
+     1,         /* rightshift */
+     2,         /* size (0 = byte, 1 = short, 2 = long) */
+     25,            /* bitsize */
+     true,          /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_PLT",   /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0xffffff00,        /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* COPY.  */
-  HOWTO (R_TRICORE_COPY,	/* type */
-	 0,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
-	 0,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_COPY",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0,			/* dst_mask */
-	 true), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_COPY,    /* type */
+     0,         /* rightshift */
+     0,         /* size (0 = byte, 1 = short, 2 = long) */
+     0,         /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_COPY",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0,         /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* GLOB_DAT.  */
-  HOWTO (R_TRICORE_GLOB_DAT,	/* type */
-	 0,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
-	 0,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_GLOB_DAT",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0,			/* dst_mask */
-	 true), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_GLOB_DAT,    /* type */
+     0,         /* rightshift */
+     0,         /* size (0 = byte, 1 = short, 2 = long) */
+     0,         /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_GLOB_DAT",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0,         /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* JMP_SLOT.  */
-  HOWTO (R_TRICORE_JMP_SLOT,	/* type */
-	 0,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
-	 0,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_JMP_SLOT",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0,			/* dst_mask */
-	 true), 		/* pcrel_offset */
+  HOWTO (R_TRICORE_JMP_SLOT,    /* type */
+     0,         /* rightshift */
+     0,         /* size (0 = byte, 1 = short, 2 = long) */
+     0,         /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_JMP_SLOT",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0,         /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* RELATIVE.  */
-  HOWTO (R_TRICORE_RELATIVE,	/* type */
-	 0,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
-	 0,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_RELATIVE",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0,			/* dst_mask */
-	 true),	 		/* pcrel_offset */
+  HOWTO (R_TRICORE_RELATIVE,    /* type */
+     0,         /* rightshift */
+     0,         /* size (0 = byte, 1 = short, 2 = long) */
+     0,         /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_RELATIVE",  /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0,         /* dst_mask */
+     true),         /* pcrel_offset */
 
   /* BITPOS.  */
-  HOWTO (R_TRICORE_BITPOS,	/* type */
-	 0,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
-	 0,			/* bitsize */
-	 false,			/* pc_relative */
-	 0,			/* bitpos */
-	 complain_overflow_dont,/* complain_on_overflow */
-	 bfd_elf_generic_reloc,	/* special_function */
-	 "R_TRICORE_BITPOS",	/* name */
-	 false,			/* partial_inplace */
-	 0,			/* src_mask */
-	 0,			/* dst_mask */
-	 false)	 		/* pcrel_offset */
+  HOWTO (R_TRICORE_BITPOS,  /* type */
+     0,         /* rightshift */
+     0,         /* size (0 = byte, 1 = short, 2 = long) */
+     0,         /* bitsize */
+     false,         /* pc_relative */
+     0,         /* bitpos */
+     complain_overflow_dont,/* complain_on_overflow */
+     bfd_elf_generic_reloc, /* special_function */
+     "R_TRICORE_BITPOS",    /* name */
+     false,         /* partial_inplace */
+     0,         /* src_mask */
+     0,         /* dst_mask */
+     false)         /* pcrel_offset */
 };
 
 /* Describe the mapping between BFD and TriCore relocs.  */
@@ -1470,8 +1470,8 @@ static CONST struct elf_reloc_map tricore_reloc_map[] =
   {BFD_RELOC_TRICORE_5REL,      R_TRICORE_5REL},
   {BFD_RELOC_VTABLE_ENTRY,      R_TRICORE_GNU_VTENTRY},
   {BFD_RELOC_VTABLE_INHERIT,    R_TRICORE_GNU_VTINHERIT},
-  {BFD_RELOC_TRICORE_PCREL16,	R_TRICORE_PCREL16},
-  {BFD_RELOC_TRICORE_PCREL8,	R_TRICORE_PCREL8},
+  {BFD_RELOC_TRICORE_PCREL16,   R_TRICORE_PCREL16},
+  {BFD_RELOC_TRICORE_PCREL8,    R_TRICORE_PCREL8},
   {BFD_RELOC_TRICORE_GOT,       R_TRICORE_GOT},
   {BFD_RELOC_TRICORE_GOT2,      R_TRICORE_GOT2},
   {BFD_RELOC_TRICORE_GOTHI,     R_TRICORE_GOTHI},
@@ -1619,7 +1619,7 @@ static elf_linker_section_t *tricore_elf32_create_linker_section
 
 static boolean tricore_elf32_check_relocs
      PARAMS ((bfd *, struct bfd_link_info *, asection *,
-     	     const Elf_Internal_Rela *));
+             const Elf_Internal_Rela *));
 
 static unsigned long tricore_elf32_get_bitpos
      PARAMS ((bfd *, struct bfd_link_info *, Elf_Internal_Rela *,
@@ -1689,7 +1689,7 @@ tricore_elf32_reloc_type_lookup (abfd, code)
     code = BFD_RELOC_TRICORE_PCREL16;
   else if (code == BFD_RELOC_8_PCREL)
     code = BFD_RELOC_TRICORE_PCREL8;
-		   
+
   for (i = 0; i < nr_maps; ++i)
     if (tricore_reloc_map[i].bfd_reloc_val == code)
       return &tricore_elf32_howto_table[tricore_reloc_map[i].tricore_val];
@@ -1760,32 +1760,32 @@ tricore_elf32_create_linker_section (abfd, info, which)
       defaults.hole_written_p = false;
       defaults.alignment = 3;
       defaults.flags = (SEC_ALLOC | SEC_LOAD | SEC_HAS_CONTENTS
-      			| SEC_IN_MEMORY);
+                | SEC_IN_MEMORY);
       switch (which)
         {
-	default:
-	  (*_bfd_error_handler)
-	   (_("%s: Unknown special linker section type %d"),
-	    bfd_get_filename (abfd), (int) which);
-	  bfd_set_error (bfd_error_bad_value);
-	  return (elf_linker_section_t *) 0;
+    default:
+      (*_bfd_error_handler)
+       (_("%s: Unknown special linker section type %d"),
+        bfd_get_filename (abfd), (int) which);
+      bfd_set_error (bfd_error_bad_value);
+      return (elf_linker_section_t *) 0;
 
-	case LINKER_SECTION_SDATA:	/* .sdata/.sbss sections.  */
-	  defaults.name	 = ".sdata";
-	  defaults.rel_name = ".rela.sdata";
-	  defaults.bss_name = ".sbss";
-	  defaults.sym_name = "_SMALL_DATA_";
-	  defaults.sym_offset = 32768;
-	  break;
+    case LINKER_SECTION_SDATA:  /* .sdata/.sbss sections.  */
+      defaults.name  = ".sdata";
+      defaults.rel_name = ".rela.sdata";
+      defaults.bss_name = ".sbss";
+      defaults.sym_name = "_SMALL_DATA_";
+      defaults.sym_offset = 32768;
+      break;
 
-	case LINKER_SECTION_SDATA2:	/* .zdata/.zbss sections.  */
-	  defaults.name	 = ".zdata";
-	  defaults.rel_name = ".rela.zdata";
-	  defaults.bss_name = ".zbss";
-	  defaults.sym_name = "_ZERO_DATA_";
-	  defaults.sym_offset = 0;
-	  break;
-	}
+    case LINKER_SECTION_SDATA2: /* .zdata/.zbss sections.  */
+      defaults.name  = ".zdata";
+      defaults.rel_name = ".rela.zdata";
+      defaults.bss_name = ".zbss";
+      defaults.sym_name = "_ZERO_DATA_";
+      defaults.sym_offset = 0;
+      break;
+    }
 
       lsect = _bfd_elf_create_linker_section (abfd, info, which, &defaults);
     }
@@ -1832,7 +1832,7 @@ tricore_elf32_check_relocs (abfd, info, sec, relocs)
   if ((sdata = elf_linker_section (abfd, LINKER_SECTION_SDATA)) == NULL)
     {
       sdata = tricore_elf32_create_linker_section (abfd, info,
-      						   LINKER_SECTION_SDATA);
+                               LINKER_SECTION_SDATA);
       if (sdata == NULL)
         return false;
     }
@@ -1845,7 +1845,7 @@ tricore_elf32_check_relocs (abfd, info, sec, relocs)
       && (zdata = elf_linker_section (abfd, LINKER_SECTION_SDATA2) == NULL))
     {
       zdata = tricore_elf32_create_linker_section (abfd, info,
-      						   LINKER_SECTION_SDATA2);
+                               LINKER_SECTION_SDATA2);
       if (zdata == NULL)
         return false;
     }
@@ -1874,258 +1874,258 @@ tricore_elf32_check_relocs (abfd, info, sec, relocs)
       else
         {
           (*_bfd_error_handler) (_("%s: bad symbol index (%d)"),
-			         bfd_archive_filename (abfd), r_symndx);
-	  return false;
-	}  
+                     bfd_archive_filename (abfd), r_symndx);
+      return false;
+    }
 
       switch (ELF32_R_TYPE (rel->r_info))
         {
         case R_TRICORE_GOTOFF:
-	case R_TRICORE_GOTOFF2:
-	case R_TRICORE_GOTOFFLO:
-	case R_TRICORE_GOTOFFLO2:
-	case R_TRICORE_GOTOFFHI:
-	case R_TRICORE_GOTOFFUP:
+    case R_TRICORE_GOTOFF2:
+    case R_TRICORE_GOTOFFLO:
+    case R_TRICORE_GOTOFFLO2:
+    case R_TRICORE_GOTOFFHI:
+    case R_TRICORE_GOTOFFUP:
         case R_TRICORE_GOTPC:
-	case R_TRICORE_GOTPC2:
-	case R_TRICORE_GOTPCLO:
-	case R_TRICORE_GOTPCLO2:
-	case R_TRICORE_GOTPCHI:
-	case R_TRICORE_GOTPCUP:
-	  /* These relocations require a GOT, but no GOT entry.  */
-	  if (dynobj == NULL)
-	    {
-	      /* Remember the first BFD that requested a GOT and
-	         create the ".got" section.  */
-	      elf_hash_table (info)->dynobj = dynobj = abfd;
-	      if (!_bfd_elf_create_got_section (dynobj, info))
-	        return false;
-	    }
-	  break;  
+    case R_TRICORE_GOTPC2:
+    case R_TRICORE_GOTPCLO:
+    case R_TRICORE_GOTPCLO2:
+    case R_TRICORE_GOTPCHI:
+    case R_TRICORE_GOTPCUP:
+      /* These relocations require a GOT, but no GOT entry.  */
+      if (dynobj == NULL)
+        {
+          /* Remember the first BFD that requested a GOT and
+             create the ".got" section.  */
+          elf_hash_table (info)->dynobj = dynobj = abfd;
+          if (!_bfd_elf_create_got_section (dynobj, info))
+            return false;
+        }
+      break;
 
         case R_TRICORE_GOT:
-	case R_TRICORE_GOT2:
-	case R_TRICORE_GOTLO:
-	case R_TRICORE_GOTLO2:
-	case R_TRICORE_GOTHI:
-	case R_TRICORE_GOTUP:
-	  /* These relocations actually require a GOT entry.  */
-	  if (dynobj == NULL)
-	    {
-	      /* Remember the first BFD that requested a GOT and
-	         create the ".got" section.  */
-	      elf_hash_table (info)->dynobj = dynobj = abfd;
-	      if (!_bfd_elf_create_got_section (dynobj, info))
-	        return false;
-	    }
+    case R_TRICORE_GOT2:
+    case R_TRICORE_GOTLO:
+    case R_TRICORE_GOTLO2:
+    case R_TRICORE_GOTHI:
+    case R_TRICORE_GOTUP:
+      /* These relocations actually require a GOT entry.  */
+      if (dynobj == NULL)
+        {
+          /* Remember the first BFD that requested a GOT and
+             create the ".got" section.  */
+          elf_hash_table (info)->dynobj = dynobj = abfd;
+          if (!_bfd_elf_create_got_section (dynobj, info))
+            return false;
+        }
 
-	  /* Make sure there's a ".got" section.  */
-	  if (sgot == NULL)
-	    {
-	      sgot = bfd_get_section_by_name (dynobj, ".got");
-	      if (sgot == NULL)
-	        {
-		  if (!_bfd_elf_create_got_section (dynobj, info))
-	            return false;
+      /* Make sure there's a ".got" section.  */
+      if (sgot == NULL)
+        {
+          sgot = bfd_get_section_by_name (dynobj, ".got");
+          if (sgot == NULL)
+            {
+          if (!_bfd_elf_create_got_section (dynobj, info))
+                return false;
 
-	          sgot = bfd_get_section_by_name (dynobj, ".got");
-		}
-	      BFD_ASSERT (sgot != NULL);
-	    }
+              sgot = bfd_get_section_by_name (dynobj, ".got");
+        }
+          BFD_ASSERT (sgot != NULL);
+        }
 
-	  /* Make sure there's also a ".rela.got" section, so that
-	     we can emit the necessary relocations for GOT entries.  */
-	  if ((srelgot == NULL) && ((h != NULL) || info->shared)) 
-	    {
-	      srelgot = bfd_get_section_by_name (dynobj, ".rela.got");
-	      if (srelgot == NULL)
-	        {
-		  srelgot = bfd_make_section (dynobj, ".rela.got");
-		  if (srelgot == NULL)
-	            return false;
+      /* Make sure there's also a ".rela.got" section, so that
+         we can emit the necessary relocations for GOT entries.  */
+      if ((srelgot == NULL) && ((h != NULL) || info->shared))
+        {
+          srelgot = bfd_get_section_by_name (dynobj, ".rela.got");
+          if (srelgot == NULL)
+            {
+          srelgot = bfd_make_section (dynobj, ".rela.got");
+          if (srelgot == NULL)
+                return false;
 
-	          if (!bfd_set_section_flags (dynobj, srelgot, RELGOTSECFLAGS))
-	            return false;
+              if (!bfd_set_section_flags (dynobj, srelgot, RELGOTSECFLAGS))
+                return false;
 
-	          if (!bfd_set_section_alignment (dynobj, srelgot, 2))
-	            return false;
-		}    
-	    }
+              if (!bfd_set_section_alignment (dynobj, srelgot, 2))
+                return false;
+        }
+        }
 
-	  if (h != NULL)
-	    {
-	      /* This is a GOT entry for a global symbol.  */
-	      if (h->got.refcount == 0)
-	        {
-		  /* Make sure this symbol is output as a dynamic symbol.  */
-	          if (h->dynindx == -1)
-	            if (!bfd_elf32_link_record_dynamic_symbol (info, h))
-		      return false;
+      if (h != NULL)
+        {
+          /* This is a GOT entry for a global symbol.  */
+          if (h->got.refcount == 0)
+            {
+          /* Make sure this symbol is output as a dynamic symbol.  */
+              if (h->dynindx == -1)
+                if (!bfd_elf32_link_record_dynamic_symbol (info, h))
+              return false;
 
-	          /* Allocate space in .got/.rela.got.  */
-	          sgot->_raw_size += 4;
-	          srelgot->_raw_size += sizeof (Elf32_External_Rela);
-		}
-	      h->got.refcount++;
-	    }
-	  else
-	    {
-	      /* This is a GOT entry for a local symbol.  */
-	      if (local_got_refcounts == NULL)
-	        {
-		  bfd_size_type size;
+              /* Allocate space in .got/.rela.got.  */
+              sgot->_raw_size += 4;
+              srelgot->_raw_size += sizeof (Elf32_External_Rela);
+        }
+          h->got.refcount++;
+        }
+      else
+        {
+          /* This is a GOT entry for a local symbol.  */
+          if (local_got_refcounts == NULL)
+            {
+          bfd_size_type size;
 
-		  size = symtab_hdr->sh_info * sizeof (bfd_signed_vma);
-		  local_got_refcounts = ((bfd_signed_vma *)
-		  			 bfd_zalloc (abfd, size));
-		  if (local_got_refcounts == NULL)
-		    return false;
+          size = symtab_hdr->sh_info * sizeof (bfd_signed_vma);
+          local_got_refcounts = ((bfd_signed_vma *)
+                     bfd_zalloc (abfd, size));
+          if (local_got_refcounts == NULL)
+            return false;
 
-		  elf_local_got_refcounts (abfd) = local_got_refcounts;
-		}
+          elf_local_got_refcounts (abfd) = local_got_refcounts;
+        }
 
-	      if (local_got_refcounts[r_symndx] == 0)
-	        {
-		  /* Allocate space in .got.  */
-	          sgot->_raw_size += 4;
+          if (local_got_refcounts[r_symndx] == 0)
+            {
+          /* Allocate space in .got.  */
+              sgot->_raw_size += 4;
 
-	          /* If we are generating a shared object, we need to output
-		     an R_TRICORE_RELATIVE reloc so that the dynamic linker
-		     can adjust this GOT entry.  */
+              /* If we are generating a shared object, we need to output
+             an R_TRICORE_RELATIVE reloc so that the dynamic linker
+             can adjust this GOT entry.  */
                   if (info->shared)
-	            srelgot->_raw_size += sizeof (Elf32_External_Rela);
-		}
-	      local_got_refcounts[r_symndx]++;
-	    }
-	  break;
+                srelgot->_raw_size += sizeof (Elf32_External_Rela);
+        }
+          local_got_refcounts[r_symndx]++;
+        }
+      break;
 
-	case R_TRICORE_PLT:
-	case R_TRICORE_24REL:
+    case R_TRICORE_PLT:
+    case R_TRICORE_24REL:
           /* This symbol might require a procedure linkage table entry.  We
              actually build the entry in tricore_elf32_adjust_dynamic_symbol,
              because this might be a case of linking PIC code without linking
-	     in any dynamic objects, in which case we don't need to generate
-	     a procedure linkage table after all.  */
-	  if (h == NULL)
-	    {
-	      /* PLT entries for local (static) functions don't make
-	         much sense in this shlib model, so we'll resolve this
-		 reloc directly in tricore_elf32_relocate_section.  */
+         in any dynamic objects, in which case we don't need to generate
+         a procedure linkage table after all.  */
+      if (h == NULL)
+        {
+          /* PLT entries for local (static) functions don't make
+             much sense in this shlib model, so we'll resolve this
+         reloc directly in tricore_elf32_relocate_section.  */
               break;
-	    }
-	  else
-	    {
-	      /* Make sure this symbol is output as a dynamic symbol.  */
-	      if (h->dynindx == -1)
-	        if (!bfd_elf32_link_record_dynamic_symbol (info, h))
-		  return false;
+        }
+      else
+        {
+          /* Make sure this symbol is output as a dynamic symbol.  */
+          if (h->dynindx == -1)
+            if (!bfd_elf32_link_record_dynamic_symbol (info, h))
+          return false;
 
-	      h->elf_link_hash_flags |= ELF_LINK_HASH_NEEDS_PLT;
-	      h->plt.refcount++;
-	    }
-	  break;
+          h->elf_link_hash_flags |= ELF_LINK_HASH_NEEDS_PLT;
+          h->plt.refcount++;
+        }
+      break;
 
-	case R_TRICORE_GNU_VTINHERIT:
-	  /* This relocation describes a C++ object vtable hierarchy.
-	     Record it for later use during GC.  */
-	  if (!_bfd_elf32_gc_record_vtinherit (abfd, sec, h, rel->r_addend))
-	    return false;
+    case R_TRICORE_GNU_VTINHERIT:
+      /* This relocation describes a C++ object vtable hierarchy.
+         Record it for later use during GC.  */
+      if (!_bfd_elf32_gc_record_vtinherit (abfd, sec, h, rel->r_addend))
+        return false;
 
-	  break;  
+      break;
 
-	case R_TRICORE_GNU_VTENTRY:
-	  /* This relocation describes which C++ vtable entries are
-	     actually used.  Record it for later use during GC.  */
-	  if (!_bfd_elf32_gc_record_vtentry (abfd, sec, h, rel->r_addend))
-	    return false;
+    case R_TRICORE_GNU_VTENTRY:
+      /* This relocation describes which C++ vtable entries are
+         actually used.  Record it for later use during GC.  */
+      if (!_bfd_elf32_gc_record_vtentry (abfd, sec, h, rel->r_addend))
+        return false;
 
-	  break;
+      break;
 
-	case R_TRICORE_HIADJ:
-	case R_TRICORE_HI:
-	case R_TRICORE_LO:
-	case R_TRICORE_LO2:
-	  if ((h != NULL) && !info->shared)
-	    {
-	      /* If this symbol is defined in a SO, we might need a
-	         copy reloc.  We haven't seen all input sections yet,
-		 so we tentatively set the flag for now, and correct
-		 it in tricore_elf32_adjust_dynamic_symbol.  */
+    case R_TRICORE_HIADJ:
+    case R_TRICORE_HI:
+    case R_TRICORE_LO:
+    case R_TRICORE_LO2:
+      if ((h != NULL) && !info->shared)
+        {
+          /* If this symbol is defined in a SO, we might need a
+             copy reloc.  We haven't seen all input sections yet,
+         so we tentatively set the flag for now, and correct
+         it in tricore_elf32_adjust_dynamic_symbol.  */
               h->elf_link_hash_flags |= ELF_LINK_NON_GOT_REF;
 
-	      /* The symbol may as well turn out to be a function defined
-	         in some SO, in which case we need to create a PLT entry.  */
-	      h->plt.refcount++;
-	    }
-	  break;
+          /* The symbol may as well turn out to be a function defined
+             in some SO, in which case we need to create a PLT entry.  */
+          h->plt.refcount++;
+        }
+      break;
 
-	case R_TRICORE_32ABS:
-	case R_TRICORE_32REL:
-	  if ((h != NULL) && !info->shared)
-	    {
-	      /* If this reloc is in a read-only section, we might
-	         need a copy reloc.  We can't check reliably at this
-		 stage whether the section is read-only, as input
-		 sections have not yet been mapped to output sections.
-		 Tentatively set the flag for now, and correct it in
-		 tricore_elf32_adjust_dynamic_symbol.  */
+    case R_TRICORE_32ABS:
+    case R_TRICORE_32REL:
+      if ((h != NULL) && !info->shared)
+        {
+          /* If this reloc is in a read-only section, we might
+             need a copy reloc.  We can't check reliably at this
+         stage whether the section is read-only, as input
+         sections have not yet been mapped to output sections.
+         Tentatively set the flag for now, and correct it in
+         tricore_elf32_adjust_dynamic_symbol.  */
               h->elf_link_hash_flags |= ELF_LINK_NON_GOT_REF;
 
-	      /* We may need a PLT entry if this reloc refers to
-	         a function in a shared library.  */
-	      h->plt.refcount++;
-	    }
+          /* We may need a PLT entry if this reloc refers to
+             a function in a shared library.  */
+          h->plt.refcount++;
+        }
 
-	  /* When creating a shared object, we might need to copy these
-	     relocs into the output file, so we have to create a reloc
-	     section in dynobj and make room for the reloc.  */
-	  if (!info->shared
-	      || !(sec->flags & SEC_ALLOC)
-	      || ((ELF32_R_TYPE (rel->r_info) == R_TRICORE_32REL)
-	          && ((h == NULL)
-		      || (info->symbolic
-		      	  && (h->elf_link_hash_flags
-			      & ELF_LINK_HASH_DEF_REGULAR)))))
-	    break;  
+      /* When creating a shared object, we might need to copy these
+         relocs into the output file, so we have to create a reloc
+         section in dynobj and make room for the reloc.  */
+      if (!info->shared
+          || !(sec->flags & SEC_ALLOC)
+          || ((ELF32_R_TYPE (rel->r_info) == R_TRICORE_32REL)
+              && ((h == NULL)
+              || (info->symbolic
+                  && (h->elf_link_hash_flags
+                  & ELF_LINK_HASH_DEF_REGULAR)))))
+        break;
 
-	  if (sreloc == NULL)
-	    {
-	      const char *name;
+      if (sreloc == NULL)
+        {
+          const char *name;
 
-	      name = (bfd_elf_string_from_elf_section
-	      	      (abfd,
-		      elf_elfheader (abfd)->e_shstrndx,
-		      elf_section_data (sec)->rel_hdr.sh_name));
-	      if (name == NULL)
-	        return false;
+          name = (bfd_elf_string_from_elf_section
+                  (abfd,
+              elf_elfheader (abfd)->e_shstrndx,
+              elf_section_data (sec)->rel_hdr.sh_name));
+          if (name == NULL)
+            return false;
 
-	      BFD_ASSERT (!strncmp (name, ".rela", 5)
-	      		  && !strcmp (bfd_get_section_name (abfd, sec),
-			  	      name + 5));
-	      sreloc = bfd_get_section_by_name (dynobj, name);
-	      if (sreloc == NULL)
-	        {
-		  flagword flags;
-		  
-		  sreloc = bfd_make_section (dynobj, name);
-		  flags = DYNOBJSECFLAGS;
-		  if (sec->flags & SEC_ALLOC)
-		    flags |= (SEC_ALLOC | SEC_LOAD);
-		  if ((sreloc == NULL)
-		      || !bfd_set_section_flags (dynobj, sreloc, flags)
-		      || !bfd_set_section_alignment (dynobj, sreloc, 2))
-		    return false;  
-		}
-	      if (sec->flags & SEC_READONLY)
-	        info->flags |= DF_TEXTREL;
-	    }
+          BFD_ASSERT (!strncmp (name, ".rela", 5)
+                  && !strcmp (bfd_get_section_name (abfd, sec),
+                      name + 5));
+          sreloc = bfd_get_section_by_name (dynobj, name);
+          if (sreloc == NULL)
+            {
+          flagword flags;
 
-	  sreloc->_raw_size += sizeof (Elf32_External_Rela);
-	  break;
+          sreloc = bfd_make_section (dynobj, name);
+          flags = DYNOBJSECFLAGS;
+          if (sec->flags & SEC_ALLOC)
+            flags |= (SEC_ALLOC | SEC_LOAD);
+          if ((sreloc == NULL)
+              || !bfd_set_section_flags (dynobj, sreloc, flags)
+              || !bfd_set_section_alignment (dynobj, sreloc, 2))
+            return false;
+        }
+          if (sec->flags & SEC_READONLY)
+            info->flags |= DF_TEXTREL;
+        }
 
-	default:
-	  break;
-	}
+      sreloc->_raw_size += sizeof (Elf32_External_Rela);
+      break;
+
+    default:
+      break;
+    }
     }
 
   return true;
@@ -2308,14 +2308,14 @@ tricore_elf32_adjust_dynamic_symbol (info, h)
 
       /* There's a hw limit for the size of a PLT due to the 24-bit
          offset of jump/call instructions; it might well be reached
-	 before the ".plt" section hits the 16 MB upper limit, as
-	 PLT entries are called from code sections, but this will
-	 be checked later in tricore_elf32_relocate_section.  */
+     before the ".plt" section hits the 16 MB upper limit, as
+     PLT entries are called from code sections, but this will
+     be checked later in tricore_elf32_relocate_section.  */
       if (s->_raw_size >= 0x01000000)
         {
-	  bfd_set_error (bfd_error_bad_value);
-	  return false;
-	}  
+      bfd_set_error (bfd_error_bad_value);
+      return false;
+    }
 
       /* If this symbol is not defined in a regular file, and we are
          not generating a shared library, then set the symbol to this
@@ -2500,13 +2500,13 @@ tricore_elf32_size_dynamic_sections (output_bfd, info)
             {
               /* If we don't need this section, strip it from the
                  output file.  This is mostly to handle ".rela.bss"
-		 and ".rela.plt".  We must create both sections in
+         and ".rela.plt".  We must create both sections in
                  elf_backend_create_dynamic_sections, because they
-		 must be created before the linker maps input sections
-		 to output sections.  The linker does that before
+         must be created before the linker maps input sections
+         to output sections.  The linker does that before
                  tricore_elf32_adjust_dynamic_symbol is called, and it
-		 is that function which decides whether anything needs
-		 to go into these sections.  */
+         is that function which decides whether anything needs
+         to go into these sections.  */
               strip = true;
             }
           else
@@ -2626,7 +2626,7 @@ tricore_elf32_finish_dynamic_symbol (output_bfd, info, h, sym)
       bfd_elf32_swap_reloca_out (output_bfd, &rela,
                                  ((Elf32_External_Rela *) srela->contents
                                   + h->plt.offset / PLT_ENTRY_SIZE
-				  - PLT_RESERVED_SLOTS));
+                  - PLT_RESERVED_SLOTS));
 
       if ((h->elf_link_hash_flags & ELF_LINK_HASH_DEF_REGULAR) == 0)
         {
@@ -2672,10 +2672,10 @@ tricore_elf32_finish_dynamic_symbol (output_bfd, info, h, sym)
         }
       else
         {
-	  BFD_ASSERT ((h->got.offset & 1) == 0);
+      BFD_ASSERT ((h->got.offset & 1) == 0);
           bfd_put_32 (output_bfd, (bfd_vma) 0, sgot->contents + h->got.offset);
           rela.r_info = ELF32_R_INFO (h->dynindx, R_TRICORE_GLOB_DAT);
-	  rela.r_addend = 0;
+      rela.r_addend = 0;
         }
 
       bfd_elf32_swap_reloca_out (output_bfd, &rela,
@@ -2772,8 +2772,8 @@ tricore_elf32_finish_dynamic_sections (output_bfd, info)
                 {
                   if (size)
                     {
-		      /* Not sure if anyone has actually set up the cooked
-		         size, but just in case we're assuming it's valid.  */
+              /* Not sure if anyone has actually set up the cooked
+                 size, but just in case we're assuming it's valid.  */
                       if (s->_cooked_size != 0)
                         dyn.d_un.d_val = s->_cooked_size;
                       else
@@ -2801,13 +2801,13 @@ tricore_elf32_finish_dynamic_sections (output_bfd, info)
     {
       if (sdyn == NULL)
         bfd_put_32 (output_bfd, (bfd_vma) 0,
-		    sgot->contents
-		    + elf_hash_table (info)->hgot->root.u.def.value);
+            sgot->contents
+            + elf_hash_table (info)->hgot->root.u.def.value);
       else
         bfd_put_32 (output_bfd,
                     sdyn->output_section->vma + sdyn->output_offset,
                     sgot->contents
-		    + elf_hash_table (info)->hgot->root.u.def.value);
+            + elf_hash_table (info)->hgot->root.u.def.value);
 
       /* Set entry size for ".got" (4 bytes per entry).  */
       elf_section_data (sgot->output_section)->this_hdr.sh_entsize = 4;
@@ -2823,30 +2823,30 @@ tricore_elf32_finish_dynamic_sections (output_bfd, info)
    section.  There are, however, two cases in which this is undesirable:
 
       1. If the GOT contains more than 8192 entries, single TriCore
-	 instructions can't address the excessive entries with their
-	 16-bit signed offset.  Of course, that's only a problem
-	 when there are modules compiled with "-fpic".
+     instructions can't address the excessive entries with their
+     16-bit signed offset.  Of course, that's only a problem
+     when there are modules compiled with "-fpic".
 
       2. In a shared object, the GOT pointer is also used to address
          variables in SDA0, so the combined size of the ".got", ".sbss"
-	 and ".sdata" sections must not exceed 32k (well, of course the
-	 combined size of these sections can be 64k, but not if the
-	 GOT pointer offset is zero).
+     and ".sdata" sections must not exceed 32k (well, of course the
+     combined size of these sections can be 64k, but not if the
+     GOT pointer offset is zero).
 
    To address these problems, we use the following algorithm to determine
    the final GOT offset:
 
       1. If the combined size of the ".got", ".sbss" and ".sdata"
-	 sections is <= 32k, we'll keep the zero offset.
+     sections is <= 32k, we'll keep the zero offset.
 
       2. If the GOT contains more than 8192 entries, we'll
-	 set the offset to 0x8000, unless doing that would
-	 render any SDA entries unaccessible.
+     set the offset to 0x8000, unless doing that would
+     render any SDA entries unaccessible.
 
       3. In all other cases, we'll set the offset to the size
-	 of the ".got" section minus 4 (because of the _DYNAMIC
-	 entry at _GLOBAL_OFFSET_TABLE_[0]).
-	 
+     of the ".got" section minus 4 (because of the _DYNAMIC
+     entry at _GLOBAL_OFFSET_TABLE_[0]).
+
    In any case, if either ".sdata" or ".sbss" is non-empty, we're adjusting
    the symbol "_SMALL_DATA_" to have the same value as "_GLOBAL_OFFSET_TABLE_",
    as both the GOT and the SDA are addressed via the same register (%a12).
@@ -2872,67 +2872,67 @@ tricore_elf32_final_gp (output_bfd, info)
 
       if (info->shared)
         {
-	  sdata = bfd_get_section_by_name (output_bfd, ".sdata");
+      sdata = bfd_get_section_by_name (output_bfd, ".sdata");
           sbss = bfd_get_section_by_name (output_bfd, ".sbss");
           if (sdata != NULL)
             {
               if (sdata->_cooked_size != 0)
-	        sda_size += sdata->_cooked_size;
-	      else
-	        sda_size += sdata->_raw_size;
-	    }
+            sda_size += sdata->_cooked_size;
+          else
+            sda_size += sdata->_raw_size;
+        }
 
           if (sbss != NULL)
             {
               if (sbss->_cooked_size != 0)
-	        sda_size += sbss->_cooked_size;
-	      else
-	        sda_size += sbss->_raw_size;
-	    }
+            sda_size += sbss->_cooked_size;
+          else
+            sda_size += sbss->_raw_size;
+        }
 
           if (sda_size > (0x8000 - 4))
             {
-	      (*_bfd_error_handler) (_("%s: Too many SDA entries (%ld bytes)"),
-	  			     bfd_archive_filename (output_bfd),
-				     sda_size);
-	      return false;
-	    }
+          (*_bfd_error_handler) (_("%s: Too many SDA entries (%ld bytes)"),
+                     bfd_archive_filename (output_bfd),
+                     sda_size);
+          return false;
+        }
         }
 
       if ((got_size + sda_size) <= 0x8000)
         gp_offset = 0;
       else if ((got_size > 0x8000)
-	       && ((sda_size + got_size - 0x8000) <= 0x8000))
-	gp_offset = 0x8000;
+           && ((sda_size + got_size - 0x8000) <= 0x8000))
+    gp_offset = 0x8000;
       else
         gp_offset = got_size - 4;
 
       if (gp_offset != 0)
-	elf_hash_table (info)->hgot->root.u.def.value = gp_offset;
+    elf_hash_table (info)->hgot->root.u.def.value = gp_offset;
 
       /* If there's any data in ".sdata"/".sbss", set the value of
          _SMALL_DATA_ to that of the GOT pointer.  */
       if (((sdata != NULL) && (sdata->_raw_size > 0))
           || ((sbss != NULL) && (sbss->_raw_size > 0)))
         {
-	  h = (struct elf_link_hash_entry *)
-	       bfd_link_hash_lookup (info->hash, "_SMALL_DATA_",
-	  			     false, false, false);
-	  if (h == NULL)
-	    {
-	      /* This can't possibly happen, as we're always creating the
-	         ".sdata"/".sbss" output sections and the "_SMALL_DATA_"
-		 symbol in tricore_elf32_check_relocs.  */
-	      (*_bfd_error_handler)
-	       (_("%s: SDA entries, but _SMALL_DATA_ undefined"),
-	       bfd_archive_filename (output_bfd));
-	      return false;
-	    }
-	  gp = gp_offset + sgot->output_section->vma + sgot->output_offset;
-	  sdata = h->root.u.def.section;
-	  sda = sdata->output_section->vma + sdata->output_offset;
-	  h->root.u.def.value = gp - sda;
-	}
+      h = (struct elf_link_hash_entry *)
+           bfd_link_hash_lookup (info->hash, "_SMALL_DATA_",
+                     false, false, false);
+      if (h == NULL)
+        {
+          /* This can't possibly happen, as we're always creating the
+             ".sdata"/".sbss" output sections and the "_SMALL_DATA_"
+         symbol in tricore_elf32_check_relocs.  */
+          (*_bfd_error_handler)
+           (_("%s: SDA entries, but _SMALL_DATA_ undefined"),
+           bfd_archive_filename (output_bfd));
+          return false;
+        }
+      gp = gp_offset + sgot->output_section->vma + sgot->output_offset;
+      sdata = h->root.u.def.section;
+      sda = sdata->output_section->vma + sdata->output_offset;
+      h->root.u.def.value = gp - sda;
+    }
     }
 
   return true;
@@ -2972,21 +2972,21 @@ tricore_elf32_final_sda_bases (output_bfd, info)
       if (!data)
         data = bss;
       h = bfd_link_hash_lookup (info->hash, sda->sda_symbol_name,
-      				true, false, true);
+                    true, false, true);
       if ((i == 0) && info->shared)
         {
-	  sda->areg = 12;
-	  BFD_ASSERT (h->type == bfd_link_hash_defined);
-	}
+      sda->areg = 12;
+      BFD_ASSERT (h->type == bfd_link_hash_defined);
+    }
       else if (h->type != bfd_link_hash_defined)
         {
           h->u.def.value = 32768;
-	  h->u.def.section = data;
-	  h->type = bfd_link_hash_defined;
-	}
+      h->u.def.section = data;
+      h->type = bfd_link_hash_defined;
+    }
       sda->gp_value = (h->u.def.value
-		       + h->u.def.section->output_section->vma
-		       + h->u.def.section->output_offset);
+               + h->u.def.section->output_section->vma
+               + h->u.def.section->output_offset);
       sda->valid = true;
     }
 }
@@ -3014,10 +3014,10 @@ tricore_elf32_final_sda_base (osec, sda_base, sda_reg)
 
       if ((sda->data_section == osec) || (sda->bss_section == osec))
         {
-	  *sda_base = sda->gp_value;
-	  *sda_reg = sda->areg;
-	  return bfd_reloc_ok;
-	}
+      *sda_base = sda->gp_value;
+      *sda_reg = sda->areg;
+      return bfd_reloc_ok;
+    }
     }
 
   return bfd_reloc_dangerous;
@@ -3039,7 +3039,7 @@ tricore_elf32_final_sda_base (osec, sda_base, sda_reg)
 
 static boolean
 tricore_elf32_relocate_section (output_bfd, info, input_bfd, input_section,
-			        contents, relocs, local_syms, local_sections)
+                    contents, relocs, local_syms, local_sections)
      bfd *output_bfd;
      struct bfd_link_info *info;
      bfd *input_bfd;
@@ -3068,16 +3068,16 @@ tricore_elf32_relocate_section (output_bfd, info, input_bfd, input_section,
   boolean do_pcpmap = false;
   boolean ret = true; /* Assume success.  */
 
-#define CHECK_DISPLACEMENT(off,min,max)					\
-  if (off & 1)								\
-    {									\
-      errmsg = _("Displacement is not even");				\
-      break;								\
-    }									\
-  else if (((int) (off) < (min)) || ((int) (off) > (max)))		\
-    {									\
-      errmsg = _("Displacement overflow");				\
-      break;								\
+#define CHECK_DISPLACEMENT(off,min,max)                 \
+  if (off & 1)                              \
+    {                                   \
+      errmsg = _("Displacement is not even");               \
+      break;                                \
+    }                                   \
+  else if (((int) (off) < (min)) || ((int) (off) > (max)))      \
+    {                                   \
+      errmsg = _("Displacement overflow");              \
+      break;                                \
     }
 
   if (!info->relocateable)
@@ -3086,18 +3086,18 @@ tricore_elf32_relocate_section (output_bfd, info, input_bfd, input_section,
         {
           /* Determine the final values for "_GLOBAL_OFFSET_TABLE_" and the
              defined SDA symbols; also, if a map file is to be generated,
-	     show the addresses assigned to bit objects.  */
+         show the addresses assigned to bit objects.  */
           final_gp = true;
           if (!tricore_elf32_final_gp (output_bfd, info))
             return false;
 
           tricore_elf32_final_sda_bases (output_bfd, info);
           if (tricore_elf32_map_file)
-	    {
-	      tricore_elf32_list_bit_objects (info);
-	      if (tricore_elf32_extmap_enabled)
-	        tricore_elf32_do_extmap (info);
-	    }
+        {
+          tricore_elf32_list_bit_objects (info);
+          if (tricore_elf32_extmap_enabled)
+            tricore_elf32_do_extmap (info);
+        }
         }
 
       /* Initialize various variables needed for a final link.  */
@@ -3109,17 +3109,17 @@ tricore_elf32_relocate_section (output_bfd, info, input_bfd, input_section,
           got_base = elf_hash_table (info)->hgot->root.u.def.value;
           got_ptr = (got_base
                      + (elf_hash_table (info)
-      		        ->hgot->root.u.def.section->output_section->vma)
-		     + (elf_hash_table (info)
-		        ->hgot->root.u.def.section->output_offset));
+                    ->hgot->root.u.def.section->output_section->vma)
+             + (elf_hash_table (info)
+                ->hgot->root.u.def.section->output_offset));
         }
 
       /* See if we need to perform PCP address mappings.  */
       if ((tricore_elf32_pcpmap >= 0)
           && ((input_section->flags & PCP_SEG)
-	      || !strcmp (input_section->name, ".pcp_c_ptr_init")
-	      || !strncmp (input_section->name, ".pcp_c_ptr_init.", 16)))
-	do_pcpmap = true;
+          || !strcmp (input_section->name, ".pcp_c_ptr_init")
+          || !strncmp (input_section->name, ".pcp_c_ptr_init.", 16)))
+    do_pcpmap = true;
     }
 
 
@@ -3132,66 +3132,66 @@ tricore_elf32_relocate_section (output_bfd, info, input_bfd, input_section,
 
       if ((r_type < 0)
           || (r_type < R_TRICORE_NONE)
-	  || (r_type >= R_TRICORE_max))
-	{
-	  (*_bfd_error_handler) (_("%s: unknown relocation type %d"),
-				 bfd_get_filename (input_bfd), r_type);
-	  bfd_set_error (bfd_error_bad_value);
-	  ret = false;
-	  bitpos_seen = false;
-	  continue;
-	}
+      || (r_type >= R_TRICORE_max))
+    {
+      (*_bfd_error_handler) (_("%s: unknown relocation type %d"),
+                 bfd_get_filename (input_bfd), r_type);
+      bfd_set_error (bfd_error_bad_value);
+      ret = false;
+      bitpos_seen = false;
+      continue;
+    }
       else if (r_type == R_TRICORE_NONE)
         {
-	  /* This relocation type is typically caused by the TriCore-specific
-	     relaxation pass, either because it has changed R_TRICORE_BITPOS
-	     relocations against local bit variables to refer to the actual
-	     symbol representing their respective bit offset, or because it
-	     was found that a call instruction requires a trampoline to reach
-	     its target (in which case the call instruction is modified to
-	     directly branch to the trampoline, so the original relocation
-	     against the target needs to be nullified, while the instructions
-	     within the trampoline will add their own relocation entries).  */
-	  bitpos_seen = false;
+      /* This relocation type is typically caused by the TriCore-specific
+         relaxation pass, either because it has changed R_TRICORE_BITPOS
+         relocations against local bit variables to refer to the actual
+         symbol representing their respective bit offset, or because it
+         was found that a call instruction requires a trampoline to reach
+         its target (in which case the call instruction is modified to
+         directly branch to the trampoline, so the original relocation
+         against the target needs to be nullified, while the instructions
+         within the trampoline will add their own relocation entries).  */
+      bitpos_seen = false;
           continue;
-	}
+    }
 
       if (info->relocateable)
-	{
-	  /* This is a relocateable link.  We don't have to change
-	     anything, unless the reloc is against a local section
-	     symbol, in which case we have to adjust according to
-	     where the section symbol winds up in the output section.  */
-	  if (r_symndx < symtab_hdr->sh_info)
-	    {
-	      sym = local_syms + r_symndx;
-	      if (ELF_ST_TYPE (sym->st_info) == STT_SECTION)
-	        {
-		  sec = local_sections[r_symndx];
-	          rel->r_addend += sym->st_value + sec->output_offset;
-	          /* Addends are stored with relocs.  We're done.  */
-		}
-	    }
+    {
+      /* This is a relocateable link.  We don't have to change
+         anything, unless the reloc is against a local section
+         symbol, in which case we have to adjust according to
+         where the section symbol winds up in the output section.  */
+      if (r_symndx < symtab_hdr->sh_info)
+        {
+          sym = local_syms + r_symndx;
+          if (ELF_ST_TYPE (sym->st_info) == STT_SECTION)
+            {
+          sec = local_sections[r_symndx];
+              rel->r_addend += sym->st_value + sec->output_offset;
+              /* Addends are stored with relocs.  We're done.  */
+        }
+        }
 
-	  continue;
-	}
+      continue;
+    }
 
       /* This is a final link.  All kinds of strange things may happen...  */
 
       if ((r_type == R_TRICORE_GNU_VTENTRY)
-	  || (r_type == R_TRICORE_GNU_VTINHERIT))
-	{
-	  /* Handled by GC (if enabled via "--gc-sections", that is).  */
+      || (r_type == R_TRICORE_GNU_VTINHERIT))
+    {
+      /* Handled by GC (if enabled via "--gc-sections", that is).  */
           continue;
-	}
+    }
 
       if (r_type == R_TRICORE_BITPOS)
         {
-	  /* The next relocation will be against a bit object; remember that
-	     its bit position should be used rather than its address.  */
-	  bitpos_seen = true;
-	  continue;
-	}
+      /* The next relocation will be against a bit object; remember that
+         its bit position should be used rather than its address.  */
+      bitpos_seen = true;
+      continue;
+    }
 
       howto = tricore_elf32_howto_table + r_type;
       addend = rel->r_addend;
@@ -3205,59 +3205,59 @@ tricore_elf32_relocate_section (output_bfd, info, input_bfd, input_section,
       errmsg = NULL;
 
       if (r_symndx < symtab_hdr->sh_info)
-	{
-	  /* Relocation against a local symbol.  */
-	  sym = local_syms + r_symndx;
-	  sec = local_sections[r_symndx];
-	  sym_name = "<local symbol>";
-	  will_become_local = true;
-	  relocation = _bfd_elf_rela_local_sym (output_bfd, sym, sec, rel);
-	}
+    {
+      /* Relocation against a local symbol.  */
+      sym = local_syms + r_symndx;
+      sec = local_sections[r_symndx];
+      sym_name = "<local symbol>";
+      will_become_local = true;
+      relocation = _bfd_elf_rela_local_sym (output_bfd, sym, sec, rel);
+    }
       else
-	{
-	  /* Relocation against an external symbol.  */
-	  h = sym_hashes[r_symndx - symtab_hdr->sh_info];
-	  while ((h->root.type == bfd_link_hash_indirect)
-		 || (h->root.type == bfd_link_hash_warning))
-	    h = (struct elf_link_hash_entry *) h->root.u.i.link;
-	  sym_name = h->root.root.string;
+    {
+      /* Relocation against an external symbol.  */
+      h = sym_hashes[r_symndx - symtab_hdr->sh_info];
+      while ((h->root.type == bfd_link_hash_indirect)
+         || (h->root.type == bfd_link_hash_warning))
+        h = (struct elf_link_hash_entry *) h->root.u.i.link;
+      sym_name = h->root.root.string;
 
-	  /* Can this relocation be resolved immediately?  */
-	  will_become_local = SYMBOL_REFERENCES_LOCAL (info, h);
+      /* Can this relocation be resolved immediately?  */
+      will_become_local = SYMBOL_REFERENCES_LOCAL (info, h);
 
-	  if ((h->root.type == bfd_link_hash_defined)
-	      || (h->root.type == bfd_link_hash_defweak))
-	    {
-	      sec = h->root.u.def.section;
-	      if (sec->output_section == NULL)
-		{
-		  /* Set a flag that will be cleared later if we find a
-		     relocation value for this symbol.  output_section
-		     is typically NULL for symbols satisfied by a shared
-		     library.  */
-		  relocation = 0;
-		  unresolved_reloc = true;
-		}  
-	      else if (howto->pc_relative && (sec == bfd_abs_section_ptr))
-		{
-		  rel_abs = 1;
-		  relocation = (h->root.u.def.value
-			        + sec->output_section->vma);
-		}
-	      else
-		relocation = (h->root.u.def.value
-			      + sec->output_section->vma
-			      + sec->output_offset);
-	    }
-	  else if (h->root.type == bfd_link_hash_undefweak)
-	    relocation = 0;
+      if ((h->root.type == bfd_link_hash_defined)
+          || (h->root.type == bfd_link_hash_defweak))
+        {
+          sec = h->root.u.def.section;
+          if (sec->output_section == NULL)
+        {
+          /* Set a flag that will be cleared later if we find a
+             relocation value for this symbol.  output_section
+             is typically NULL for symbols satisfied by a shared
+             library.  */
+          relocation = 0;
+          unresolved_reloc = true;
+        }
+          else if (howto->pc_relative && (sec == bfd_abs_section_ptr))
+        {
+          rel_abs = 1;
+          relocation = (h->root.u.def.value
+                    + sec->output_section->vma);
+        }
+          else
+        relocation = (h->root.u.def.value
+                  + sec->output_section->vma
+                  + sec->output_offset);
+        }
+      else if (h->root.type == bfd_link_hash_undefweak)
+        relocation = 0;
           else if (info->shared
                    && (!info->symbolic || info->allow_shlib_undefined)
                    && !info->no_undefined
                    && ELF_ST_VISIBILITY (h->other) == STV_DEFAULT)
-	    relocation = 0;
-	  else
-	    {
+        relocation = 0;
+      else
+        {
               if (!((*info->callbacks->undefined_symbol)
                     (info, h->root.root.string, input_bfd,
                      input_section, rel->r_offset,
@@ -3265,45 +3265,45 @@ tricore_elf32_relocate_section (output_bfd, info, input_bfd, input_section,
                       || ELF_ST_VISIBILITY (h->other)))))
                 return false;
 
-	      ret = false;
-	      bitpos_seen = false;
-	      continue;
-	    }
+          ret = false;
+          bitpos_seen = false;
+          continue;
+        }
         }
 
       /* The linker's optimization passes may have deleted entries in
          the ".eh_frame" (ELF only) and ".stab" sections; as a result,
-	 we have to skip relocations that are no longer valid, and to
-	 compute and use the (potentially) new offsets of entries that
-	 couldn't be eliminated during said optimization passes.  */
+     we have to skip relocations that are no longer valid, and to
+     compute and use the (potentially) new offsets of entries that
+     couldn't be eliminated during said optimization passes.  */
       {
-	bfd_vma n_offset;
+    bfd_vma n_offset;
 
-	n_offset = _bfd_elf_section_offset (output_bfd, info,
-	      				    input_section, offset);
-	if ((n_offset == (bfd_vma) -1)  /* eh_frame entry deleted.  */
-	    || (n_offset == (bfd_vma) -2))  /* stab entry deleted.  */
-	  continue;
+    n_offset = _bfd_elf_section_offset (output_bfd, info,
+                            input_section, offset);
+    if ((n_offset == (bfd_vma) -1)  /* eh_frame entry deleted.  */
+        || (n_offset == (bfd_vma) -2))  /* stab entry deleted.  */
+      continue;
 
-	offset = n_offset;
+    offset = n_offset;
       }
 
       /* Sanity check the address.  Note that if the relaxation pass has
          been enabled, additional instructions and relocs for these may
-	 have been created, so we must compare the offset against the
-	 section's cooked size.  This is okay even if relaxation hasn't
-	 been enabled, or if it hasn't increased the size, because in the
-	 former case, the linker will have set the cooked size to the raw
-	 size in lang_size_sections_sections_1, while in the latter case
-	 this is done by tricore_elf32_relax_section itself.  Likewise, if
-	 relaxing has decreased the section size, the cooked size will be
-	 smaller than the raw size, so if there are any relocations against
-	 locations beyond the cooked size, this indicates an error.  */
+     have been created, so we must compare the offset against the
+     section's cooked size.  This is okay even if relaxation hasn't
+     been enabled, or if it hasn't increased the size, because in the
+     former case, the linker will have set the cooked size to the raw
+     size in lang_size_sections_sections_1, while in the latter case
+     this is done by tricore_elf32_relax_section itself.  Likewise, if
+     relaxing has decreased the section size, the cooked size will be
+     smaller than the raw size, so if there are any relocations against
+     locations beyond the cooked size, this indicates an error.  */
       if (offset > input_section->_cooked_size)
-	{
-	  r = bfd_reloc_outofrange;
-	  goto check_reloc;
-	}
+    {
+      r = bfd_reloc_outofrange;
+      goto check_reloc;
+    }
 
       /* If PC-relative, adjust the relocation value appropriately.  */
       if (howto->pc_relative && !rel_abs)
@@ -3319,1044 +3319,1044 @@ tricore_elf32_relocate_section (output_bfd, info, input_bfd, input_section,
 
       /* Special case: the previous relocation was R_TRICORE_BITPOS,
          which means that the relocation value is not the symbol's
-	 address, but its bit position.  */
+     address, but its bit position.  */
       if (bitpos_seen)
         {
-	  relocation = tricore_elf32_get_bitpos (input_bfd, info, rel,
-	  					 symtab_hdr,
-						 local_syms, sym_hashes,
-						 input_section, &ret);
-	  bitpos_seen = false;
-	}
+      relocation = tricore_elf32_get_bitpos (input_bfd, info, rel,
+                         symtab_hdr,
+                         local_syms, sym_hashes,
+                         input_section, &ret);
+      bitpos_seen = false;
+    }
       else if (do_pcpmap && sec
-      	       && ((sec->flags & SEC_DATA) || !(sec->flags & SEC_LOAD)))
-	{
+               && ((sec->flags & SEC_DATA) || !(sec->flags & SEC_LOAD)))
+    {
           /* Perform PCP address mapping based on the relocation value
-	     and the specified mapping scheme (there's currently only
-	     one of them, so we don't need to check the actual value of
-	     tricore_elf32_pcpmap).  Note that we don't care about the
-	     symbol or section the relocation value was derived from;
-	     this is because even knowing the type of a symbol or a
-	     section won't help in deciding automatically if a relocation
-	     value should be mapped or not (e.g., if we would exempt
-	     absolute symbols from being mapped, this would fail if the
-	     symbol would hold the absolute address of a variable that
-	     is located within a mappable memory region).  This sort of
-	     hardware design really, really sucks big time!  */
+         and the specified mapping scheme (there's currently only
+         one of them, so we don't need to check the actual value of
+         tricore_elf32_pcpmap).  Note that we don't care about the
+         symbol or section the relocation value was derived from;
+         this is because even knowing the type of a symbol or a
+         section won't help in deciding automatically if a relocation
+         value should be mapped or not (e.g., if we would exempt
+         absolute symbols from being mapped, this would fail if the
+         symbol would hold the absolute address of a variable that
+         is located within a mappable memory region).  This sort of
+         hardware design really, really sucks big time!  */
           if ((relocation >= 0xc0000000) && (relocation < 0xd4100000))
-	    {
-	      bfd_vma poffset = 0;
+        {
+          bfd_vma poffset = 0;
 
-	      if (relocation < 0xc0400000)
-	        poffset = 0x28000000;
-	      else if (relocation >= 0xd0000000)
-	        {
-		  if (relocation < 0xd0100000)
-		    poffset = 0x18400000;
-		  else if (relocation >= 0xd4000000)
-		    poffset = 0x14500000;
-		}
+          if (relocation < 0xc0400000)
+            poffset = 0x28000000;
+          else if (relocation >= 0xd0000000)
+            {
+          if (relocation < 0xd0100000)
+            poffset = 0x18400000;
+          else if (relocation >= 0xd4000000)
+            poffset = 0x14500000;
+        }
 
-	      if (poffset)
-	        {
-		  if (tricore_elf32_debug_pcpmap)
-		    {
-		      printf ("PCPMAP: %s(%s+%ld): 0x%08lx [",
-			      bfd_archive_filename (input_section->owner),
-			      input_section->name,
-			      offset,
-			      relocation);
-		      if (h)
-			printf ("%s", sym_name);
-		      else
-			printf ("%s", sec->name);
-		      if (addend)
-			printf ("+%ld", addend);
-		      printf ("] += 0x%08lx (= 0x%08lx)\n",
-		      	      poffset, relocation + poffset);
-		    }
-		  relocation += poffset;
-		}
-	    }
-	}
+          if (poffset)
+            {
+          if (tricore_elf32_debug_pcpmap)
+            {
+              printf ("PCPMAP: %s(%s+%ld): 0x%08lx [",
+                  bfd_archive_filename (input_section->owner),
+                  input_section->name,
+                  offset,
+                  relocation);
+              if (h)
+            printf ("%s", sym_name);
+              else
+            printf ("%s", sec->name);
+              if (addend)
+            printf ("+%ld", addend);
+              printf ("] += 0x%08lx (= 0x%08lx)\n",
+                      poffset, relocation + poffset);
+            }
+          relocation += poffset;
+        }
+        }
+    }
 
       /* Now apply the fixup.  Handle simple data relocs first.  */
       byte_ptr = (bfd_byte *) contents + offset;
 
       switch (r_type)
         {
-	case R_TRICORE_8ABS:
-	case R_TRICORE_PCREL8:
-	  bfd_put_8 (input_bfd, relocation, byte_ptr);
-	  continue;
+    case R_TRICORE_8ABS:
+    case R_TRICORE_PCREL8:
+      bfd_put_8 (input_bfd, relocation, byte_ptr);
+      continue;
 
-	case R_TRICORE_16ABS:
-	case R_TRICORE_PCREL16:
-	  bfd_put_16 (input_bfd, relocation, byte_ptr);
-	  continue;
+    case R_TRICORE_16ABS:
+    case R_TRICORE_PCREL16:
+      bfd_put_16 (input_bfd, relocation, byte_ptr);
+      continue;
 
-	case R_TRICORE_32ABS:
-	case R_TRICORE_32REL:
-	  if (info->shared
-	      && (r_symndx != 0)
-	      && (input_section->flags & SEC_ALLOC)
-	      && ((r_type != R_TRICORE_32REL)
-	          || ((h != NULL)
-		      && (h->dynindx != -1)
-		      && (!info->symbolic
-		          || !(h->elf_link_hash_flags
-			       & ELF_LINK_HASH_DEF_REGULAR)))))
-	    {
-	      Elf_Internal_Rela outrel;
-	      boolean skip = false, relocate = false;
+    case R_TRICORE_32ABS:
+    case R_TRICORE_32REL:
+      if (info->shared
+          && (r_symndx != 0)
+          && (input_section->flags & SEC_ALLOC)
+          && ((r_type != R_TRICORE_32REL)
+              || ((h != NULL)
+              && (h->dynindx != -1)
+              && (!info->symbolic
+                  || !(h->elf_link_hash_flags
+                   & ELF_LINK_HASH_DEF_REGULAR)))))
+        {
+          Elf_Internal_Rela outrel;
+          boolean skip = false, relocate = false;
 
-	      if (sreloc == NULL)
-	        {
-		  const char *name;
+          if (sreloc == NULL)
+            {
+          const char *name;
 
-		  name = (bfd_elf_string_from_elf_section
-		  	  (input_bfd,
-			   elf_elfheader (input_bfd)->e_shstrndx,
-			   elf_section_data (input_section)->rel_hdr.sh_name));
-		  if (name == NULL)
-		    return false;
+          name = (bfd_elf_string_from_elf_section
+              (input_bfd,
+               elf_elfheader (input_bfd)->e_shstrndx,
+               elf_section_data (input_section)->rel_hdr.sh_name));
+          if (name == NULL)
+            return false;
 
-		  BFD_ASSERT (!strncmp (name, ".rela", 5)
-		  	      && !strcmp (name + 5, bfd_get_section_name
-			      			    (input_bfd,
-					  	     input_section)));
-		  sreloc = bfd_get_section_by_name (dynobj, name);
-		  BFD_ASSERT (sreloc != NULL);
-		}
+          BFD_ASSERT (!strncmp (name, ".rela", 5)
+                  && !strcmp (name + 5, bfd_get_section_name
+                                (input_bfd,
+                             input_section)));
+          sreloc = bfd_get_section_by_name (dynobj, name);
+          BFD_ASSERT (sreloc != NULL);
+        }
 
-	      outrel.r_offset =
-	        _bfd_elf_section_offset (output_bfd, info, input_section,
-					 rel->r_offset);
-	      if (outrel.r_offset == (bfd_vma) -1)
-	        skip = true;  /* eh_frame entry deleted.  */
-	      else if (outrel.r_offset == (bfd_vma) -2)
-	        skip = relocate = true;  /* stab entry deleted.  */
-	      outrel.r_offset += (input_section->output_section->vma
-	      			  + input_section->output_offset);
-	      outrel.r_addend = rel->r_addend;
+          outrel.r_offset =
+            _bfd_elf_section_offset (output_bfd, info, input_section,
+                     rel->r_offset);
+          if (outrel.r_offset == (bfd_vma) -1)
+            skip = true;  /* eh_frame entry deleted.  */
+          else if (outrel.r_offset == (bfd_vma) -2)
+            skip = relocate = true;  /* stab entry deleted.  */
+          outrel.r_offset += (input_section->output_section->vma
+                      + input_section->output_offset);
+          outrel.r_addend = rel->r_addend;
 
-	      if (skip)
-	        memset (&outrel, 0, sizeof (outrel));
-	      else if (r_type == R_TRICORE_32REL)
-	        {
-		  BFD_ASSERT ((h != NULL) && (h->dynindx != -1));
-		  outrel.r_info = ELF32_R_INFO (h->dynindx, R_TRICORE_32REL);
-		}
-	      else
-	        {
-		  /* h->dynindx may be -1 if this symbol was marked to
-		     become local.  */
-		  if ((h == NULL)
-		      || ((info->symbolic || (h->dynindx == -1))
-		          && (h->elf_link_hash_flags
-			      & ELF_LINK_HASH_DEF_REGULAR)))
-		    {
-		      relocate = true;
-		      outrel.r_info = ELF32_R_INFO (0, R_TRICORE_RELATIVE);
-		    }
-		  else
-		    {
-		      BFD_ASSERT (h->dynindx != -1);
-		      outrel.r_info = ELF32_R_INFO
-		      		       (h->dynindx, R_TRICORE_32ABS);
-		    }
-		}
-	      bfd_elf32_swap_reloca_out (output_bfd, &outrel,
-	      				 (((Elf32_External_Rela *)
-					   sreloc->contents)
-					  + sreloc->reloc_count));
-	      ++sreloc->reloc_count;
-	      
-	      /* If this reloc is against an external symbol, we do
-	         not want to fiddle with the addend.  Otherwise, we
-		 need to include the symbol value so that it becomes
-		 an addend for the dynamic reloc.  */
-	      if (!relocate)
-	        continue;
-	    }
-	  bfd_put_32 (input_bfd, relocation, byte_ptr);
-	  continue;
-	}
+          if (skip)
+            memset (&outrel, 0, sizeof (outrel));
+          else if (r_type == R_TRICORE_32REL)
+            {
+          BFD_ASSERT ((h != NULL) && (h->dynindx != -1));
+          outrel.r_info = ELF32_R_INFO (h->dynindx, R_TRICORE_32REL);
+        }
+          else
+            {
+          /* h->dynindx may be -1 if this symbol was marked to
+             become local.  */
+          if ((h == NULL)
+              || ((info->symbolic || (h->dynindx == -1))
+                  && (h->elf_link_hash_flags
+                  & ELF_LINK_HASH_DEF_REGULAR)))
+            {
+              relocate = true;
+              outrel.r_info = ELF32_R_INFO (0, R_TRICORE_RELATIVE);
+            }
+          else
+            {
+              BFD_ASSERT (h->dynindx != -1);
+              outrel.r_info = ELF32_R_INFO
+                           (h->dynindx, R_TRICORE_32ABS);
+            }
+        }
+          bfd_elf32_swap_reloca_out (output_bfd, &outrel,
+                         (((Elf32_External_Rela *)
+                       sreloc->contents)
+                      + sreloc->reloc_count));
+          ++sreloc->reloc_count;
+
+          /* If this reloc is against an external symbol, we do
+             not want to fiddle with the addend.  Otherwise, we
+         need to include the symbol value so that it becomes
+         an addend for the dynamic reloc.  */
+          if (!relocate)
+            continue;
+        }
+      bfd_put_32 (input_bfd, relocation, byte_ptr);
+      continue;
+    }
 
       /* It's a relocation against an instruction.  */
 
       /* Handle PCP relocs.  */
       if ((r_type >= R_TRICORE_PCPHI) && (r_type <= R_TRICORE_PCPTEXT))
-	{
+    {
           switch (r_type)
             {
-	    case R_TRICORE_PCPHI:
-	      len32 = 0;
-	      insn = ((relocation >> 16) & 0xffff);
-	      goto check_reloc;
+        case R_TRICORE_PCPHI:
+          len32 = 0;
+          insn = ((relocation >> 16) & 0xffff);
+          goto check_reloc;
 
-	    case R_TRICORE_PCPLO:
-	      len32 = 0;
-	      insn = (relocation & 0xffff);
-	      goto check_reloc;
+        case R_TRICORE_PCPLO:
+          len32 = 0;
+          insn = (relocation & 0xffff);
+          goto check_reloc;
 
-	    case R_TRICORE_PCPPAGE:
-	      len32 = 0;
-	      /* Sanity check: the target address of this reloc must
-	         belong to a PCP data section.  */
-	      if (sec && (!(sec->flags & PCP_SEG) || !(sec->flags & SEC_DATA)))
-	        {
-		  errmsg = _("PRAM target address not within a PCP "
-		  	     "data section");
-		  goto check_reloc;
-		}
-	      /* Ideally, the target address should be aligned to a
-	         256-byte-boundary, so that PCP code can access the
-		 64 words starting at the target address using the 6-bit
-		 unsigned offset in "*.PI" instructions.  However, I
-		 think we should allow a user to organize its data as
-		 he sees fit, so we're just enforcing the minimum
-		 requirement (target address must be word-aligned),
-		 but issue a warning if the target address isn't
-		 properly aligned, as this can potentially lead to
-		 incorrect PRAM accesses for non-zero offsets; the user
-		 may turn off this warning by defining the global symbol
-		 "NOPCPWARNING" with a non-zero value.  */
-	      if (relocation & 0x3)
-	        {
-		  errmsg = _("PRAM target address is not word-aligned");
-		  goto check_reloc;
-		}
-	      else if (relocation & 0xff)
-	        {
-	          struct bfd_link_hash_entry *w;
+        case R_TRICORE_PCPPAGE:
+          len32 = 0;
+          /* Sanity check: the target address of this reloc must
+             belong to a PCP data section.  */
+          if (sec && (!(sec->flags & PCP_SEG) || !(sec->flags & SEC_DATA)))
+            {
+          errmsg = _("PRAM target address not within a PCP "
+                 "data section");
+          goto check_reloc;
+        }
+          /* Ideally, the target address should be aligned to a
+             256-byte-boundary, so that PCP code can access the
+         64 words starting at the target address using the 6-bit
+         unsigned offset in "*.PI" instructions.  However, I
+         think we should allow a user to organize its data as
+         he sees fit, so we're just enforcing the minimum
+         requirement (target address must be word-aligned),
+         but issue a warning if the target address isn't
+         properly aligned, as this can potentially lead to
+         incorrect PRAM accesses for non-zero offsets; the user
+         may turn off this warning by defining the global symbol
+         "NOPCPWARNING" with a non-zero value.  */
+          if (relocation & 0x3)
+            {
+          errmsg = _("PRAM target address is not word-aligned");
+          goto check_reloc;
+        }
+          else if (relocation & 0xff)
+            {
+              struct bfd_link_hash_entry *w;
 
                   w = bfd_link_hash_lookup (info->hash, "NOPCPWARNING",
-	  			            false, false, false);
+                            false, false, false);
                   if ((w == (struct bfd_link_hash_entry *) NULL)
-	              || ((w->type == bfd_link_hash_defined)
-	                  && (w->u.def.value == 0)))
-            	    {
-		      const char *name, *msg;
+                  || ((w->type == bfd_link_hash_defined)
+                      && (w->u.def.value == 0)))
+                    {
+              const char *name, *msg;
 
-		      if (h != NULL)
-		        name = h->root.root.string;
-		      else
-		        {
-		          name = (bfd_elf_string_from_elf_section
-			          (input_bfd, symtab_hdr->sh_link,
-				  sym->st_name));
-		          if (name == NULL || *name == '\0')
-			    name = bfd_section_name (input_bfd, sec);
-		        }
-		      msg = _("PRAM target address should be aligned "
-		              "to a 256-byte boundary");
-	              (void) ((*info->callbacks->warning)
-		              (info, msg, name, input_bfd, input_section,
-			      offset));
-		    }
-		}
+              if (h != NULL)
+                name = h->root.root.string;
+              else
+                {
+                  name = (bfd_elf_string_from_elf_section
+                      (input_bfd, symtab_hdr->sh_link,
+                  sym->st_name));
+                  if (name == NULL || *name == '\0')
+                name = bfd_section_name (input_bfd, sec);
+                }
+              msg = _("PRAM target address should be aligned "
+                      "to a 256-byte boundary");
+                  (void) ((*info->callbacks->warning)
+                      (info, msg, name, input_bfd, input_section,
+                  offset));
+            }
+        }
               insn = bfd_get_16 (input_bfd, byte_ptr);
               insn |= (relocation & 0xff00);
-	      goto check_reloc;
+          goto check_reloc;
 
-	    case R_TRICORE_PCPOFF:
-	      len32 = 0;
-	      /* Sanity check: the target address of this reloc must
-	         belong to a PCP data section.  */
-	      if (sec && (!(sec->flags & PCP_SEG) || !(sec->flags & SEC_DATA)))
-	        {
-		  errmsg = _("PRAM target address not within a PCP "
-		  	     "data section");
-		  goto check_reloc;
-		}
-	      if (relocation & 0x3)
-	        {
-		  errmsg = _("PRAM target address is not word-aligned");
-		  goto check_reloc;
-		}
+        case R_TRICORE_PCPOFF:
+          len32 = 0;
+          /* Sanity check: the target address of this reloc must
+             belong to a PCP data section.  */
+          if (sec && (!(sec->flags & PCP_SEG) || !(sec->flags & SEC_DATA)))
+            {
+          errmsg = _("PRAM target address not within a PCP "
+                 "data section");
+          goto check_reloc;
+        }
+          if (relocation & 0x3)
+            {
+          errmsg = _("PRAM target address is not word-aligned");
+          goto check_reloc;
+        }
               insn = bfd_get_16 (input_bfd, byte_ptr);
-	      insn |= ((relocation >> 2) & 0x3f);	
-	      goto check_reloc;
+          insn |= ((relocation >> 2) & 0x3f);
+          goto check_reloc;
 
-	    case R_TRICORE_PCPTEXT:
-	      len32 = 0;
-	      /* Sanity check: the target address of this reloc must
-	         belong to a PCP text section.  */
-	      if (sec && (!(sec->flags & PCP_SEG) || !(sec->flags & SEC_CODE)))
-	        {
-		  errmsg = _("PCODE target address not within a PCP "
-		  	     "text section");
-		  goto check_reloc;
-		}
-	      if (relocation & 0x1)
-	        {
-		  errmsg = _("PCODE target address is not even");
-		  goto check_reloc;
-		}
-	      insn = ((relocation >> 1) & 0xffff);	
-	      goto check_reloc;
+        case R_TRICORE_PCPTEXT:
+          len32 = 0;
+          /* Sanity check: the target address of this reloc must
+             belong to a PCP text section.  */
+          if (sec && (!(sec->flags & PCP_SEG) || !(sec->flags & SEC_CODE)))
+            {
+          errmsg = _("PCODE target address not within a PCP "
+                 "text section");
+          goto check_reloc;
+        }
+          if (relocation & 0x1)
+            {
+          errmsg = _("PCODE target address is not even");
+          goto check_reloc;
+        }
+          insn = ((relocation >> 1) & 0xffff);
+          goto check_reloc;
 
-	    default:
-	      break;
-	    }
-	}
+        default:
+          break;
+        }
+    }
 
       /* Handle TriCore relocs.  */
       len32 = (*byte_ptr & 1);
       if (len32)
         insn = bfd_get_32 (input_bfd, byte_ptr);
       else
-	insn = bfd_get_16 (input_bfd, byte_ptr);
+    insn = bfd_get_16 (input_bfd, byte_ptr);
 
       /* Prepare PIC relocs.  */
       switch (r_type)
         {
-	case R_TRICORE_GOTOFF:
-	case R_TRICORE_GOTOFF2:
-	case R_TRICORE_GOTOFFHI:
-	case R_TRICORE_GOTOFFLO:
-	case R_TRICORE_GOTOFFLO2:
-	case R_TRICORE_GOTOFFUP:
-	  /* The relocation value is the offset between the
-	     symbol and the GOT pointer.  */
-	  relocation = relocation - got_ptr;
-	  break;
+    case R_TRICORE_GOTOFF:
+    case R_TRICORE_GOTOFF2:
+    case R_TRICORE_GOTOFFHI:
+    case R_TRICORE_GOTOFFLO:
+    case R_TRICORE_GOTOFFLO2:
+    case R_TRICORE_GOTOFFUP:
+      /* The relocation value is the offset between the
+         symbol and the GOT pointer.  */
+      relocation = relocation - got_ptr;
+      break;
 
-	case R_TRICORE_GOTPC:
-	case R_TRICORE_GOTPC2:
-	case R_TRICORE_GOTPCHI:
-	case R_TRICORE_GOTPCLO:
-	case R_TRICORE_GOTPCLO2:
-	case R_TRICORE_GOTPCUP:
-	  /* The relocation value is the offset between the
-	     GOT pointer and the current PC.  */
-	  relocation = (relocation
-	  		- (got_base
-			   + input_section->output_section->vma
+    case R_TRICORE_GOTPC:
+    case R_TRICORE_GOTPC2:
+    case R_TRICORE_GOTPCHI:
+    case R_TRICORE_GOTPCLO:
+    case R_TRICORE_GOTPCLO2:
+    case R_TRICORE_GOTPCUP:
+      /* The relocation value is the offset between the
+         GOT pointer and the current PC.  */
+      relocation = (relocation
+            - (got_base
+               + input_section->output_section->vma
                            + input_section->output_offset
-			   + offset));
-	  break;
+               + offset));
+      break;
 
-	case R_TRICORE_GOT:
-	case R_TRICORE_GOT2:
-	case R_TRICORE_GOTHI:
-	case R_TRICORE_GOTLO:
-	case R_TRICORE_GOTLO2:
-	case R_TRICORE_GOTUP:
-	  /* The relocation is to the GOT entry for this symbol.  */
-	  if (sgot == NULL)
-	    {
-	      sgot = bfd_get_section_by_name (dynobj, ".got");
-	      BFD_ASSERT (sgot != NULL);
-	    }
+    case R_TRICORE_GOT:
+    case R_TRICORE_GOT2:
+    case R_TRICORE_GOTHI:
+    case R_TRICORE_GOTLO:
+    case R_TRICORE_GOTLO2:
+    case R_TRICORE_GOTUP:
+      /* The relocation is to the GOT entry for this symbol.  */
+      if (sgot == NULL)
+        {
+          sgot = bfd_get_section_by_name (dynobj, ".got");
+          BFD_ASSERT (sgot != NULL);
+        }
 
-	  if (h != NULL)
-	    {
-	      bfd_vma off;
+      if (h != NULL)
+        {
+          bfd_vma off;
 
-	      off = h->got.offset;
-	      BFD_ASSERT (off != (bfd_vma) -1);
-	      /* The first entry of the GOT is reserved (-> _DYNAMIC),
-	         so offsets of "real" entries start at 4.  However,
-		 if tricore_elf32_final_gp has moved the GOT base to
-		 a higher address, we must adjust the offsets of entries
-		 located below the new GOT base by 4 bytes.  Should we
-		 ever need to reserve more space for special entries,
-		 we must use elf_backend_got_header_size (defined at
-		 the end of this file) instead of the value 4.  */
-	      if (off <= got_base)
-	        off -= 4;
+          off = h->got.offset;
+          BFD_ASSERT (off != (bfd_vma) -1);
+          /* The first entry of the GOT is reserved (-> _DYNAMIC),
+             so offsets of "real" entries start at 4.  However,
+         if tricore_elf32_final_gp has moved the GOT base to
+         a higher address, we must adjust the offsets of entries
+         located below the new GOT base by 4 bytes.  Should we
+         ever need to reserve more space for special entries,
+         we must use elf_backend_got_header_size (defined at
+         the end of this file) instead of the value 4.  */
+          if (off <= got_base)
+            off -= 4;
 
-	      if (!elf_hash_table (info)->dynamic_sections_created
-	          || (info->shared && SYMBOL_REFERENCES_LOCAL (info, h)))
-		{
-		  /* This is actually a static link, or it is a "-Bsymbolic"
-		     link and the symbol is defined locally, or the symbol
-		     was forced to be local because of a version file.  We
-		     must initialize this GOT entry, and since the offset
-		     must always be a multiple of 4, we use the least
-		     significant bit to record whether we have initialized
-		     it already.  When doing a dynamic link, we create a
-		     ".rela.got" relocation entry to initialize the value.
-		     This is done in tricore_elf32_finish_dynamic_symbol.  */
-		  if ((off & 1) != 0)   
-		    off &= ~1;
-		  else
-		    {
-		      bfd_put_32 (output_bfd, relocation,
-		      		  sgot->contents + off);
-		      h->got.offset |= 1;
-		    }  
-		}
-	      else
-	        unresolved_reloc = false;
+          if (!elf_hash_table (info)->dynamic_sections_created
+              || (info->shared && SYMBOL_REFERENCES_LOCAL (info, h)))
+        {
+          /* This is actually a static link, or it is a "-Bsymbolic"
+             link and the symbol is defined locally, or the symbol
+             was forced to be local because of a version file.  We
+             must initialize this GOT entry, and since the offset
+             must always be a multiple of 4, we use the least
+             significant bit to record whether we have initialized
+             it already.  When doing a dynamic link, we create a
+             ".rela.got" relocation entry to initialize the value.
+             This is done in tricore_elf32_finish_dynamic_symbol.  */
+          if ((off & 1) != 0)
+            off &= ~1;
+          else
+            {
+              bfd_put_32 (output_bfd, relocation,
+                      sgot->contents + off);
+              h->got.offset |= 1;
+            }
+        }
+          else
+            unresolved_reloc = false;
 
-	      relocation = sgot->output_offset + off - got_base;
-	    }
-	  else
-	    {
-	      bfd_vma off;
+          relocation = sgot->output_offset + off - got_base;
+        }
+      else
+        {
+          bfd_vma off;
 
-	      BFD_ASSERT ((local_got_offsets != NULL)
-	      		  && (local_got_offsets[r_symndx] != (bfd_vma) -1));
-	      off = local_got_offsets[r_symndx];
-	      if (off <= got_base)
-	        off -= 4;
-	      /* The offset must always be a multiple of 4.  We use
-	         the least significant bit to record whether we have
-		 already processed this entry.  */
-	      if ((off & 1) != 0)
-	        off &= ~1;
-	      else
-	        {
-		  bfd_put_32 (output_bfd, relocation, sgot->contents + off);
+          BFD_ASSERT ((local_got_offsets != NULL)
+                  && (local_got_offsets[r_symndx] != (bfd_vma) -1));
+          off = local_got_offsets[r_symndx];
+          if (off <= got_base)
+            off -= 4;
+          /* The offset must always be a multiple of 4.  We use
+             the least significant bit to record whether we have
+         already processed this entry.  */
+          if ((off & 1) != 0)
+            off &= ~1;
+          else
+            {
+          bfd_put_32 (output_bfd, relocation, sgot->contents + off);
 
-		  if (info->shared)
-		    {
-		      asection *srelgot;
-		      Elf_Internal_Rela outrel;
+          if (info->shared)
+            {
+              asection *srelgot;
+              Elf_Internal_Rela outrel;
 
-		      /* We need to generate a R_TRICORE_RELATIVE reloc
-		         for the dynamic linker.  */
-		      srelgot = bfd_get_section_by_name (dynobj, ".rela.got");
-		      BFD_ASSERT (srelgot != NULL);
-		      outrel.r_offset = (sgot->output_section->vma
-		      			 + sgot->output_offset + off);
-		      outrel.r_info = ELF32_R_INFO (0, R_TRICORE_RELATIVE);
-		      outrel.r_addend = 0;
-		      bfd_elf32_swap_reloca_out (output_bfd, &outrel,
-		      				 (((Elf32_External_Rela *)
-						   srelgot->contents)
-						  + srelgot->reloc_count));
-		      ++srelgot->reloc_count;
-		    }
+              /* We need to generate a R_TRICORE_RELATIVE reloc
+                 for the dynamic linker.  */
+              srelgot = bfd_get_section_by_name (dynobj, ".rela.got");
+              BFD_ASSERT (srelgot != NULL);
+              outrel.r_offset = (sgot->output_section->vma
+                         + sgot->output_offset + off);
+              outrel.r_info = ELF32_R_INFO (0, R_TRICORE_RELATIVE);
+              outrel.r_addend = 0;
+              bfd_elf32_swap_reloca_out (output_bfd, &outrel,
+                             (((Elf32_External_Rela *)
+                           srelgot->contents)
+                          + srelgot->reloc_count));
+              ++srelgot->reloc_count;
+            }
 
-		  local_got_offsets[r_symndx] |= 1;
-		}
-	      relocation = sgot->output_offset + off - got_base;
-	    }
-	  break;  
+          local_got_offsets[r_symndx] |= 1;
+        }
+          relocation = sgot->output_offset + off - got_base;
+        }
+      break;
 
-	case R_TRICORE_PLT:
-	case R_TRICORE_24REL:
-	  if (!info->shared || !h)
-	    break;
+    case R_TRICORE_PLT:
+    case R_TRICORE_24REL:
+      if (!info->shared || !h)
+        break;
 
-	  /* The relocation is to the PLT entry for this symbol.  */
+      /* The relocation is to the PLT entry for this symbol.  */
           if (splt == NULL)
-	    splt = bfd_get_section_by_name (dynobj, ".plt");
-	  if ((h->plt.offset == (bfd_vma) -1) || (splt == NULL))
-	    {
-	      /* We didn't make a PLT entry for this symbol.  This
-	         happens when statically linking PIC code, or when
-		 using "-Bsymbolic".  */
-	      break;
-	    }
-	  relocation = (splt->output_section->vma
-	  		+ splt->output_offset
-			+ h->plt.offset);
+        splt = bfd_get_section_by_name (dynobj, ".plt");
+      if ((h->plt.offset == (bfd_vma) -1) || (splt == NULL))
+        {
+          /* We didn't make a PLT entry for this symbol.  This
+             happens when statically linking PIC code, or when
+         using "-Bsymbolic".  */
+          break;
+        }
+      relocation = (splt->output_section->vma
+            + splt->output_offset
+            + h->plt.offset);
           relocation -= (input_section->output_section->vma
                          + input_section->output_offset);
           if (howto->pcrel_offset)
             relocation -= offset;
-	  break;
+      break;
 
-	default:
-	  break;
-	}
+    default:
+      break;
+    }
 
       switch (r_type)
         {
-	case R_TRICORE_GOT:
-	case R_TRICORE_GOTOFF:
-	case R_TRICORE_GOTPC:
-	  if (((int) relocation < -32768) || ((int) relocation > 32767))
-	    {
-	      errmsg = _("16-bit signed GOT-relative offset overflow");
-	      break;
-	    }
-	  insn |= ((relocation & 0xffff) << 12);
-	  break;
+    case R_TRICORE_GOT:
+    case R_TRICORE_GOTOFF:
+    case R_TRICORE_GOTPC:
+      if (((int) relocation < -32768) || ((int) relocation > 32767))
+        {
+          errmsg = _("16-bit signed GOT-relative offset overflow");
+          break;
+        }
+      insn |= ((relocation & 0xffff) << 12);
+      break;
 
-	case R_TRICORE_GOT2:
-	case R_TRICORE_GOTOFF2:
-	case R_TRICORE_GOTPC2:
-	  if (((int) relocation < -32768) || ((int) relocation > 32767))
-	    {
-	      errmsg = _("16-bit signed GOT-relative offset overflow");
-	      break;
-	    }
-	  insn |= ((relocation & 0x3f) << 16);
-	  insn |= ((relocation & 0x3c0) << 22);
-	  insn |= ((relocation & 0xfc00) << 12);
-	  break;
+    case R_TRICORE_GOT2:
+    case R_TRICORE_GOTOFF2:
+    case R_TRICORE_GOTPC2:
+      if (((int) relocation < -32768) || ((int) relocation > 32767))
+        {
+          errmsg = _("16-bit signed GOT-relative offset overflow");
+          break;
+        }
+      insn |= ((relocation & 0x3f) << 16);
+      insn |= ((relocation & 0x3c0) << 22);
+      insn |= ((relocation & 0xfc00) << 12);
+      break;
 
-	case R_TRICORE_GOTHI:  
-	case R_TRICORE_GOTOFFHI:  
-	case R_TRICORE_GOTPCHI:  
-	  insn |= ((((relocation + 0x8000) >> 16) & 0xffff) << 12);
-	  break;
+    case R_TRICORE_GOTHI:
+    case R_TRICORE_GOTOFFHI:
+    case R_TRICORE_GOTPCHI:
+      insn |= ((((relocation + 0x8000) >> 16) & 0xffff) << 12);
+      break;
 
-	case R_TRICORE_GOTLO:
-	case R_TRICORE_GOTOFFLO:
-	case R_TRICORE_GOTPCLO:
-	  insn |= ((relocation & 0xffff) << 12);
-	  break;
+    case R_TRICORE_GOTLO:
+    case R_TRICORE_GOTOFFLO:
+    case R_TRICORE_GOTPCLO:
+      insn |= ((relocation & 0xffff) << 12);
+      break;
 
-	case R_TRICORE_GOTLO2:
-	case R_TRICORE_GOTOFFLO2:
-	case R_TRICORE_GOTPCLO2:
-	  insn |= ((relocation & 0x3f) << 16);
-	  insn |= ((relocation & 0x3c0) << 22);
-	  insn |= ((relocation & 0xfc00) << 12);
-	  break;
+    case R_TRICORE_GOTLO2:
+    case R_TRICORE_GOTOFFLO2:
+    case R_TRICORE_GOTPCLO2:
+      insn |= ((relocation & 0x3f) << 16);
+      insn |= ((relocation & 0x3c0) << 22);
+      insn |= ((relocation & 0xfc00) << 12);
+      break;
 
-	case R_TRICORE_GOTUP:
-	case R_TRICORE_GOTOFFUP:
-	case R_TRICORE_GOTPCUP:
-	  insn |= (((relocation >> 16) & 0xffff) << 12);
-	  break;
+    case R_TRICORE_GOTUP:
+    case R_TRICORE_GOTOFFUP:
+    case R_TRICORE_GOTPCUP:
+      insn |= (((relocation >> 16) & 0xffff) << 12);
+      break;
 
-	case R_TRICORE_PLT:
-	case R_TRICORE_24REL:
-	  if (relocation & 1)
-	    {
-	      errmsg = _("24-bit PC-relative displacement is not even");
-	      break;
-	    }
-	  else if (((int) (relocation) < (-16777216)) ||
-		   ((int) (relocation) > (16777214)))
-	    {
-	      /* The target address is out of range; check if it
-	         is reachable using absolute addressing mode.  */
-	      bfd_vma target_address = relocation;
+    case R_TRICORE_PLT:
+    case R_TRICORE_24REL:
+      if (relocation & 1)
+        {
+          errmsg = _("24-bit PC-relative displacement is not even");
+          break;
+        }
+      else if (((int) (relocation) < (-16777216)) ||
+           ((int) (relocation) > (16777214)))
+        {
+          /* The target address is out of range; check if it
+             is reachable using absolute addressing mode.  */
+          bfd_vma target_address = relocation;
 
-	      if (!rel_abs)
-	        {
-		  /* The target symbol isn't in the absolute section,
-		     so we need to undo the relative offset.  */
-	          target_address += input_section->output_section->vma
-	      		          + input_section->output_offset;
+          if (!rel_abs)
+            {
+          /* The target symbol isn't in the absolute section,
+             so we need to undo the relative offset.  */
+              target_address += input_section->output_section->vma
+                          + input_section->output_offset;
                   if (howto->pcrel_offset)
                     target_address += offset;
-		}
+        }
 
-	      if (!(target_address & 0x0fe00000))
-	        {
-		  /* Okay, it's reachable using absolute addressing mode;
-		     turn [f]call into [f]calla, or j[l] into j[l]a.  */
-		  insn |= 0x80;
-		  target_address >>= 1;
-		  target_address |= ((target_address & 0x78000000) >> 7);
-		  insn |= ((target_address & 0xffff) << 16);
-		  insn |= ((target_address & 0xff0000) >> 8);
-		}
-	      else
-	        {
-		  /* We need additional instructions to reach the target.
-		     If the target is a global symbol, then enabling the
-		     linker's relaxing pass will do the trick.  Local
-		     symbols, however, require the user to take action.  */
-		  if (tricore_elf32_relax_bdata)
-		    {
-		      errmsg = _("24-bit PC-relative displacement overflow: "
-		      		 "if the target of this call or jump insn "
-				 "is a static function or procedure, just "
-				 "turn it into a global one; otherwise try "
-				 "to move excessive code from the affected "
-				 "control statement's (e.g., if/else/switch) "
-				 "body to separate new functions/procedures");
-		    }
-		  else
-		    {
-		      errmsg = _("24-bit PC-relative displacement overflow; "
-		  	         "re-run linker with -relax or --relax-24rel");
-		    }
-		}
+          if (!(target_address & 0x0fe00000))
+            {
+          /* Okay, it's reachable using absolute addressing mode;
+             turn [f]call into [f]calla, or j[l] into j[l]a.  */
+          insn |= 0x80;
+          target_address >>= 1;
+          target_address |= ((target_address & 0x78000000) >> 7);
+          insn |= ((target_address & 0xffff) << 16);
+          insn |= ((target_address & 0xff0000) >> 8);
+        }
+          else
+            {
+          /* We need additional instructions to reach the target.
+             If the target is a global symbol, then enabling the
+             linker's relaxing pass will do the trick.  Local
+             symbols, however, require the user to take action.  */
+          if (tricore_elf32_relax_bdata)
+            {
+              errmsg = _("24-bit PC-relative displacement overflow: "
+                     "if the target of this call or jump insn "
+                 "is a static function or procedure, just "
+                 "turn it into a global one; otherwise try "
+                 "to move excessive code from the affected "
+                 "control statement's (e.g., if/else/switch) "
+                 "body to separate new functions/procedures");
+            }
+          else
+            {
+              errmsg = _("24-bit PC-relative displacement overflow; "
+                     "re-run linker with -relax or --relax-24rel");
+            }
+        }
 
-	      break;
-	    }
-	  else
-	    {
-	      /* Target address w/in +/- 16 MB.  */
-	      relocation >>= 1;
-	      insn |= ((relocation & 0xffff) << 16);
-	      insn |= ((relocation & 0xff0000) >> 8);
-	    }
-	  break;
+          break;
+        }
+      else
+        {
+          /* Target address w/in +/- 16 MB.  */
+          relocation >>= 1;
+          insn |= ((relocation & 0xffff) << 16);
+          insn |= ((relocation & 0xff0000) >> 8);
+        }
+      break;
 
-	case R_TRICORE_24ABS:
-	  if (relocation & 0x0fe00001)
-	    {
-	      errmsg = _("Illegal 24-bit absolute address");
-	      break;
-	    }
+    case R_TRICORE_24ABS:
+      if (relocation & 0x0fe00001)
+        {
+          errmsg = _("Illegal 24-bit absolute address");
+          break;
+        }
           relocation >>= 1;
           relocation |= ((relocation & 0x78000000) >> 7);
           insn |= ((relocation & 0xffff) << 16);
           insn |= ((relocation & 0xff0000) >> 8);
           break;
-	  
-	case R_TRICORE_18ABS:
-	  if (relocation & 0x0fffc000)
-	    {
-	      errmsg = _("Illegal 18-bit absolute address");
-	      break;
-	    }
-	  insn |= ((relocation & 0x3f) << 16);
-	  insn |= ((relocation & 0x3c0) << 22);
-	  insn |= ((relocation & 0x3c00) << 12);
-	  insn |= ((relocation & 0xf0000000) >> 16);
-	  break;
 
-	case R_TRICORE_HI:
-	  insn |= (((relocation >> 16) & 0xffff) << 12);
-	  break;
+    case R_TRICORE_18ABS:
+      if (relocation & 0x0fffc000)
+        {
+          errmsg = _("Illegal 18-bit absolute address");
+          break;
+        }
+      insn |= ((relocation & 0x3f) << 16);
+      insn |= ((relocation & 0x3c0) << 22);
+      insn |= ((relocation & 0x3c00) << 12);
+      insn |= ((relocation & 0xf0000000) >> 16);
+      break;
 
-	case R_TRICORE_HIADJ:
-	  insn |= ((((relocation + 0x8000) >> 16) & 0xffff) << 12);
-	  break;
+    case R_TRICORE_HI:
+      insn |= (((relocation >> 16) & 0xffff) << 12);
+      break;
 
-	case R_TRICORE_LO:
-	  insn |= ((relocation & 0xffff) << 12);
-	  break;
+    case R_TRICORE_HIADJ:
+      insn |= ((((relocation + 0x8000) >> 16) & 0xffff) << 12);
+      break;
 
-	case R_TRICORE_LO2:
-	  insn |= ((relocation & 0x3f) << 16);
-	  insn |= ((relocation & 0x3c0) << 22);
-	  insn |= ((relocation & 0xfc00) << 12);
-	  break;
+    case R_TRICORE_LO:
+      insn |= ((relocation & 0xffff) << 12);
+      break;
 
-	case R_TRICORE_16SM:
-	case R_TRICORE_10SM:
-	case R_TRICORE_16SM2:
-	  BFD_ASSERT (sec);
-	  sec_name = sec->name;
-	  if (strcmp (sec_name, ".sdata")
-	      && strcmp (sec_name, ".sbss")
-	      && strncmp (sec_name, ".sdata.", 7)
-	      && strncmp (sec_name, ".sbss.", 6))
-	    {
-	      errmsg = _("Small data relocation against an object not in a "
-	      	         "named small data section (i.e., .s{data,bss}{,.*}");
-	      break;
-	    }
-	  r = tricore_elf32_final_sda_base (sec->output_section,
-	  				    &sda_base, &sda_reg);
-	  if (r != bfd_reloc_ok)
-	    {
-	      errmsg = _("Undefined or illegal small data output section");
-	      break;
-	    }
-	  relocation -= sda_base;
-	  if ((r_type == R_TRICORE_16SM) || (r_type == R_TRICORE_16SM2))
-	    {
-	      if (((int) relocation < -32768) || ((int) relocation > 32767))
-	      {
-	        errmsg = _("16-bit signed SDA-relative offset overflow");
-	        break;
-	      }
-	      if (r_type == R_TRICORE_16SM)
-	        insn |= ((relocation & 0xfc00) << 12);
-	      else
-	        {
-		  insn |= ((relocation & 0xffff) << 12);
-		  break;
-		}
-	    }
-	  else
-	    {
-	      if (((int) relocation < -512) || ((int) relocation > 511))
-	      {
-	        errmsg = _("10-bit signed SDA-relative offset overflow");
-	        break;
-	      }
-	    }
-	  insn |= ((relocation & 0x3f) << 16);
-	  insn |= ((relocation & 0x3c0) << 22);
-	  /* Insert the address register number for the given SDA,
-	     except for 16SM2 (which only requests the SDA offset as a
-	     constant and won't access a variable directly).  */
-	  if ((sda_reg != 0) && (r_type != R_TRICORE_16SM2))
-	    insn = (insn & 0xffff0fff) | (sda_reg << 12);
-	  break;
+    case R_TRICORE_LO2:
+      insn |= ((relocation & 0x3f) << 16);
+      insn |= ((relocation & 0x3c0) << 22);
+      insn |= ((relocation & 0xfc00) << 12);
+      break;
 
-	case R_TRICORE_16CONST:
-	  if (((int) relocation < -32768) || ((int) relocation > 32767))
-	    {
-	      errmsg = _("16-bit signed value overflow");
-	      break;
-	    }
-	  insn |= ((relocation & 0xffff) << 12);
-	  break;
+    case R_TRICORE_16SM:
+    case R_TRICORE_10SM:
+    case R_TRICORE_16SM2:
+      BFD_ASSERT (sec);
+      sec_name = sec->name;
+      if (strcmp (sec_name, ".sdata")
+          && strcmp (sec_name, ".sbss")
+          && strncmp (sec_name, ".sdata.", 7)
+          && strncmp (sec_name, ".sbss.", 6))
+        {
+          errmsg = _("Small data relocation against an object not in a "
+                     "named small data section (i.e., .s{data,bss}{,.*}");
+          break;
+        }
+      r = tricore_elf32_final_sda_base (sec->output_section,
+                        &sda_base, &sda_reg);
+      if (r != bfd_reloc_ok)
+        {
+          errmsg = _("Undefined or illegal small data output section");
+          break;
+        }
+      relocation -= sda_base;
+      if ((r_type == R_TRICORE_16SM) || (r_type == R_TRICORE_16SM2))
+        {
+          if (((int) relocation < -32768) || ((int) relocation > 32767))
+          {
+            errmsg = _("16-bit signed SDA-relative offset overflow");
+            break;
+          }
+          if (r_type == R_TRICORE_16SM)
+            insn |= ((relocation & 0xfc00) << 12);
+          else
+            {
+          insn |= ((relocation & 0xffff) << 12);
+          break;
+        }
+        }
+      else
+        {
+          if (((int) relocation < -512) || ((int) relocation > 511))
+          {
+            errmsg = _("10-bit signed SDA-relative offset overflow");
+            break;
+          }
+        }
+      insn |= ((relocation & 0x3f) << 16);
+      insn |= ((relocation & 0x3c0) << 22);
+      /* Insert the address register number for the given SDA,
+         except for 16SM2 (which only requests the SDA offset as a
+         constant and won't access a variable directly).  */
+      if ((sda_reg != 0) && (r_type != R_TRICORE_16SM2))
+        insn = (insn & 0xffff0fff) | (sda_reg << 12);
+      break;
 
-	case R_TRICORE_15REL:
-	  CHECK_DISPLACEMENT (relocation, -32768, 32766);
-	  insn |= (((relocation >> 1) & 0x7fff) << 16);
-	  break;
+    case R_TRICORE_16CONST:
+      if (((int) relocation < -32768) || ((int) relocation > 32767))
+        {
+          errmsg = _("16-bit signed value overflow");
+          break;
+        }
+      insn |= ((relocation & 0xffff) << 12);
+      break;
 
-	case R_TRICORE_9SCONST:
-	  if (((int) relocation < -256) || ((int) relocation > 255))
-	    {
-	      errmsg = _("9-bit signed value overflow");
-	      break;
-	    }
-	  insn |= ((relocation & 0x1ff) << 12);
-	  break;
+    case R_TRICORE_15REL:
+      CHECK_DISPLACEMENT (relocation, -32768, 32766);
+      insn |= (((relocation >> 1) & 0x7fff) << 16);
+      break;
 
-	case R_TRICORE_9ZCONST:
-	  if (relocation & ~511)
-	    {
-	      errmsg = _("9-bit unsigned value overflow");
-	      break;
-	    }
-	  insn |= (relocation << 12);
-	  break;
+    case R_TRICORE_9SCONST:
+      if (((int) relocation < -256) || ((int) relocation > 255))
+        {
+          errmsg = _("9-bit signed value overflow");
+          break;
+        }
+      insn |= ((relocation & 0x1ff) << 12);
+      break;
 
-	case R_TRICORE_8REL:
-	  CHECK_DISPLACEMENT (relocation, -256, 254);
-	  relocation >>= 1;
-	  insn |= ((relocation & 0xff) << 8);
-	  break;
+    case R_TRICORE_9ZCONST:
+      if (relocation & ~511)
+        {
+          errmsg = _("9-bit unsigned value overflow");
+          break;
+        }
+      insn |= (relocation << 12);
+      break;
 
-	case R_TRICORE_8CONST:
-	  if (relocation & ~255)
-	    {
-	      errmsg = _("8-bit unsigned value overflow");
-	      break;
-	    }
-	  insn |= (relocation << 8);
-	  break;
+    case R_TRICORE_8REL:
+      CHECK_DISPLACEMENT (relocation, -256, 254);
+      relocation >>= 1;
+      insn |= ((relocation & 0xff) << 8);
+      break;
 
-	case R_TRICORE_10OFF:
-	  if (((int) relocation < -512) || ((int) relocation > 511))
-	    {
-	      errmsg = _("10-bit signed offset overflow");
-	      break;
-	    }
-	  insn |= ((relocation & 0x3f) << 16);
-	  insn |= ((relocation & 0x3c0) << 12);
-	  break;
+    case R_TRICORE_8CONST:
+      if (relocation & ~255)
+        {
+          errmsg = _("8-bit unsigned value overflow");
+          break;
+        }
+      insn |= (relocation << 8);
+      break;
 
-	case R_TRICORE_16OFF:
-	  if (((int) relocation < -32768) || ((int) relocation > 32767))
-	    {
-	      errmsg = _("16-bit signed offset overflow");
-	      break;
-	    }
-	  insn |= ((relocation & 0x3f) << 16);
-	  insn |= ((relocation & 0x3c0) << 22);
-	  insn |= ((relocation & 0xfc00) << 12);
-	  break;
+    case R_TRICORE_10OFF:
+      if (((int) relocation < -512) || ((int) relocation > 511))
+        {
+          errmsg = _("10-bit signed offset overflow");
+          break;
+        }
+      insn |= ((relocation & 0x3f) << 16);
+      insn |= ((relocation & 0x3c0) << 12);
+      break;
 
-	case R_TRICORE_1BIT:
-	  if (relocation & ~1)
-	    {
-	      errmsg = _("Invalid bit value");
-	      break;
-	    }
-	  insn |= (relocation << 11);
-	  break;
+    case R_TRICORE_16OFF:
+      if (((int) relocation < -32768) || ((int) relocation > 32767))
+        {
+          errmsg = _("16-bit signed offset overflow");
+          break;
+        }
+      insn |= ((relocation & 0x3f) << 16);
+      insn |= ((relocation & 0x3c0) << 22);
+      insn |= ((relocation & 0xfc00) << 12);
+      break;
 
-	case R_TRICORE_3POS:
-	  if (relocation & ~7)
-	    {
-	      errmsg = _("Invalid 3-bit bit position");
-	      break;
-	    }
-	  insn |= (relocation << 8);
-	  break;
+    case R_TRICORE_1BIT:
+      if (relocation & ~1)
+        {
+          errmsg = _("Invalid bit value");
+          break;
+        }
+      insn |= (relocation << 11);
+      break;
 
-	case R_TRICORE_5POS:
-	  if (relocation & ~31)
-	    {
-	      errmsg = _("Invalid 5-bit bit position");
-	      break;
-	    }
-	  insn |= (relocation << 16);
-	  break;
+    case R_TRICORE_3POS:
+      if (relocation & ~7)
+        {
+          errmsg = _("Invalid 3-bit bit position");
+          break;
+        }
+      insn |= (relocation << 8);
+      break;
 
-	case R_TRICORE_5POS2:
-	  if (relocation & ~31)
-	    {
-	      errmsg = _("Invalid 5-bit bit position");
-	      break;
-	    }
-	  insn |= (relocation << 23);
-	  break;
+    case R_TRICORE_5POS:
+      if (relocation & ~31)
+        {
+          errmsg = _("Invalid 5-bit bit position");
+          break;
+        }
+      insn |= (relocation << 16);
+      break;
 
-	case R_TRICORE_BRCC:
-	  if (((int) relocation < -8) || ((int) relocation > 7))
-	    {
-	      errmsg = _("4-bit signed value overflow");
-	      break;
-	    }
-	  insn |= ((relocation & 0xf) << 12);
-	  break;
+    case R_TRICORE_5POS2:
+      if (relocation & ~31)
+        {
+          errmsg = _("Invalid 5-bit bit position");
+          break;
+        }
+      insn |= (relocation << 23);
+      break;
 
-	case R_TRICORE_BRCZ:
-	  if (relocation & ~15)
-	    {
-	      errmsg = _("4-bit unsigned value overflow");
-	      break;
-	    }
-	  insn |= (relocation << 12);
-	  break;
+    case R_TRICORE_BRCC:
+      if (((int) relocation < -8) || ((int) relocation > 7))
+        {
+          errmsg = _("4-bit signed value overflow");
+          break;
+        }
+      insn |= ((relocation & 0xf) << 12);
+      break;
 
-	case R_TRICORE_BRNN:
-	  if (relocation & ~31)
-	    {
-	      errmsg = _("Invalid 5-bit bit position");
-	      break;
-	    }
-	  insn |= ((relocation & 0xf) << 12);
-	  insn |= ((relocation & 0x10) << 3);
-	  break;
+    case R_TRICORE_BRCZ:
+      if (relocation & ~15)
+        {
+          errmsg = _("4-bit unsigned value overflow");
+          break;
+        }
+      insn |= (relocation << 12);
+      break;
 
-	case R_TRICORE_RRN:
-	  if (relocation & ~3)
-	    {
-	      errmsg = _("2-bit unsigned value overflow");
-	      break;
-	    }
-	  insn |= (relocation << 16);
-	  break;
+    case R_TRICORE_BRNN:
+      if (relocation & ~31)
+        {
+          errmsg = _("Invalid 5-bit bit position");
+          break;
+        }
+      insn |= ((relocation & 0xf) << 12);
+      insn |= ((relocation & 0x10) << 3);
+      break;
 
-	case R_TRICORE_4CONST:
-	  if (((int) relocation < -8) || ((int) relocation > 7))
-	    {
-	      errmsg = _("4-bit signed value overflow");
-	      break;
-	    }
-	  insn |= ((relocation & 0xf) << 12);
-	  break;
+    case R_TRICORE_RRN:
+      if (relocation & ~3)
+        {
+          errmsg = _("2-bit unsigned value overflow");
+          break;
+        }
+      insn |= (relocation << 16);
+      break;
 
-	case R_TRICORE_4REL:
-	  CHECK_DISPLACEMENT (relocation, 0, 30);
-	  relocation >>= 1;
-	  insn |= ((relocation & 0xf) << 8);
-	  break;
+    case R_TRICORE_4CONST:
+      if (((int) relocation < -8) || ((int) relocation > 7))
+        {
+          errmsg = _("4-bit signed value overflow");
+          break;
+        }
+      insn |= ((relocation & 0xf) << 12);
+      break;
 
-	case R_TRICORE_4REL2:
-	  CHECK_DISPLACEMENT (relocation, -32, -2);
-	  relocation >>= 1;
-	  insn |= ((relocation & 0xf) << 8);
-	  break;
+    case R_TRICORE_4REL:
+      CHECK_DISPLACEMENT (relocation, 0, 30);
+      relocation >>= 1;
+      insn |= ((relocation & 0xf) << 8);
+      break;
 
-	case R_TRICORE_5REL:
-	  CHECK_DISPLACEMENT (relocation, 0, 62);
-	  relocation >>= 1;
-	  insn &= ~0x0080;
-	  insn |= ((relocation & 0xf) << 8);
-	  insn |= ((relocation & 0x10) << 3);
-	  break;
+    case R_TRICORE_4REL2:
+      CHECK_DISPLACEMENT (relocation, -32, -2);
+      relocation >>= 1;
+      insn |= ((relocation & 0xf) << 8);
+      break;
 
-	case R_TRICORE_5POS3:
-	  if (relocation & ~31)
-	    {
-	      errmsg = _("Invalid 5-bit bit position");
-	      break;
-	    }
-	  insn |= ((relocation & 0xf) << 12);
-	  insn |= ((relocation & 0x10) << 3);
-	  break;
+    case R_TRICORE_5REL:
+      CHECK_DISPLACEMENT (relocation, 0, 62);
+      relocation >>= 1;
+      insn &= ~0x0080;
+      insn |= ((relocation & 0xf) << 8);
+      insn |= ((relocation & 0x10) << 3);
+      break;
 
-	case R_TRICORE_4OFF:
-	  if (relocation & ~15)
-	    {
-	      errmsg = _("4-bit unsigned offset overflow");
-	      break;
-	    }
-	  insn |= (relocation << 12);
-	  break;
+    case R_TRICORE_5POS3:
+      if (relocation & ~31)
+        {
+          errmsg = _("Invalid 5-bit bit position");
+          break;
+        }
+      insn |= ((relocation & 0xf) << 12);
+      insn |= ((relocation & 0x10) << 3);
+      break;
 
-	case R_TRICORE_4OFF2:
-	  if (relocation & ~31)
-	    {
-	      errmsg = _("5-bit unsigned offset overflow");
-	      break;
-	    }
-	  else if (relocation & 1)
-	    {
-	      errmsg = _("5-bit unsigned offset is not even");
-	      break;
-	    }
-	  insn |= (relocation << 11);
-	  break;
+    case R_TRICORE_4OFF:
+      if (relocation & ~15)
+        {
+          errmsg = _("4-bit unsigned offset overflow");
+          break;
+        }
+      insn |= (relocation << 12);
+      break;
 
-	case R_TRICORE_4OFF4:
-	  if (relocation & ~63)
-	    {
-	      errmsg = _("6-bit unsigned offset overflow");
-	      break;
-	    }
-	  else if (relocation & 3)
-	    {
-	      errmsg = _("6-bit unsigned offset is not a multiple of 4");
-	      break;
-	    }
-	  insn |= (relocation << 10);
-	  break;
+    case R_TRICORE_4OFF2:
+      if (relocation & ~31)
+        {
+          errmsg = _("5-bit unsigned offset overflow");
+          break;
+        }
+      else if (relocation & 1)
+        {
+          errmsg = _("5-bit unsigned offset is not even");
+          break;
+        }
+      insn |= (relocation << 11);
+      break;
 
-	case R_TRICORE_42OFF:
-	  if (relocation & ~15)
-	    {
-	      errmsg = _("4-bit unsigned offset overflow");
-	      break;
-	    }
-	  insn |= (relocation << 8);
-	  break;
+    case R_TRICORE_4OFF4:
+      if (relocation & ~63)
+        {
+          errmsg = _("6-bit unsigned offset overflow");
+          break;
+        }
+      else if (relocation & 3)
+        {
+          errmsg = _("6-bit unsigned offset is not a multiple of 4");
+          break;
+        }
+      insn |= (relocation << 10);
+      break;
 
-	case R_TRICORE_42OFF2:
-	  if (relocation & ~31)
-	    {
-	      errmsg = _("5-bit unsigned offset overflow");
-	      break;
-	    }
-	  else if (relocation & 1)
-	    {
-	      errmsg = _("5-bit unsigned offset is not even");
-	      break;
-	    }
-	  insn |= (relocation << 7);
-	  break;
+    case R_TRICORE_42OFF:
+      if (relocation & ~15)
+        {
+          errmsg = _("4-bit unsigned offset overflow");
+          break;
+        }
+      insn |= (relocation << 8);
+      break;
 
-	case R_TRICORE_42OFF4:
-	  if (relocation & ~63)
-	    {
-	      errmsg = _("6-bit unsigned offset overflow");
-	      break;
-	    }
-	  else if (relocation & 3)
-	    {
-	      errmsg = _("6-bit unsigned offset is not a multiple of 4");
-	      break;
-	    }
-	  insn |= (relocation << 6);
-	  break;
+    case R_TRICORE_42OFF2:
+      if (relocation & ~31)
+        {
+          errmsg = _("5-bit unsigned offset overflow");
+          break;
+        }
+      else if (relocation & 1)
+        {
+          errmsg = _("5-bit unsigned offset is not even");
+          break;
+        }
+      insn |= (relocation << 7);
+      break;
 
-	case R_TRICORE_2OFF:
-	  if (relocation & 3)
-	    {
-	      errmsg = _("2-bit unsigned value overflow");
-	      break;
-	    }
-	  insn |= (relocation << 6);
-	  break;
+    case R_TRICORE_42OFF4:
+      if (relocation & ~63)
+        {
+          errmsg = _("6-bit unsigned offset overflow");
+          break;
+        }
+      else if (relocation & 3)
+        {
+          errmsg = _("6-bit unsigned offset is not a multiple of 4");
+          break;
+        }
+      insn |= (relocation << 6);
+      break;
 
-	case R_TRICORE_8CONST2:
-	  if (relocation & ~1023)
-	    {
-	      errmsg = _("10-bit unsigned offset overflow");
-	      break;
-	    }
-	  else if (relocation & 3)
-	    {
-	      errmsg = _("10-bit unsigned offset is not a multiple of 4");
-	      break;
-	    }
-	  insn |= (relocation << 6);
-	  break;
+    case R_TRICORE_2OFF:
+      if (relocation & 3)
+        {
+          errmsg = _("2-bit unsigned value overflow");
+          break;
+        }
+      insn |= (relocation << 6);
+      break;
 
-	case R_TRICORE_4POS:
-	  if (relocation & ~15)
-	    {
-	      errmsg = _("Invalid 4-bit bit position");
-	      break;
-	    }
-	  insn |= ((relocation & 0xf) << 12);
-	  break;
+    case R_TRICORE_8CONST2:
+      if (relocation & ~1023)
+        {
+          errmsg = _("10-bit unsigned offset overflow");
+          break;
+        }
+      else if (relocation & 3)
+        {
+          errmsg = _("10-bit unsigned offset is not a multiple of 4");
+          break;
+        }
+      insn |= (relocation << 6);
+      break;
 
-	default:
-	  errmsg = _("Internal error: unimplemented relocation type");
-	  break;
-	}
+    case R_TRICORE_4POS:
+      if (relocation & ~15)
+        {
+          errmsg = _("Invalid 4-bit bit position");
+          break;
+        }
+      insn |= ((relocation & 0xf) << 12);
+      break;
+
+    default:
+      errmsg = _("Internal error: unimplemented relocation type");
+      break;
+    }
 
 
 check_reloc:
       if ((r == bfd_reloc_ok) && (errmsg == NULL))
         {
-	  /* No error occurred; just write back the relocated insn.  */
-	  if (len32)
-  	    bfd_put_32 (input_bfd, insn, byte_ptr);
-	  else
-  	    bfd_put_16 (input_bfd, insn, byte_ptr);
-	}
+      /* No error occurred; just write back the relocated insn.  */
+      if (len32)
+        bfd_put_32 (input_bfd, insn, byte_ptr);
       else
-	{
-	  /* Some error occured.  Gripe.  */
-	  const char *name;
+        bfd_put_16 (input_bfd, insn, byte_ptr);
+    }
+      else
+    {
+      /* Some error occured.  Gripe.  */
+      const char *name;
 
-	  if (h != NULL)
-	    name = h->root.root.string;
-	  else
-	    {
-	      name = (bfd_elf_string_from_elf_section
-		      (input_bfd, symtab_hdr->sh_link, sym->st_name));
-	      if (name == NULL || *name == '\0')
-		name = bfd_section_name (input_bfd, sec);
-	    }
+      if (h != NULL)
+        name = h->root.root.string;
+      else
+        {
+          name = (bfd_elf_string_from_elf_section
+              (input_bfd, symtab_hdr->sh_link, sym->st_name));
+          if (name == NULL || *name == '\0')
+        name = bfd_section_name (input_bfd, sec);
+        }
 
-	  if (errmsg != NULL)
-	    {
-	      ret = false;
-	      (*_bfd_error_handler)
-	       ("%s; symbol name = %s (defined in section %s of file %s), "
-	        "addend = %ld, input file = %s, input section = %s, "
-		"relocation offset = 0x%08lx (VMA = 0x%08lx), "
-		"relocation value = 0x%08lx (%ld), output section = %s",
-	        errmsg, name, sec->name,
-	        sec->owner ? bfd_archive_filename (sec->owner) : "<unknown>",
-		addend,
-	        bfd_archive_filename (input_bfd),
-	        bfd_get_section_name (input_bfd, input_section),
-	        offset, offset + input_section->output_section->vma
-	              	       + input_section->output_offset,
-	        relocation, relocation,
-	        input_section->output_section->name);
-	    }
-	  else
-	    {
-	      switch (r)
-	        {
-	        case bfd_reloc_overflow:
-	          if (!((*info->callbacks->reloc_overflow)
-		        (info, name, howto->name, (bfd_vma) 0,
-		        input_bfd, input_section, offset)))
-		    return false;
-		  ret = false;
-	          break;
+      if (errmsg != NULL)
+        {
+          ret = false;
+          (*_bfd_error_handler)
+           ("%s; symbol name = %s (defined in section %s of file %s), "
+            "addend = %ld, input file = %s, input section = %s, "
+        "relocation offset = 0x%08lx (VMA = 0x%08lx), "
+        "relocation value = 0x%08lx (%ld), output section = %s",
+            errmsg, name, sec->name,
+            sec->owner ? bfd_archive_filename (sec->owner) : "<unknown>",
+        addend,
+            bfd_archive_filename (input_bfd),
+            bfd_get_section_name (input_bfd, input_section),
+            offset, offset + input_section->output_section->vma
+                           + input_section->output_offset,
+            relocation, relocation,
+            input_section->output_section->name);
+        }
+      else
+        {
+          switch (r)
+            {
+            case bfd_reloc_overflow:
+              if (!((*info->callbacks->reloc_overflow)
+                (info, name, howto->name, (bfd_vma) 0,
+                input_bfd, input_section, offset)))
+            return false;
+          ret = false;
+              break;
 
-	        case bfd_reloc_undefined:
-	          if (!((*info->callbacks->undefined_symbol)
-		        (info, name, input_bfd, input_section, offset, true)))
-		    return false;
-	          break;
+            case bfd_reloc_undefined:
+              if (!((*info->callbacks->undefined_symbol)
+                (info, name, input_bfd, input_section, offset, true)))
+            return false;
+              break;
 
-	        case bfd_reloc_outofrange:
-	          errmsg = _("Out of range error");
-	          goto common_error;
+            case bfd_reloc_outofrange:
+              errmsg = _("Out of range error");
+              goto common_error;
 
-	        case bfd_reloc_notsupported:
-	          errmsg = _("Unsupported relocation error");
-	          goto common_error;
+            case bfd_reloc_notsupported:
+              errmsg = _("Unsupported relocation error");
+              goto common_error;
 
-	        case bfd_reloc_dangerous:
-	          errmsg = _("Dangerous error");
-	          goto common_error;
+            case bfd_reloc_dangerous:
+              errmsg = _("Dangerous error");
+              goto common_error;
 
-	        default:
-	          errmsg = _("Internal error: unknown error");
+            default:
+              errmsg = _("Internal error: unknown error");
 common_error:
-		  ret = false;
-	          if (!((*info->callbacks->warning)
-		        (info, errmsg, name, input_bfd, input_section, offset)))
-		    return false;
-	          break;
-	        }
-	    }
-	}
+          ret = false;
+              if (!((*info->callbacks->warning)
+                (info, errmsg, name, input_bfd, input_section, offset)))
+            return false;
+              break;
+            }
+        }
+    }
     }
 
   return ret;
@@ -4397,36 +4397,36 @@ tricore_elf32_merge_private_bfd_data (ibfd, obfd)
 #if 1
       if ((old_isa == bfd_mach_norider) && (new_isa != bfd_mach_norider))
         {
-	  /* The first object determines the final mach type.  */
-	  old_isa = linkmask = new_isa;
-	  elf_elfheader (obfd)->e_flags = linkmask;
-	}
+      /* The first object determines the final mach type.  */
+      old_isa = linkmask = new_isa;
+      elf_elfheader (obfd)->e_flags = linkmask;
+    }
       else if ((new_isa == bfd_mach_norider)
-      	       || (new_isa > old_isa)	
-      	       || ((old_isa == bfd_mach_rider_a)
-	           && (new_isa != bfd_mach_rider_a))
-	       || ((new_isa == bfd_mach_rider_a)
-	           && (old_isa != bfd_mach_rider_a)))
-	{
+               || (new_isa > old_isa)
+               || ((old_isa == bfd_mach_rider_a)
+               && (new_isa != bfd_mach_rider_a))
+           || ((new_isa == bfd_mach_rider_a)
+               && (old_isa != bfd_mach_rider_a)))
+    {
           error = true;
           (*_bfd_error_handler)
            (_("%s uses an incompatible TriCore instruction set architecture."),
             bfd_get_filename (ibfd));
-	}
+    }
 #else
       if ((old_isa != bfd_mach_norider) && (new_isa != bfd_mach_norider)
           && ((old_isa & new_isa) == bfd_mach_norider))
-	{
+    {
           error = true;
           (*_bfd_error_handler)
            (_("%s uses an incompatible TriCore instruction set architecture."),
             bfd_get_filename (ibfd));
-	}
+    }
       else
         {
-	  linkmask |= mask;
-	  elf_elfheader (obfd)->e_flags = linkmask;
-	}
+      linkmask |= mask;
+      elf_elfheader (obfd)->e_flags = linkmask;
+    }
 #endif
     }
 
@@ -4495,8 +4495,8 @@ tricore_elf32_set_arch_mach (abfd, arch)
   for (ap = def_ap; ap != NULL; ap = (bfd_arch_info_type *) ap->next)
     if (ap->mach == mach)
       {
-	abfd->arch_info = ap;
-	return;
+    abfd->arch_info = ap;
+    return;
       }
 
   abfd->arch_info = &bfd_default_arch_struct;
@@ -4538,7 +4538,7 @@ tricore_elf32_section_flags (flags, hdr)
     *flags |= SEC_ARCH_BIT_0;
 
   return true;
-}  
+}
 
 /* Same as above, but vice-versa.  */
 
@@ -4599,112 +4599,112 @@ tricore_elf32_get_bitpos (abfd, info, rel, symtab_hdr, isymbuf, hashes, is, ok)
 
       if (symidx == SHN_UNDEF)
         {
-	  /* This is a classic case of "Can't happen!": it is normally
-	     not possible to produce a relocation against a local symbol
-	     that is undefined, because the assembler (well, at least
-	     GNU as) marks undefined symbols automatically as global,
-	     and other assemblers requiring an explicit global/external
-	     declaration would certainly gripe if references to local
-	     symbols cannot be resolved.  So how can it be that we still
-	     need to deal with references to undefined local symbols?
-	     Part of the answer is how the GNU linker handles "garbage
-	     collection" (enabled with "--gc-sections"), a method to
-	     automatically remove any unneded sections.  A section is
-	     considered unneeded if the linker script doesn't provide
-	     an explicit "KEEP" statement for it, and if there are no
-	     symbols within that section that are referenced from any
-	     other section.  If both conditions are met, the linker can
-	     safely remove this section from the output BFD.  However,
-	     when considering whether there are any references to a
-	     given symbol, the linker ignores relocations coming from
-	     debug sections -- which makes sense, because debug sections
-	     don't really contribute to a program's code and data, but
-	     are merely relevant to a debugger.  It thus can happen that
-	     a debug section references a symbol which is defined in an
-	     otherwise unneeded section, and the GNU linker handles this
-	     by completely zeroing such relocation entries in case they
-	     are referencing global symbols, or by setting a referenced
-	     local symbol's symbol index to zero.  This means that for
-	     relocations against such "deleted" global symbols the
-	     relocation type is 0 (i.e., BFD_RELOC_NONE, which is also
-	     mapped to R_TRICORE_NONE), so tricore_elf32_relocate_section
-	     will simply ignore it, and for relocations against "deleted"
-	     local symbols, the symbol's section index will point to the
-	     "undefined section" (SHN_UNDEF) --  a valid input section
-	     to _bfd_elf_rela_local_sym (tricore_elf32_relocate_section
-	     calls this function whenever it needs to resolve references
-	     to local symbols).  Now, if a reference to a deleted symbol
-	     is either ignored or properly handled, where's the problem,
-	     then?  Well, the problem is that for relocations against
-	     "deleted" local symbols only their *symbol index* will be
-	     changed, while their original *relocation type* information
-	     will remain intact, so the relocation function won't simply
-	     ignore such relocs.  But while the "usual" processing of
-	     relocations against deleted symbols causes no grief at all
-	     (see comment above regarding _bfd_elf_rela_local_sym), this
-	     TriCore port of the GNU tools supports the allocation of
-	     "single-bit" objects, and so tricore_elf32_relocate_section
-	     must call this current function to determine a bit object's
-	     position (or "bit offset") within its containing byte.  So,
-	     without checking for deleted local bit objects right here
-	     (by means of the introductory SHN_UNDEF comparison), the
-	     code below could potentially cause illegal memory accesses,
-	     because "bfd_section_from_elf_index (abfd, 0)" returns NULL,
-	     unless "abfd" actually has an "undefined section" attached
-	     to it -- which is a rather unlikely event.  For more details,
-	     take a look at elf_link_input_bfd and the various "garbage
-	     collect" (gc) functions, all defined in elflink.h.  */
+      /* This is a classic case of "Can't happen!": it is normally
+         not possible to produce a relocation against a local symbol
+         that is undefined, because the assembler (well, at least
+         GNU as) marks undefined symbols automatically as global,
+         and other assemblers requiring an explicit global/external
+         declaration would certainly gripe if references to local
+         symbols cannot be resolved.  So how can it be that we still
+         need to deal with references to undefined local symbols?
+         Part of the answer is how the GNU linker handles "garbage
+         collection" (enabled with "--gc-sections"), a method to
+         automatically remove any unneded sections.  A section is
+         considered unneeded if the linker script doesn't provide
+         an explicit "KEEP" statement for it, and if there are no
+         symbols within that section that are referenced from any
+         other section.  If both conditions are met, the linker can
+         safely remove this section from the output BFD.  However,
+         when considering whether there are any references to a
+         given symbol, the linker ignores relocations coming from
+         debug sections -- which makes sense, because debug sections
+         don't really contribute to a program's code and data, but
+         are merely relevant to a debugger.  It thus can happen that
+         a debug section references a symbol which is defined in an
+         otherwise unneeded section, and the GNU linker handles this
+         by completely zeroing such relocation entries in case they
+         are referencing global symbols, or by setting a referenced
+         local symbol's symbol index to zero.  This means that for
+         relocations against such "deleted" global symbols the
+         relocation type is 0 (i.e., BFD_RELOC_NONE, which is also
+         mapped to R_TRICORE_NONE), so tricore_elf32_relocate_section
+         will simply ignore it, and for relocations against "deleted"
+         local symbols, the symbol's section index will point to the
+         "undefined section" (SHN_UNDEF) --  a valid input section
+         to _bfd_elf_rela_local_sym (tricore_elf32_relocate_section
+         calls this function whenever it needs to resolve references
+         to local symbols).  Now, if a reference to a deleted symbol
+         is either ignored or properly handled, where's the problem,
+         then?  Well, the problem is that for relocations against
+         "deleted" local symbols only their *symbol index* will be
+         changed, while their original *relocation type* information
+         will remain intact, so the relocation function won't simply
+         ignore such relocs.  But while the "usual" processing of
+         relocations against deleted symbols causes no grief at all
+         (see comment above regarding _bfd_elf_rela_local_sym), this
+         TriCore port of the GNU tools supports the allocation of
+         "single-bit" objects, and so tricore_elf32_relocate_section
+         must call this current function to determine a bit object's
+         position (or "bit offset") within its containing byte.  So,
+         without checking for deleted local bit objects right here
+         (by means of the introductory SHN_UNDEF comparison), the
+         code below could potentially cause illegal memory accesses,
+         because "bfd_section_from_elf_index (abfd, 0)" returns NULL,
+         unless "abfd" actually has an "undefined section" attached
+         to it -- which is a rather unlikely event.  For more details,
+         take a look at elf_link_input_bfd and the various "garbage
+         collect" (gc) functions, all defined in elflink.h.  */
 
-	  return 0;
-	}
+      return 0;
+    }
 
       /* Local bit symbol; either we haven't relaxed bit variables,
          or a bit section contains only a single local bit variable.
-	 In both cases the bit offset is zero, so we don't have to
-	 compute it.  However, we're doing some sanity checking, albeit
-	 not too fancy: since relocs against local labels are usually
-	 adjusted (i.e., turned into relocs against section+offset),
-	 the reloc references the section symbol, not the bit symbol,
-	 so we skip some tests in this case (of course, we could search
-	 for the actual bit symbol, but it isn't worth the effort, as
-	 making sure that the reloc is against a bit section, and that
-	 the ".boffs" section exists in the input BFD (and has a size
-	 of zero), already provides a great deal of assurance).  */
+     In both cases the bit offset is zero, so we don't have to
+     compute it.  However, we're doing some sanity checking, albeit
+     not too fancy: since relocs against local labels are usually
+     adjusted (i.e., turned into relocs against section+offset),
+     the reloc references the section symbol, not the bit symbol,
+     so we skip some tests in this case (of course, we could search
+     for the actual bit symbol, but it isn't worth the effort, as
+     making sure that the reloc is against a bit section, and that
+     the ".boffs" section exists in the input BFD (and has a size
+     of zero), already provides a great deal of assurance).  */
       sym = isymbuf + symidx;
       bsec = bfd_section_from_elf_index (abfd, sym->st_shndx);
       if (sym->st_name != 0)
-	sname = (bfd_elf_string_from_elf_section
-	    	 (abfd, symtab_hdr->sh_link, sym->st_name));
+    sname = (bfd_elf_string_from_elf_section
+             (abfd, symtab_hdr->sh_link, sym->st_name));
       if (sname == NULL)
         sname = "<unknown local>";
 
       /* Make sure the symbol lives in a bit section.  */
       if (strcmp (bsec->name, ".bdata") && strncmp (bsec->name, ".bdata.", 7)
           && strcmp (bsec->name, ".bbss") && strncmp (bsec->name, ".bbss.", 6))
-	{
+    {
 error_no_bit_section:
-	  (*_bfd_error_handler)
-	   (_("%s(%s+%ld): bit variable \"%s\" defined in non-bit "
-	      "section \"%s\""),
-	    bfd_archive_filename (abfd), is->name, rel->r_offset,
-	    sname, bsec->name);
-	  *ok = false;
-	  return 0;
-	}
+      (*_bfd_error_handler)
+       (_("%s(%s+%ld): bit variable \"%s\" defined in non-bit "
+          "section \"%s\""),
+        bfd_archive_filename (abfd), is->name, rel->r_offset,
+        sname, bsec->name);
+      *ok = false;
+      return 0;
+    }
 
       /* Make sure the input BFD has a section ".boffs" with size 0.  */
       boffs = bfd_get_section_by_name (abfd, ".boffs");
       if (boffs == NULL)
         {
           (*_bfd_error_handler) (_("%s: missing section \".boffs\""),
-      			         bfd_archive_filename (abfd));
+                         bfd_archive_filename (abfd));
           *ok = false;
           return 0;
         }
       if (boffs->_raw_size != 0)
         {
           (*_bfd_error_handler) (_("%s: section \".boffs\" has non-zero size"),
-      			         bfd_archive_filename (abfd));
+                         bfd_archive_filename (abfd));
           *ok = false;
           return 0;
         }
@@ -4712,37 +4712,37 @@ error_no_bit_section:
       /* Perform the following tests only if the reloc is against
          an actual bit symbol, not just the section symbol.  */
       if (sym->st_name != 0)
-	{
-	  /* Make sure the symbol represents a 1-byte object and is
-	     associated with a ".pos" symbol in section ".boffs".  */
-	  if ((symidx == (symtab_hdr->sh_info - 1))
-	      || (ELF_ST_TYPE (sym->st_info) != STT_OBJECT)
-	      || (sym->st_size != 1))
-	    {
+    {
+      /* Make sure the symbol represents a 1-byte object and is
+         associated with a ".pos" symbol in section ".boffs".  */
+      if ((symidx == (symtab_hdr->sh_info - 1))
+          || (ELF_ST_TYPE (sym->st_info) != STT_OBJECT)
+          || (sym->st_size != 1))
+        {
 error_no_bit:
-	      (*_bfd_error_handler)
-	       (_("%s(%s+%ld): symbol \"%s\" doesn't represent a bit object"),
-	        bfd_archive_filename (abfd), is->name, rel->r_offset, sname);
-	      *ok = false;
-	      return 0;
-	    }
+          (*_bfd_error_handler)
+           (_("%s(%s+%ld): symbol \"%s\" doesn't represent a bit object"),
+            bfd_archive_filename (abfd), is->name, rel->r_offset, sname);
+          *ok = false;
+          return 0;
+        }
 
-	  boffs_shndx = _bfd_elf_section_from_bfd_section (abfd, boffs);
-	  len = strlen (sname);
-	  sym2 = isymbuf + symidx + 1;
-	  if ((sym2->st_name == 0)
-	      || (sym2->st_shndx != boffs_shndx)
-	      || (sym2->st_size != 0)
-	      || (sym2->st_value != 0)
-	      || (ELF_ST_TYPE (sym2->st_info) != STT_NOTYPE)
-	      || ((sname2 = (bfd_elf_string_from_elf_section
-			     (abfd, symtab_hdr->sh_link, sym2->st_name)))
-		   == NULL)
-	      || (strlen (sname2) != (len + 4))
-	      || strncmp (sname2, sname, len)
-	      || strcmp (sname2 + len, ".pos"))
-	    goto error_no_bit;
-	}
+      boffs_shndx = _bfd_elf_section_from_bfd_section (abfd, boffs);
+      len = strlen (sname);
+      sym2 = isymbuf + symidx + 1;
+      if ((sym2->st_name == 0)
+          || (sym2->st_shndx != boffs_shndx)
+          || (sym2->st_size != 0)
+          || (sym2->st_value != 0)
+          || (ELF_ST_TYPE (sym2->st_info) != STT_NOTYPE)
+          || ((sname2 = (bfd_elf_string_from_elf_section
+                 (abfd, symtab_hdr->sh_link, sym2->st_name)))
+           == NULL)
+          || (strlen (sname2) != (len + 4))
+          || strncmp (sname2, sname, len)
+          || strcmp (sname2 + len, ".pos"))
+        goto error_no_bit;
+    }
 
       return 0;
     }
@@ -4821,8 +4821,8 @@ tricore_elf32_list_bit_objects (info)
          won't have any bit sections, so we can safely skip it.  */
       if (((boffs = bfd_get_section_by_name (ibfd, ".boffs")) == NULL)
           || (bfd_get_section_flags (ibfd, boffs) & SEC_EXCLUDE)
-	  || (boffs->_raw_size != 0))
-	continue;
+      || (boffs->_raw_size != 0))
+    continue;
 
       boffs_shndx = _bfd_elf_section_from_bfd_section (ibfd, boffs);
       isymbuf = NULL;
@@ -4830,211 +4830,211 @@ tricore_elf32_list_bit_objects (info)
       symtab_hdr = &elf_tdata (ibfd)->symtab_hdr;
       if (symtab_hdr->sh_info != 0)
         {
-	  isymbuf = (Elf_Internal_Sym *) symtab_hdr->contents;
-	  if (isymbuf == NULL)
-	    isymbuf = bfd_elf_get_elf_syms (ibfd, symtab_hdr,
-	    				    symtab_hdr->sh_info, 0,
-					    NULL, NULL, NULL);
-	  if (isymbuf == NULL)
-	    continue;  /* This error will be catched elsewhere.  */
+      isymbuf = (Elf_Internal_Sym *) symtab_hdr->contents;
+      if (isymbuf == NULL)
+        isymbuf = bfd_elf_get_elf_syms (ibfd, symtab_hdr,
+                            symtab_hdr->sh_info, 0,
+                        NULL, NULL, NULL);
+      if (isymbuf == NULL)
+        continue;  /* This error will be catched elsewhere.  */
 
-	  strtab_hdr = &elf_tdata (ibfd)->strtab_hdr;
-	  strtab = strtab_hdr->contents;
-	  if (strtab == NULL)
-	    {
-	      bfd_elf_get_str_section (ibfd, symtab_hdr->sh_link);
-	      strtab = strtab_hdr->contents;
-	    }
-	  BFD_ASSERT (strtab);
-	}
+      strtab_hdr = &elf_tdata (ibfd)->strtab_hdr;
+      strtab = strtab_hdr->contents;
+      if (strtab == NULL)
+        {
+          bfd_elf_get_str_section (ibfd, symtab_hdr->sh_link);
+          strtab = strtab_hdr->contents;
+        }
+      BFD_ASSERT (strtab);
+    }
 
       /* Iterate over the sections of this BFD; skip non-bit sections.  */
       for (bdata = ibfd->sections; bdata; bdata = bdata->next)
-	{
+    {
           if ((bfd_get_section_flags (ibfd, bdata) & SEC_EXCLUDE)
-	      || (bdata->_raw_size == 0)
-	      || (strcmp (bdata->name, ".bdata")
-	          && strncmp (bdata->name, ".bdata.", 7)
-		  && strcmp (bdata->name, ".bbss")
-		  && strncmp (bdata->name, ".bbss.", 6)))
-	    continue;
+          || (bdata->_raw_size == 0)
+          || (strcmp (bdata->name, ".bdata")
+              && strncmp (bdata->name, ".bdata.", 7)
+          && strcmp (bdata->name, ".bbss")
+          && strncmp (bdata->name, ".bbss.", 6)))
+        continue;
 
-	  if (!header_printed)
-	    {
-	      fprintf (out, "\n%s\n",
-	  	       _("Allocating bit symbols (l/g = local or global "
-		         "scope)"));
-	      fprintf (out, "%s\n\n",
-	  	       _("Bit symbol          bit address  l/g  file"));
-	      header_printed = true;
-	    }
+      if (!header_printed)
+        {
+          fprintf (out, "\n%s\n",
+               _("Allocating bit symbols (l/g = local or global "
+                 "scope)"));
+          fprintf (out, "%s\n\n",
+               _("Bit symbol          bit address  l/g  file"));
+          header_printed = true;
+        }
 
-	  /* Walk through all local symbols in this section.  */
+      /* Walk through all local symbols in this section.  */
           if (isymbuf != NULL)
-	    {
-	      Elf_Internal_Sym *isym, *isymend = isymbuf + symtab_hdr->sh_info;
+        {
+          Elf_Internal_Sym *isym, *isymend = isymbuf + symtab_hdr->sh_info;
               const char *this_file = NULL, *this_base = NULL;
-	      unsigned int bdata_shndx;
+          unsigned int bdata_shndx;
 
-	      bdata_shndx = _bfd_elf_section_from_bfd_section (ibfd, bdata);
-	      for (isym = isymbuf; isym < isymend; ++isym)
-	        {
-	          if (ELF_ST_TYPE (isym->st_info) == STT_FILE)
-	            {
-	              this_file = strtab + isym->st_name;
-		      this_base = strchr (this_file, '.');
-		      continue;
-		    }
+          bdata_shndx = _bfd_elf_section_from_bfd_section (ibfd, bdata);
+          for (isym = isymbuf; isym < isymend; ++isym)
+            {
+              if (ELF_ST_TYPE (isym->st_info) == STT_FILE)
+                {
+                  this_file = strtab + isym->st_name;
+              this_base = strchr (this_file, '.');
+              continue;
+            }
 
-	          if ((isym->st_shndx == bdata_shndx)
-	              && (ELF_ST_TYPE (isym->st_info) == STT_OBJECT))
-		    {
-		      Elf_Internal_Sym *isym2;
-		      char *aname;
-		      size_t len;
+              if ((isym->st_shndx == bdata_shndx)
+                  && (ELF_ST_TYPE (isym->st_info) == STT_OBJECT))
+            {
+              Elf_Internal_Sym *isym2;
+              char *aname;
+              size_t len;
 
-		      aname = strtab + isym->st_name;
-		      len = strlen (aname);
-		      if (isym->st_size != 1)
-		        {
-		          (*_bfd_error_handler)
-		           (_("%s: bit symbol \"%s\" has size != 1 (%ld)"),
-		            bfd_archive_filename (ibfd), aname, isym->st_size);
-		          bfd_set_error (bfd_error_bad_value);
-		          continue;
-		        }
-		      for (isym2 = isym + 1; isym2 < isymend; ++isym2)
-		        {
-			  const char *aname2;
+              aname = strtab + isym->st_name;
+              len = strlen (aname);
+              if (isym->st_size != 1)
+                {
+                  (*_bfd_error_handler)
+                   (_("%s: bit symbol \"%s\" has size != 1 (%ld)"),
+                    bfd_archive_filename (ibfd), aname, isym->st_size);
+                  bfd_set_error (bfd_error_bad_value);
+                  continue;
+                }
+              for (isym2 = isym + 1; isym2 < isymend; ++isym2)
+                {
+              const char *aname2;
 
-		          /* Bail out if this symbol indicates the beginning
-		             of a new file, as this means that the ".pos"
-			     symbol is missing in the current file (shouldn't
-			     really happen, but just in case).  */
-	                  if (ELF_ST_TYPE (isym2->st_info) == STT_FILE)
-		            {
-			      isym2 = isymend;
-			      break;
-			    }
+                  /* Bail out if this symbol indicates the beginning
+                     of a new file, as this means that the ".pos"
+                 symbol is missing in the current file (shouldn't
+                 really happen, but just in case).  */
+                      if (ELF_ST_TYPE (isym2->st_info) == STT_FILE)
+                    {
+                  isym2 = isymend;
+                  break;
+                }
 
-			  aname2 = strtab + isym2->st_name;
-		          if ((isym2->st_shndx == boffs_shndx)
-			      && (ELF_ST_TYPE (isym2->st_info) == STT_NOTYPE)
-			      && (strlen (aname2) == (len + 4))
-			      && !strncmp (aname2, aname, len)
-			      && !strcmp (aname2 + len, ".pos"))
-			    {
-			      fprintf (out, "%-19s 0x%08lx.%ld  l   %s",
-			  	       aname,
-				       (bdata->output_section->vma
-				        + bdata->output_offset
-				        + isym->st_value),
-				       isym2->st_value,
-				       bfd_archive_filename (ibfd));
+              aname2 = strtab + isym2->st_name;
+                  if ((isym2->st_shndx == boffs_shndx)
+                  && (ELF_ST_TYPE (isym2->st_info) == STT_NOTYPE)
+                  && (strlen (aname2) == (len + 4))
+                  && !strncmp (aname2, aname, len)
+                  && !strcmp (aname2 + len, ".pos"))
+                {
+                  fprintf (out, "%-19s 0x%08lx.%ld  l   %s",
+                       aname,
+                       (bdata->output_section->vma
+                        + bdata->output_offset
+                        + isym->st_value),
+                       isym2->st_value,
+                       bfd_archive_filename (ibfd));
 
-			      /* If this is an input object that is the result
-			         of a relocateable link run, also print the
-				 name of the original file that defined this
-				 bit object.  */
-			      if (this_file
-			          && this_base
-			          && strncmp (this_file, ibfd->filename,
-			      		      this_base - this_file))
-			        fprintf (out, " <%s>", this_file);
-			      fprintf (out, "\n");
-			      break;
-			    }
-		        }
-		      if (isym2 == isymend)
-		        {
+                  /* If this is an input object that is the result
+                     of a relocateable link run, also print the
+                 name of the original file that defined this
+                 bit object.  */
+                  if (this_file
+                      && this_base
+                      && strncmp (this_file, ibfd->filename,
+                              this_base - this_file))
+                    fprintf (out, " <%s>", this_file);
+                  fprintf (out, "\n");
+                  break;
+                }
+                }
+              if (isym2 == isymend)
+                {
 #ifndef FATAL_BITVAR_ERRORS
-		          (*_bfd_error_handler)
-		           (_("%s: warning: missing or invalid local bit "
-			      "position "
-		              "symbol \"%s.pos\" in section \".boffs\""),
-			    bfd_archive_filename (ibfd), aname);
+                  (*_bfd_error_handler)
+                   (_("%s: warning: missing or invalid local bit "
+                  "position "
+                      "symbol \"%s.pos\" in section \".boffs\""),
+                bfd_archive_filename (ibfd), aname);
 #else
-		          (*_bfd_error_handler)
-		           (_("%s: missing or invalid local bit position "
-		              "symbol \"%s.pos\" in section \".boffs\""),
-			    bfd_archive_filename (ibfd), aname);
-		          bfd_set_error (bfd_error_bad_value);
+                  (*_bfd_error_handler)
+                   (_("%s: missing or invalid local bit position "
+                      "symbol \"%s.pos\" in section \".boffs\""),
+                bfd_archive_filename (ibfd), aname);
+                  bfd_set_error (bfd_error_bad_value);
 #endif
-		        }
-		    }
-	        }
-	    }
+                }
+            }
+            }
+        }
 
-	  /* Walk through all global symbols in this section.  */
+      /* Walk through all global symbols in this section.  */
           symcount = (symtab_hdr->sh_size / sizeof (Elf32_External_Sym)
-      		      - symtab_hdr->sh_info);
+                  - symtab_hdr->sh_info);
           beg_hashes = elf_sym_hashes (ibfd);
           end_hashes = elf_sym_hashes (ibfd) + symcount;
           for (sym_hashes = beg_hashes; sym_hashes < end_hashes; ++sym_hashes)
-	    {
-	      struct elf_link_hash_entry *sym = *sym_hashes;
+        {
+          struct elf_link_hash_entry *sym = *sym_hashes;
 
-	      if ((sym->root.u.def.section == bdata)
-	          && (sym->type == STT_OBJECT)
-	          && ((sym->root.type == bfd_link_hash_defined)
-	              || (sym->root.type == bfd_link_hash_defweak)))
-	        {
-	          struct elf_link_hash_entry *sym2;
-	          const char *aname = sym->root.root.string;
-	          char *pname;
-	          size_t len;
+          if ((sym->root.u.def.section == bdata)
+              && (sym->type == STT_OBJECT)
+              && ((sym->root.type == bfd_link_hash_defined)
+                  || (sym->root.type == bfd_link_hash_defweak)))
+            {
+              struct elf_link_hash_entry *sym2;
+              const char *aname = sym->root.root.string;
+              char *pname;
+              size_t len;
 
-	          if (sym->size != 1)
-	            {
-		      (*_bfd_error_handler)
-		       (_("%s: bit symbol \"%s\" has size != 1 (%ld)"),
-		        bfd_archive_filename (ibfd), aname, sym->size);
-		      bfd_set_error (bfd_error_bad_value);
-	              continue;
-	            }
-	          if (sym->elf_link_hash_flags
-	              & (ELF_LINK_HASH_REF_DYNAMIC | ELF_LINK_HASH_DEF_DYNAMIC))
-		    {
-		      (*_bfd_error_handler)
-		       (_("%s: bit symbol \"%s\" defined or referenced by a "
-		          "shared object"),
-	  	       bfd_archive_filename (ibfd), aname);
-		      bfd_set_error (bfd_error_bad_value);
-	              continue;
-		    }
+              if (sym->size != 1)
+                {
+              (*_bfd_error_handler)
+               (_("%s: bit symbol \"%s\" has size != 1 (%ld)"),
+                bfd_archive_filename (ibfd), aname, sym->size);
+              bfd_set_error (bfd_error_bad_value);
+                  continue;
+                }
+              if (sym->elf_link_hash_flags
+                  & (ELF_LINK_HASH_REF_DYNAMIC | ELF_LINK_HASH_DEF_DYNAMIC))
+            {
+              (*_bfd_error_handler)
+               (_("%s: bit symbol \"%s\" defined or referenced by a "
+                  "shared object"),
+               bfd_archive_filename (ibfd), aname);
+              bfd_set_error (bfd_error_bad_value);
+                  continue;
+            }
 
-	          /* Lookup the global symbol "aname.pos", which should be
-	             defined in section ".boffs" and have type STT_NOTYPE.  */
-	          len = strlen (aname) + 5;
-	          if ((pname = bfd_malloc (len)) == NULL)
-	            return;
+              /* Lookup the global symbol "aname.pos", which should be
+                 defined in section ".boffs" and have type STT_NOTYPE.  */
+              len = strlen (aname) + 5;
+              if ((pname = bfd_malloc (len)) == NULL)
+                return;
 
-		  sprintf (pname, "%s.pos", aname);
-	          sym2 = (struct elf_link_hash_entry *)
-	      	          bfd_link_hash_lookup (info->hash, pname,
-	      				        false, false, false);
-	          if ((sym2 == NULL)
-		      || (sym2->root.u.def.section != boffs)
-	              || (sym2->type != STT_NOTYPE))
-		    {
-		      (*_bfd_error_handler)
-		       (_("%s: missing or invalid bit position symbol \"%s\""),
-		        bfd_archive_filename (ibfd), pname);
-		      bfd_set_error (bfd_error_bad_value);
-		      free (pname);
-		      continue;
-		    }
+          sprintf (pname, "%s.pos", aname);
+              sym2 = (struct elf_link_hash_entry *)
+                      bfd_link_hash_lookup (info->hash, pname,
+                                false, false, false);
+              if ((sym2 == NULL)
+              || (sym2->root.u.def.section != boffs)
+                  || (sym2->type != STT_NOTYPE))
+            {
+              (*_bfd_error_handler)
+               (_("%s: missing or invalid bit position symbol \"%s\""),
+                bfd_archive_filename (ibfd), pname);
+              bfd_set_error (bfd_error_bad_value);
+              free (pname);
+              continue;
+            }
 
-	          free (pname);
-	          fprintf (out, "%-19s 0x%08lx.%ld  g   %s\n",
-		           aname,
-		           (bdata->output_section->vma
-			    + bdata->output_offset
-			    + sym->root.u.def.value),
-		           sym2->root.u.def.value,
-		           bfd_archive_filename (ibfd));
-	        }
-	    }
+              free (pname);
+              fprintf (out, "%-19s 0x%08lx.%ld  g   %s\n",
+                   aname,
+                   (bdata->output_section->vma
+                + bdata->output_offset
+                + sym->root.u.def.value),
+                   sym2->root.u.def.value,
+                   bfd_archive_filename (ibfd));
+            }
+        }
         }
     }
 }
@@ -5090,15 +5090,15 @@ tricore_elf32_adjust_bit_relocs (abfd, info, secidx, old, new, bpos, bidx)
       /* Find the highest section ID of all input sections.  */
       for (ibfd = info->input_bfds; ibfd; ibfd = ibfd->link_next)
         for (section = ibfd->sections; section; section = section->next)
-	  if (section->id > max)
-	    max = section->id;
+      if (section->id > max)
+        max = section->id;
 
       ++max;
       if ((reloc_adjusted = bfd_malloc (max * sizeof (char *))) == NULL)
         return false;
 
       for (i = 0; i < max; ++i)
-	reloc_adjusted[i] = NULL;
+    reloc_adjusted[i] = NULL;
 
       initialized = true;
     }
@@ -5110,108 +5110,108 @@ tricore_elf32_adjust_bit_relocs (abfd, info, secidx, old, new, bpos, bidx)
     {
       if (((sec->flags & SEC_RELOC) == 0)
           || (sec->reloc_count == 0))
-	continue;
+    continue;
 
       internal_relocs = (_bfd_elf32_link_read_relocs
-  		         (abfd, sec, (PTR) NULL, (Elf_Internal_Rela *) NULL,
-		          true /* Cache the relocs.  */));
+                 (abfd, sec, (PTR) NULL, (Elf_Internal_Rela *) NULL,
+                  true /* Cache the relocs.  */));
       if (internal_relocs == NULL)
         return false;
 
       if (!reloc_adjusted[sec->id])
         {
-	  if ((reloc_adjusted[sec->id] = bfd_malloc (sec->reloc_count)) == NULL)
-	    return false;
+      if ((reloc_adjusted[sec->id] = bfd_malloc (sec->reloc_count)) == NULL)
+        return false;
 
-	  memset (reloc_adjusted[sec->id], 0, sec->reloc_count);
-	}
+      memset (reloc_adjusted[sec->id], 0, sec->reloc_count);
+    }
 
       irelend = internal_relocs + sec->reloc_count;
       for (irel = internal_relocs; irel < irelend; irel++)
         {
-	  if (irel->r_addend != old)
-	    {
-	      bitoff_seen = false;
-	      continue;
-	    }
+      if (irel->r_addend != old)
+        {
+          bitoff_seen = false;
+          continue;
+        }
 
-	  r_type = ELF32_R_TYPE (irel->r_info);
-	  if ((r_type == R_TRICORE_NONE)
-	      || reloc_adjusted[sec->id][irel - internal_relocs])
-	    {
-	      /* Don't touch an already modified reloc; see comment above.  */
-	      bitoff_seen = false;
-	      continue;
-	    }
+      r_type = ELF32_R_TYPE (irel->r_info);
+      if ((r_type == R_TRICORE_NONE)
+          || reloc_adjusted[sec->id][irel - internal_relocs])
+        {
+          /* Don't touch an already modified reloc; see comment above.  */
+          bitoff_seen = false;
+          continue;
+        }
           if ((r_type < 0)
               || (r_type < R_TRICORE_NONE)
-	      || (r_type >= R_TRICORE_max))
-	    {
-	      (*_bfd_error_handler) (_("%s: unknown relocation type %d"),
-				     sec->name, r_type);
-	      bfd_set_error (bfd_error_bad_value);
-	      return false;
-	    }
-	  if (r_type == R_TRICORE_BITPOS)
-	    {
-	      bitoff_seen = true;
-	      lastrel = irel;
-	      continue;
-	    }
+          || (r_type >= R_TRICORE_max))
+        {
+          (*_bfd_error_handler) (_("%s: unknown relocation type %d"),
+                     sec->name, r_type);
+          bfd_set_error (bfd_error_bad_value);
+          return false;
+        }
+      if (r_type == R_TRICORE_BITPOS)
+        {
+          bitoff_seen = true;
+          lastrel = irel;
+          continue;
+        }
 
-	  symidx = ELF32_R_SYM (irel->r_info);
-	  if (symidx >= symtab_hdr->sh_info)
-	    {
-	      /* Relocation against a global symbol.  Can be safely
-	         ignored, because even if bitoff_seen is true and
-		 this symbol turns out to not represent a bit symbol,
-		 this will be catched either by the relaxation pass
-		 or later by tricore_elf32_relocate_section when it
-		 calls tricore_elf32_get_bitpos.  */
-	      bitoff_seen = false;
-	      continue;
-	    }
+      symidx = ELF32_R_SYM (irel->r_info);
+      if (symidx >= symtab_hdr->sh_info)
+        {
+          /* Relocation against a global symbol.  Can be safely
+             ignored, because even if bitoff_seen is true and
+         this symbol turns out to not represent a bit symbol,
+         this will be catched either by the relaxation pass
+         or later by tricore_elf32_relocate_section when it
+         calls tricore_elf32_get_bitpos.  */
+          bitoff_seen = false;
+          continue;
+        }
 
-	  sym = isymbuf + symidx;
-	  if ((sym->st_shndx != secidx)
-	      || (ELF_ST_TYPE (sym->st_info) != STT_SECTION))
-	    {
-	      /* This symbol doesn't belong to the given bit section,
-	         or the relocation is not against the section symbol.  */
-	      bitoff_seen = false;
-	      continue;
-	    }
+      sym = isymbuf + symidx;
+      if ((sym->st_shndx != secidx)
+          || (ELF_ST_TYPE (sym->st_info) != STT_SECTION))
+        {
+          /* This symbol doesn't belong to the given bit section,
+             or the relocation is not against the section symbol.  */
+          bitoff_seen = false;
+          continue;
+        }
 
-	  if (tricore_elf32_debug_relax)
-	    {
-	      asection *bsec;
+      if (tricore_elf32_debug_relax)
+        {
+          asection *bsec;
 
-	      bsec = bfd_section_from_elf_index (abfd, sym->st_shndx);
-	      printf ("    %s+%ld: symbol at %s+%ld, changing ",
-	              sec->name, irel->r_offset, bsec->name, irel->r_addend);
-	    }
+          bsec = bfd_section_from_elf_index (abfd, sym->st_shndx);
+          printf ("    %s+%ld: symbol at %s+%ld, changing ",
+                  sec->name, irel->r_offset, bsec->name, irel->r_addend);
+        }
 
-	  /* Remember that this reloc is going to be changed; see
-	     comment above for details about why this is necessary.  */
-	  reloc_adjusted[sec->id][irel - internal_relocs] = 1;
-	  if (bitoff_seen)
-	    {
-	      if (tricore_elf32_debug_relax)
-	        printf ("bpos from 0 to %d\n", bpos);
+      /* Remember that this reloc is going to be changed; see
+         comment above for details about why this is necessary.  */
+      reloc_adjusted[sec->id][irel - internal_relocs] = 1;
+      if (bitoff_seen)
+        {
+          if (tricore_elf32_debug_relax)
+            printf ("bpos from 0 to %d\n", bpos);
 
-	      irel->r_info = ((irel->r_info & 0xff) | bidx << 8);
-	      irel->r_addend = 0;
-	      lastrel->r_info = R_TRICORE_NONE;
-	      bitoff_seen = false;
-	    }
-	  else
-	    {
-	      if (tricore_elf32_debug_relax)
-	        printf ("addr from %ld to %ld\n", old, new);
+          irel->r_info = ((irel->r_info & 0xff) | bidx << 8);
+          irel->r_addend = 0;
+          lastrel->r_info = R_TRICORE_NONE;
+          bitoff_seen = false;
+        }
+      else
+        {
+          if (tricore_elf32_debug_relax)
+            printf ("addr from %ld to %ld\n", old, new);
 
-	      irel->r_addend = new;
-	    }
-	}
+          irel->r_addend = new;
+        }
+    }
     }
 
   return true;
@@ -5235,7 +5235,7 @@ tricore_elf32_new_symentry ()
       symbol_list_max <<= 2;
       symbol_list =
         (symbol_t *) bfd_realloc (symbol_list,
-      				  symbol_list_max * sizeof (symbol_t));
+                      symbol_list_max * sizeof (symbol_t));
       BFD_ASSERT (symbol_list);
     }
 
@@ -5317,7 +5317,7 @@ tricore_elf32_extmap_add_sym (entry, link_info)
   if (((h->root.type != bfd_link_hash_defined)
        && (h->root.type != bfd_link_hash_defweak))
       || (bfd_get_section_flags (h->root.u.def.section->owner,
-      				 h->root.u.def.section)
+                     h->root.u.def.section)
           & SEC_EXCLUDE)
       || !strcmp (h->root.u.def.section->name, ".boffs")
       || (h->root.u.def.section->output_section == NULL))
@@ -5326,8 +5326,8 @@ tricore_elf32_extmap_add_sym (entry, link_info)
     sym = tricore_elf32_new_symentry ();
     sym->name = h->root.root.string;
     sym->address = (h->root.u.def.section->output_section->vma
-	      	    + h->root.u.def.section->output_offset
-		    + h->root.u.def.value);
+                + h->root.u.def.section->output_offset
+            + h->root.u.def.value);
     sym->region_name = "*default*";
     sym->is_bit = false;
     sym->bitpos = 0;
@@ -5336,28 +5336,28 @@ tricore_elf32_extmap_add_sym (entry, link_info)
     sym->section = h->root.u.def.section;
 
     if (!strcmp (sym->section->name, ".bdata")
-	|| !strncmp (sym->section->name, ".bdata.", 7)
-	|| !strcmp (sym->section->name, ".bbss")
-	|| !strncmp (sym->section->name, ".bbss.", 6))
+    || !strncmp (sym->section->name, ".bdata.", 7)
+    || !strcmp (sym->section->name, ".bbss")
+    || !strncmp (sym->section->name, ".bbss.", 6))
       {
-	size_t len = strlen (sym->name) + 5;
-	char *pname;
-	struct elf_link_hash_entry *psym;
+    size_t len = strlen (sym->name) + 5;
+    char *pname;
+    struct elf_link_hash_entry *psym;
 
-	if ((pname = bfd_malloc (len)) == NULL)
-	  return false;
+    if ((pname = bfd_malloc (len)) == NULL)
+      return false;
 
-	sprintf (pname, "%s.pos", sym->name);
-	psym = (struct elf_link_hash_entry *)
-		bfd_link_hash_lookup (info->hash, pname,
-			  	      false, false, false);
-	free (pname);
-	if ((psym != NULL)
-	    && !strcmp (psym->root.u.def.section->name, ".boffs"))
-	  {
-	    sym->is_bit = true;
-	    sym->bitpos = psym->root.u.def.value;
-	  }
+    sprintf (pname, "%s.pos", sym->name);
+    psym = (struct elf_link_hash_entry *)
+        bfd_link_hash_lookup (info->hash, pname,
+                      false, false, false);
+    free (pname);
+    if ((psym != NULL)
+        && !strcmp (psym->root.u.def.section->name, ".boffs"))
+      {
+        sym->is_bit = true;
+        sym->bitpos = psym->root.u.def.value;
+      }
       }
 
   return true;
@@ -5394,10 +5394,10 @@ tricore_elf32_do_extmap (info)
       fprintf (out, "Linker version: ");
       tricore_elf32_extmap_ld_version (out);
       fprintf (out, "Name of linker executable: %s\n",
-      	       tricore_elf32_extmap_ld_name);
+               tricore_elf32_extmap_ld_name);
       fprintf (out, "Date of link run: %s", tbuf);
       fprintf (out, "Name of linker map file: %s\n",
-	       tricore_elf32_map_filename);
+           tricore_elf32_map_filename);
       fprintf (out, "\n");
     }
 
@@ -5405,7 +5405,7 @@ tricore_elf32_do_extmap (info)
   if ((tricore_elf32_extmap_get_memregs != NULL)
       && ((tricore_elf32_extmap_syms_by_name > 0)
           || (tricore_elf32_extmap_syms_by_addr > 0)
-	  || tricore_elf32_extmap_memory_segments))
+      || tricore_elf32_extmap_memory_segments))
     memregs = tricore_elf32_extmap_get_memregs (&nmemregs);
 
   /* Collect symbol information, if required.  */
@@ -5420,176 +5420,176 @@ tricore_elf32_do_extmap (info)
 
       /* Add global symbols.  */
       bfd_link_hash_traverse (info->hash, tricore_elf32_extmap_add_sym,
-      			      (PTR) info);
+                      (PTR) info);
 
       /* Add local symbols, if so requested.  */
       if ((tricore_elf32_extmap_syms_by_name == 2)
-      	  || (tricore_elf32_extmap_syms_by_addr == 2))
-	{
-	  Elf_Internal_Shdr *symtab_hdr, *strtab_hdr;
-	  Elf_Internal_Sym *isymbuf, *isym, *isymend;
-	  bfd *ibfd;
-	  asection *boffs, *section;
-	  unsigned int boffs_shndx = -1;
-	  unsigned char *strtab;
+          || (tricore_elf32_extmap_syms_by_addr == 2))
+    {
+      Elf_Internal_Shdr *symtab_hdr, *strtab_hdr;
+      Elf_Internal_Sym *isymbuf, *isym, *isymend;
+      bfd *ibfd;
+      asection *boffs, *section;
+      unsigned int boffs_shndx = -1;
+      unsigned char *strtab;
 
-	  for (ibfd = info->input_bfds; ibfd; ibfd = ibfd->link_next)
-	    {
-	      if ((boffs = bfd_get_section_by_name (ibfd, ".boffs")) != NULL)
-		boffs_shndx = _bfd_elf_section_from_bfd_section (ibfd, boffs);
+      for (ibfd = info->input_bfds; ibfd; ibfd = ibfd->link_next)
+        {
+          if ((boffs = bfd_get_section_by_name (ibfd, ".boffs")) != NULL)
+        boffs_shndx = _bfd_elf_section_from_bfd_section (ibfd, boffs);
 
-	      symtab_hdr = &elf_tdata (ibfd)->symtab_hdr;
-	      if (symtab_hdr->sh_info == 0)
-	        continue;  /* Input object has no local symbols.  */
+          symtab_hdr = &elf_tdata (ibfd)->symtab_hdr;
+          if (symtab_hdr->sh_info == 0)
+            continue;  /* Input object has no local symbols.  */
 
-	      isymbuf = (Elf_Internal_Sym *) symtab_hdr->contents;
-	      if (isymbuf == NULL)
-	        isymbuf = bfd_elf_get_elf_syms (ibfd, symtab_hdr,
-						symtab_hdr->sh_info, 0,
-						NULL, NULL, NULL);
-	      if (isymbuf == NULL)
-	        continue;  /* This error will be catched elsewhere.  */
+          isymbuf = (Elf_Internal_Sym *) symtab_hdr->contents;
+          if (isymbuf == NULL)
+            isymbuf = bfd_elf_get_elf_syms (ibfd, symtab_hdr,
+                        symtab_hdr->sh_info, 0,
+                        NULL, NULL, NULL);
+          if (isymbuf == NULL)
+            continue;  /* This error will be catched elsewhere.  */
 
-	      isymend = isymbuf + symtab_hdr->sh_info;
-	      strtab_hdr = &elf_tdata (ibfd)->strtab_hdr;
-	      strtab = strtab_hdr->contents;
-	      if (strtab == NULL)
-	        {
-		  bfd_elf_get_str_section (ibfd, symtab_hdr->sh_link);
-		  strtab = strtab_hdr->contents;
-		}
-	      BFD_ASSERT (strtab);
+          isymend = isymbuf + symtab_hdr->sh_info;
+          strtab_hdr = &elf_tdata (ibfd)->strtab_hdr;
+          strtab = strtab_hdr->contents;
+          if (strtab == NULL)
+            {
+          bfd_elf_get_str_section (ibfd, symtab_hdr->sh_link);
+          strtab = strtab_hdr->contents;
+        }
+          BFD_ASSERT (strtab);
 
-	      for (isym = isymbuf; isym < isymend; ++isym)
-	        {
-		  if (isym->st_shndx == SHN_ABS)
-		    section = bfd_abs_section_ptr;
-		  else
-		    section = bfd_section_from_elf_index (ibfd, isym->st_shndx);
-		  if ((section == NULL)
-		      || (section->output_section == NULL)
-		      || (isym->st_name == 0)
-		      || (ELF_ST_TYPE (isym->st_info) == STT_FILE)
-		      || (boffs && (isym->st_shndx == boffs_shndx))
-		      || (bfd_get_section_flags (ibfd, section) & SEC_EXCLUDE))
-		    continue;
+          for (isym = isymbuf; isym < isymend; ++isym)
+            {
+          if (isym->st_shndx == SHN_ABS)
+            section = bfd_abs_section_ptr;
+          else
+            section = bfd_section_from_elf_index (ibfd, isym->st_shndx);
+          if ((section == NULL)
+              || (section->output_section == NULL)
+              || (isym->st_name == 0)
+              || (ELF_ST_TYPE (isym->st_info) == STT_FILE)
+              || (boffs && (isym->st_shndx == boffs_shndx))
+              || (bfd_get_section_flags (ibfd, section) & SEC_EXCLUDE))
+            continue;
 
-		  sym = tricore_elf32_new_symentry ();
-		  sym->name = strtab + isym->st_name;
-		  sym->address = (section->output_section->vma
-				  + section->output_offset
-				  + isym->st_value);
-		  sym->region_name = "*default*";
-		  sym->is_bit = false;
-		  sym->bitpos = 0;
-		  sym->is_static = true;
-		  sym->size = isym->st_size;
-		  sym->section = section;
-		  if (boffs
-		      && (!strcmp (sym->section->name, ".bdata")
-			  || !strncmp (sym->section->name, ".bdata.", 7)
-			  || !strcmp (sym->section->name, ".bbss")
-			  || !strncmp (sym->section->name, ".bbss.", 6)))
-		    {
-		      Elf_Internal_Sym *isym2;
+          sym = tricore_elf32_new_symentry ();
+          sym->name = strtab + isym->st_name;
+          sym->address = (section->output_section->vma
+                  + section->output_offset
+                  + isym->st_value);
+          sym->region_name = "*default*";
+          sym->is_bit = false;
+          sym->bitpos = 0;
+          sym->is_static = true;
+          sym->size = isym->st_size;
+          sym->section = section;
+          if (boffs
+              && (!strcmp (sym->section->name, ".bdata")
+              || !strncmp (sym->section->name, ".bdata.", 7)
+              || !strcmp (sym->section->name, ".bbss")
+              || !strncmp (sym->section->name, ".bbss.", 6)))
+            {
+              Elf_Internal_Sym *isym2;
 
-		      len = strlen (sym->name);
-		      for (isym2 = isym + 1; isym2 < isymend; ++isym2)
-		        {
-			  const char *aname2;
+              len = strlen (sym->name);
+              for (isym2 = isym + 1; isym2 < isymend; ++isym2)
+                {
+              const char *aname2;
 
-			  if (ELF_ST_TYPE (isym2->st_info) == STT_FILE)
-			    {
-			      isym2 = isymend;
-			      break;
-			    }
-			  aname2 = strtab + isym2->st_name;
-			  if ((isym2->st_shndx == boffs_shndx)
-			      && (ELF_ST_TYPE (isym2->st_info) == STT_NOTYPE)
-			      && (strlen (aname2) == (len + 4))
-			      && !strncmp (aname2, sym->name, len)
-			      && !strcmp (aname2 + len, ".pos"))
-			    {
-			      sym->is_bit = true;
-			      sym->bitpos = isym2->st_value;
-			      break;
-			    }
-			}
-		      if (isym2 == isymend)
-		        {
+              if (ELF_ST_TYPE (isym2->st_info) == STT_FILE)
+                {
+                  isym2 = isymend;
+                  break;
+                }
+              aname2 = strtab + isym2->st_name;
+              if ((isym2->st_shndx == boffs_shndx)
+                  && (ELF_ST_TYPE (isym2->st_info) == STT_NOTYPE)
+                  && (strlen (aname2) == (len + 4))
+                  && !strncmp (aname2, sym->name, len)
+                  && !strcmp (aname2 + len, ".pos"))
+                {
+                  sym->is_bit = true;
+                  sym->bitpos = isym2->st_value;
+                  break;
+                }
+            }
+              if (isym2 == isymend)
+                {
 #ifndef FATAL_BITVAR_ERRORS
-			  (*_bfd_error_handler)
-			   (_("%s: warning: missing or invalid local bit "
-			      "position "
-			      "symbol \"%s.pos\" in section \".boffs\""),
-			    bfd_archive_filename (ibfd), sym->name);
+              (*_bfd_error_handler)
+               (_("%s: warning: missing or invalid local bit "
+                  "position "
+                  "symbol \"%s.pos\" in section \".boffs\""),
+                bfd_archive_filename (ibfd), sym->name);
 #else
-			  (*_bfd_error_handler)
-			   (_("%s: missing or invalid local bit position "
-			      "symbol \"%s.pos\" in section \".boffs\""),
-			    bfd_archive_filename (ibfd), sym->name);
-			  bfd_set_error (bfd_error_bad_value);
+              (*_bfd_error_handler)
+               (_("%s: missing or invalid local bit position "
+                  "symbol \"%s.pos\" in section \".boffs\""),
+                bfd_archive_filename (ibfd), sym->name);
+              bfd_set_error (bfd_error_bad_value);
 #endif
-			}
-		    }
-		}
-	    }
-	}
+            }
+            }
+        }
+        }
+    }
 
       /* Compute memory regions, alignment and maximum name lengths.  */
       for (sym = symbol_list, i = 0; i <= symbol_list_idx; ++sym, ++i)
-	{
-	  if ((len = strlen (sym->name)) > maxlen_symname)
-	    maxlen_symname = len;
-	  if (!strcmp (sym->section->name, "*ABS*"))
-	    sym->region_name = "*ABS*";
-	  else if (memregs)
-	    {
-	      int j;
+    {
+      if ((len = strlen (sym->name)) > maxlen_symname)
+        maxlen_symname = len;
+      if (!strcmp (sym->section->name, "*ABS*"))
+        sym->region_name = "*ABS*";
+      else if (memregs)
+        {
+          int j;
 
-	      for (j = 0; j < nmemregs; ++j)
-		if ((sym->address >= memregs[j].start)
-		    && (sym->address < (memregs[j].start + memregs[j].length)))
-		  {
-		    sym->region_name = memregs[j].name;
-		    break;
-		  }
-	    }
-	  if ((len = strlen (sym->region_name)) > maxlen_memreg)
-	    maxlen_memreg = len;
-	  if (sym->size > max_size)
-	    max_size = sym->size;
-	  if ((len = strlen (sym->section->name)) > maxlen_isecname)
-	    maxlen_isecname = len;
-	  if ((len = strlen (sym->section->output_section->name))
-	       > maxlen_osecname)
-	    maxlen_osecname = len;
-	  if ((sym->section->owner != NULL)
-	      && ((len = strlen (bfd_archive_filename (sym->section->owner)))
-		   > maxlen_modname))
-	    maxlen_modname = len;
-	  if (sym->is_bit)
-	    {
-	      sym->align = 0;
-	      bit_seen = true;
-	    }
-	  else if ((sym->address & 1)
-		   || (sym->size & 1)
-	  	   || !strcmp (sym->section->name, "*ABS*"))
-	    sym->align = 1;
-	  else if ((bfd_get_section_flags (sym->section->owner, sym->section)
-	  	    & SEC_CODE))
-	    sym->align = 2;
-	  else if (!(sym->address & 7))
-	    sym->align = 8;
-	  else if (!(sym->address & 3))
-	    sym->align = 4;
-	  else
-	    sym->align = 2;
-	  if ((sym->size != 0) && (sym->size <= 8))
-	    while (sym->align > (int) sym->size)
-	      sym->align >>= 1;
-	}
+          for (j = 0; j < nmemregs; ++j)
+        if ((sym->address >= memregs[j].start)
+            && (sym->address < (memregs[j].start + memregs[j].length)))
+          {
+            sym->region_name = memregs[j].name;
+            break;
+          }
+        }
+      if ((len = strlen (sym->region_name)) > maxlen_memreg)
+        maxlen_memreg = len;
+      if (sym->size > max_size)
+        max_size = sym->size;
+      if ((len = strlen (sym->section->name)) > maxlen_isecname)
+        maxlen_isecname = len;
+      if ((len = strlen (sym->section->output_section->name))
+           > maxlen_osecname)
+        maxlen_osecname = len;
+      if ((sym->section->owner != NULL)
+          && ((len = strlen (bfd_archive_filename (sym->section->owner)))
+           > maxlen_modname))
+        maxlen_modname = len;
+      if (sym->is_bit)
+        {
+          sym->align = 0;
+          bit_seen = true;
+        }
+      else if ((sym->address & 1)
+           || (sym->size & 1)
+           || !strcmp (sym->section->name, "*ABS*"))
+        sym->align = 1;
+      else if ((bfd_get_section_flags (sym->section->owner, sym->section)
+            & SEC_CODE))
+        sym->align = 2;
+      else if (!(sym->address & 7))
+        sym->align = 8;
+      else if (!(sym->address & 3))
+        sym->align = 4;
+      else
+        sym->align = 2;
+      if ((sym->size != 0) && (sym->size <= 8))
+        while (sym->align > (int) sym->size)
+          sym->align >>= 1;
+    }
       if ((maxlen_size = sprintf (size_str, "%ld", max_size)) < 4)
         maxlen_size = 4;
     }
@@ -5601,59 +5601,59 @@ tricore_elf32_do_extmap (info)
       symbol_t *sym = symbol_list;
 
       qsort (sym, symbol_list_idx + 1, sizeof (symbol_t),
-	     tricore_elf32_extmap_sort_addr);
+         tricore_elf32_extmap_sort_addr);
       fprintf (out, ">>> Symbols (global %s; sorted by address)\n\n",
                (tricore_elf32_extmap_syms_by_addr == 1)
-	        ? "only" : "(S = g) and static (S = l)");
+            ? "only" : "(S = g) and static (S = l)");
       max_chars = (10 + (bit_seen ? 2 : 0) + 1 + 10 + 1
-      		   + maxlen_size + 1
+               + maxlen_size + 1
                    + ((tricore_elf32_extmap_syms_by_addr == 1) ? 0 : 2)
-		   + maxlen_symname + 1
-		   + maxlen_memreg + 1
-		   + maxlen_osecname + 1
-		   + maxlen_isecname + 1
-		   + maxlen_modname);
+           + maxlen_symname + 1
+           + maxlen_memreg + 1
+           + maxlen_osecname + 1
+           + maxlen_isecname + 1
+           + maxlen_modname);
       for (i = 0; i < max_chars; ++i)
         fputc ('=', out);
       fprintf (out, "\n");
       fprintf (out, "%-*s%s %-*s %*s %s%-*s %-*s %-*s %-*s %-*s\n",
-      	       10, "Start",
-      	       bit_seen ? "  " : "",
-	       10, "End",
-	       maxlen_size, "Size",
-	       (tricore_elf32_extmap_syms_by_addr == 1) ? "" : "S ",
-	       maxlen_symname, "Name",
-	       maxlen_memreg, "Memory",
-	       maxlen_osecname, "O-Sec",
-	       maxlen_isecname, "I-Sec",
-	       maxlen_modname, "Input object");
+               10, "Start",
+               bit_seen ? "  " : "",
+           10, "End",
+           maxlen_size, "Size",
+           (tricore_elf32_extmap_syms_by_addr == 1) ? "" : "S ",
+           maxlen_symname, "Name",
+           maxlen_memreg, "Memory",
+           maxlen_osecname, "O-Sec",
+           maxlen_isecname, "I-Sec",
+           maxlen_modname, "Input object");
       for (i = 0; i < max_chars; ++i)
         fputc ('=', out);
       fprintf (out, "\n");
 
       for (i = 0; i <= symbol_list_idx; ++sym, ++i)
         {
-	  if ((tricore_elf32_extmap_syms_by_addr == 1) && sym->is_static)
-	    continue;
+      if ((tricore_elf32_extmap_syms_by_addr == 1) && sym->is_static)
+        continue;
 
-	  if (sym->is_bit)
-	    fprintf (out, "0x%08lx.%d ", sym->address, sym->bitpos);
-	  else
-	    fprintf (out, "0x%08lx%s ", sym->address, bit_seen ? "  " : "");
-	  fprintf (out, "0x%08lx %*ld %s%-*s %-*s %-*s %-*s %s\n",
-	  	   sym->address + sym->size - ((sym->size > 0) ? 1 : 0),
-	  	   maxlen_size, sym->size,
-	           (tricore_elf32_extmap_syms_by_addr == 1)
-		    ? ""
-		    : (sym->is_static ? "l " : "g "),
-		   maxlen_symname, sym->name,
-		   maxlen_memreg, sym->region_name,
-		   maxlen_osecname, sym->section->output_section->name,
-		   maxlen_isecname, sym->section->name,
-		   (sym->section->owner == NULL)
-		    ? "*ABS*"
-		    : bfd_archive_filename (sym->section->owner));
-	}
+      if (sym->is_bit)
+        fprintf (out, "0x%08lx.%d ", sym->address, sym->bitpos);
+      else
+        fprintf (out, "0x%08lx%s ", sym->address, bit_seen ? "  " : "");
+      fprintf (out, "0x%08lx %*ld %s%-*s %-*s %-*s %-*s %s\n",
+           sym->address + sym->size - ((sym->size > 0) ? 1 : 0),
+           maxlen_size, sym->size,
+               (tricore_elf32_extmap_syms_by_addr == 1)
+            ? ""
+            : (sym->is_static ? "l " : "g "),
+           maxlen_symname, sym->name,
+           maxlen_memreg, sym->region_name,
+           maxlen_osecname, sym->section->output_section->name,
+           maxlen_isecname, sym->section->name,
+           (sym->section->owner == NULL)
+            ? "*ABS*"
+            : bfd_archive_filename (sym->section->owner));
+    }
       fprintf (out, "\n");
     }
 
@@ -5664,60 +5664,60 @@ tricore_elf32_do_extmap (info)
       symbol_t *sym = symbol_list;
 
       qsort (sym, symbol_list_idx + 1, sizeof (symbol_t),
-	     tricore_elf32_extmap_sort_name);
+         tricore_elf32_extmap_sort_name);
       fprintf (out, ">>> Symbols (global %s; sorted by name)\n\n",
                (tricore_elf32_extmap_syms_by_name == 1)
-	        ? "only" : "(S = g) and static (S = l)");
+            ? "only" : "(S = g) and static (S = l)");
       max_chars = (maxlen_symname + 1
-      		   + ((tricore_elf32_extmap_syms_by_name == 1) ? 0 : 2)
-      		   + 10 + (bit_seen ? 2 : 0) + 1 + 10 + 1
-      		   + maxlen_size + 1
-		   + maxlen_memreg + 1
-		   + maxlen_osecname + 1
-		   + maxlen_isecname + 1
-		   + maxlen_modname);
+               + ((tricore_elf32_extmap_syms_by_name == 1) ? 0 : 2)
+               + 10 + (bit_seen ? 2 : 0) + 1 + 10 + 1
+               + maxlen_size + 1
+           + maxlen_memreg + 1
+           + maxlen_osecname + 1
+           + maxlen_isecname + 1
+           + maxlen_modname);
       for (i = 0; i < max_chars; ++i)
         fputc ('=', out);
       fprintf (out, "\n");
       fprintf (out, "%-*s %s%-*s%s %-*s %*s %-*s %-*s %-*s %-*s\n",
-	       maxlen_symname, "Name",
-	       (tricore_elf32_extmap_syms_by_name == 1) ? "" : "S ",
-	       10, "Start",
-	       bit_seen ? "  " : "",
-	       10, "End",
-	       maxlen_size, "Size",
-	       maxlen_memreg, "Memory",
-	       maxlen_osecname, "O-Sec",
-	       maxlen_isecname, "I-Sec",
-	       maxlen_modname, "Input object");
+           maxlen_symname, "Name",
+           (tricore_elf32_extmap_syms_by_name == 1) ? "" : "S ",
+           10, "Start",
+           bit_seen ? "  " : "",
+           10, "End",
+           maxlen_size, "Size",
+           maxlen_memreg, "Memory",
+           maxlen_osecname, "O-Sec",
+           maxlen_isecname, "I-Sec",
+           maxlen_modname, "Input object");
       for (i = 0; i < max_chars; ++i)
         fputc ('=', out);
       fprintf (out, "\n");
 
       for (i = 0; i <= symbol_list_idx; ++sym, ++i)
         {
-	  if ((tricore_elf32_extmap_syms_by_name == 1) && sym->is_static)
-	    continue;
+      if ((tricore_elf32_extmap_syms_by_name == 1) && sym->is_static)
+        continue;
 
-	  fprintf (out, "%-*s %s",
-		   maxlen_symname, sym->name,
-	           (tricore_elf32_extmap_syms_by_name == 1)
-		    ? ""
-		    : (sym->is_static ? "l " : "g "));
-	  if (sym->is_bit)
-	    fprintf (out, "0x%08lx.%d ", sym->address, sym->bitpos);
-	  else
-	    fprintf (out, "0x%08lx%s ", sym->address, bit_seen ? "  " : "");
-	  fprintf (out, "0x%08lx %*ld %-*s %-*s %-*s %s\n",
-	  	   sym->address + sym->size - ((sym->size > 0) ? 1 : 0),
-	  	   maxlen_size, sym->size,
-		   maxlen_memreg, sym->region_name,
-		   maxlen_osecname, sym->section->output_section->name,
-		   maxlen_isecname, sym->section->name,
-		   (sym->section->owner == NULL)
-		    ? "*ABS*"
-		    : bfd_archive_filename (sym->section->owner));
-	}
+      fprintf (out, "%-*s %s",
+           maxlen_symname, sym->name,
+               (tricore_elf32_extmap_syms_by_name == 1)
+            ? ""
+            : (sym->is_static ? "l " : "g "));
+      if (sym->is_bit)
+        fprintf (out, "0x%08lx.%d ", sym->address, sym->bitpos);
+      else
+        fprintf (out, "0x%08lx%s ", sym->address, bit_seen ? "  " : "");
+      fprintf (out, "0x%08lx %*ld %-*s %-*s %-*s %s\n",
+           sym->address + sym->size - ((sym->size > 0) ? 1 : 0),
+           maxlen_size, sym->size,
+           maxlen_memreg, sym->region_name,
+           maxlen_osecname, sym->section->output_section->name,
+           maxlen_isecname, sym->section->name,
+           (sym->section->owner == NULL)
+            ? "*ABS*"
+            : bfd_archive_filename (sym->section->owner));
+    }
       fprintf (out, "\n");
     }
 
@@ -5728,40 +5728,40 @@ tricore_elf32_do_extmap (info)
       size_t len;
 
       qsort (memregs, nmemregs, sizeof (memreg_t),
-	     tricore_elf32_extmap_sort_memregs);
+         tricore_elf32_extmap_sort_memregs);
       fprintf (out, ">>> Memory segments (sorted by name)\n\n");
 
       for (i = 0; i < nmemregs; ++i)
-	if ((len = strlen (memregs[i].name)) > maxlen_memreg)
-	  maxlen_memreg = len;
+    if ((len = strlen (memregs[i].name)) > maxlen_memreg)
+      maxlen_memreg = len;
 
       max_chars = (maxlen_memreg + 1
-      		   + 10 + 1
-		   + 10 + 1
-		   + 10 + 1
-		   + 10);
+               + 10 + 1
+           + 10 + 1
+           + 10 + 1
+           + 10);
       for (i = 0; i < max_chars; ++i)
         fputc ('=', out);
       fprintf (out, "\n");
       fprintf (out, "%-*s %-*s %-*s %-*s %-*s\n",
-      	       maxlen_memreg, "Name",
-	       10, "Start",
-	       10, "End",
-	       10, "Used",
-	       10, "Free");
+               maxlen_memreg, "Name",
+           10, "Start",
+           10, "End",
+           10, "Used",
+           10, "Free");
       for (i = 0; i < max_chars; ++i)
         fputc ('=', out);
       fprintf (out, "\n");
 
       for (i = 0; i < nmemregs; ++i)
         fprintf (out, "%-*s 0x%08lx 0x%08lx 0x%08lx 0x%08lx\n",
-		 maxlen_memreg, memregs[i].name,
-		 memregs[i].start,
-		 memregs[i].start + memregs[i].length
-		  - (((memregs[i].length > 0)
-		      && (memregs[i].length != ~(bfd_size_type) 0)) ? 1 : 0),
-		 memregs[i].used,
-		 memregs[i].length - memregs[i].used);
+         maxlen_memreg, memregs[i].name,
+         memregs[i].start,
+         memregs[i].start + memregs[i].length
+          - (((memregs[i].length > 0)
+              && (memregs[i].length != ~(bfd_size_type) 0)) ? 1 : 0),
+         memregs[i].used,
+         memregs[i].length - memregs[i].used);
       fprintf (out, "\n");
     }
 
@@ -5780,7 +5780,7 @@ tricore_elf32_do_extmap (info)
    all target addresses for which we've already built a trampoline; all
    call/jump instructions referencing the same target address will also
    use the same trampoline.
-   
+
    Another thing we're doing here is to compress sections containing
    bit objects.  Such bit objects initially occupy one byte each and are
    accessed via their absolute address and bit position zero; after we've
@@ -5814,8 +5814,8 @@ tricore_elf32_relax_section (abfd, sec, info, again)
 
   if (tricore_elf32_debug_relax)
     printf ("Relaxing %s(%s) [secid = %d], raw = %ld, cooked = %ld\n",
-  	    bfd_archive_filename (abfd), sec->name, sec->id,
-	    sec->_raw_size, sec->_cooked_size);
+        bfd_archive_filename (abfd), sec->name, sec->id,
+        sec->_raw_size, sec->_cooked_size);
 
   /* Assume nothing changes.  */
   *again = false;
@@ -5834,8 +5834,8 @@ tricore_elf32_relax_section (abfd, sec, info, again)
       && (sec->_raw_size == sec->_cooked_size)
       && (!strcmp (sec->name, ".bdata")
           || !strncmp (sec->name, ".bdata.", 7)
-	  || !strcmp (sec->name, ".bbss")
-	  || !strncmp (sec->name, ".bbss.", 6)))
+      || !strcmp (sec->name, ".bbss")
+      || !strncmp (sec->name, ".bbss.", 6)))
     {
       bfd_vma baddr = 0;
       int bpos = -1;
@@ -5853,39 +5853,39 @@ tricore_elf32_relax_section (abfd, sec, info, again)
       boffs = bfd_get_section_by_name (abfd, ".boffs");
       if (boffs == NULL)
         {
-	  (*_bfd_error_handler) (_("%s: missing section \".boffs\""),
-	  			 bfd_archive_filename (abfd));
-	  bfd_set_error (bfd_error_bad_value);
-	  return false;
-	}
+      (*_bfd_error_handler) (_("%s: missing section \".boffs\""),
+                 bfd_archive_filename (abfd));
+      bfd_set_error (bfd_error_bad_value);
+      return false;
+    }
       if (boffs->_raw_size != 0)
         {
-	  (*_bfd_error_handler) (_("%s: section \".boffs\" has non-zero size"),
-	  			 bfd_archive_filename (abfd));
-	  bfd_set_error (bfd_error_bad_value);
-	  return false;
-	}
+      (*_bfd_error_handler) (_("%s: section \".boffs\" has non-zero size"),
+                 bfd_archive_filename (abfd));
+      bfd_set_error (bfd_error_bad_value);
+      return false;
+    }
       sec_shndx = _bfd_elf_section_from_bfd_section (abfd, sec);
       boffs_shndx = _bfd_elf_section_from_bfd_section (abfd, boffs);
 
       if (is_bdata)
-	{
-	  /* Get the section contents.  */
-	  if (elf_section_data (sec)->this_hdr.contents != NULL)
-	    contents = elf_section_data (sec)->this_hdr.contents;
-	  else
-	    {
-	      contents = (bfd_byte *) bfd_malloc (sec->_raw_size);
-	      if (contents == NULL)
-	        return false;
+    {
+      /* Get the section contents.  */
+      if (elf_section_data (sec)->this_hdr.contents != NULL)
+        contents = elf_section_data (sec)->this_hdr.contents;
+      else
+        {
+          contents = (bfd_byte *) bfd_malloc (sec->_raw_size);
+          if (contents == NULL)
+            return false;
 
-	      if (!bfd_get_section_contents (abfd, sec, contents,
-	      				     (file_ptr) 0, sec->_raw_size))
-	        return false;
+          if (!bfd_get_section_contents (abfd, sec, contents,
+                             (file_ptr) 0, sec->_raw_size))
+            return false;
 
-	      /* Cache the contents, since we're going to change it.  */
+          /* Cache the contents, since we're going to change it.  */
               elf_section_data (sec)->this_hdr.contents = contents;
-	    }
+        }
 
           /* Make a copy of the original data to avoid overwriting
              them while packing the bit objects.  */
@@ -5894,273 +5894,273 @@ tricore_elf32_relax_section (abfd, sec, info, again)
             return false;
 
           memcpy (orig_contents, contents, sec->_raw_size);
-	}
+    }
 
       /* Read this BFD's local symbols.  */
       if (symtab_hdr->sh_info != 0)
         {
-	  isymbuf = (Elf_Internal_Sym *) symtab_hdr->contents;
-	  if (isymbuf == NULL)
-	    isymbuf = bfd_elf_get_elf_syms (abfd, symtab_hdr,
-	    				    symtab_hdr->sh_info, 0,
-					    NULL, NULL, NULL);
-	  if (isymbuf == NULL)
-	    goto error_return;
+      isymbuf = (Elf_Internal_Sym *) symtab_hdr->contents;
+      if (isymbuf == NULL)
+        isymbuf = bfd_elf_get_elf_syms (abfd, symtab_hdr,
+                            symtab_hdr->sh_info, 0,
+                        NULL, NULL, NULL);
+      if (isymbuf == NULL)
+        goto error_return;
 
-	  /* Cache local syms, as we're going to change their values.  */
+      /* Cache local syms, as we're going to change their values.  */
           symtab_hdr->contents = (unsigned char *) isymbuf;
 
-	  strtab_hdr = &elf_tdata (abfd)->strtab_hdr;
-	  strtab = strtab_hdr->contents;
-	  if (strtab == NULL)
-	    {
-	      bfd_elf_get_str_section (abfd, symtab_hdr->sh_link);
-	      strtab = strtab_hdr->contents;
-	    }
-	  BFD_ASSERT (strtab);
-	}
+      strtab_hdr = &elf_tdata (abfd)->strtab_hdr;
+      strtab = strtab_hdr->contents;
+      if (strtab == NULL)
+        {
+          bfd_elf_get_str_section (abfd, symtab_hdr->sh_link);
+          strtab = strtab_hdr->contents;
+        }
+      BFD_ASSERT (strtab);
+    }
 
       /* Walk through all local symbols in this section.  */
       if (isymbuf != NULL)
         {
-	  Elf_Internal_Sym *isym, *isymend = isymbuf + symtab_hdr->sh_info;
+      Elf_Internal_Sym *isym, *isymend = isymbuf + symtab_hdr->sh_info;
 
-	  for (isym = isymbuf; isym < isymend; isym++)
-	    {
-	      if ((isym->st_shndx == sec_shndx)
-	          && (ELF_ST_TYPE (isym->st_info) == STT_OBJECT))
-		{
-		  Elf_Internal_Sym *isym2;
-		  char *aname, *pname;
-		  size_t len;
+      for (isym = isymbuf; isym < isymend; isym++)
+        {
+          if ((isym->st_shndx == sec_shndx)
+              && (ELF_ST_TYPE (isym->st_info) == STT_OBJECT))
+        {
+          Elf_Internal_Sym *isym2;
+          char *aname, *pname;
+          size_t len;
 
-		  aname = strtab + isym->st_name;
-		  len = strlen (aname);
-		  if (isym->st_size != 1)
-		    {
-		      /* This symbol no bit.  Gripe.  */
-	              (*_bfd_error_handler)
-		       (_("%s: bit symbol \"%s\" has size != 1 (%ld)"),
-	  		bfd_archive_filename (abfd), aname, isym->st_size);
-		      bfd_set_error (bfd_error_bad_value);
-		      goto error_return;
-		    }
+          aname = strtab + isym->st_name;
+          len = strlen (aname);
+          if (isym->st_size != 1)
+            {
+              /* This symbol no bit.  Gripe.  */
+                  (*_bfd_error_handler)
+               (_("%s: bit symbol \"%s\" has size != 1 (%ld)"),
+            bfd_archive_filename (abfd), aname, isym->st_size);
+              bfd_set_error (bfd_error_bad_value);
+              goto error_return;
+            }
 
-		  if (tricore_elf32_debug_relax)
-		    {
-		      printf ("  * %s (local), old addr = %ld",
-		  	      aname, isym->st_value);
-		      fflush (stdout);
-		    }
+          if (tricore_elf32_debug_relax)
+            {
+              printf ("  * %s (local), old addr = %ld",
+                  aname, isym->st_value);
+              fflush (stdout);
+            }
 
-		  /* Usually (in case of tricore-as, at least), we expect the
-		     next local symbol after a local bit symbol to be a
-		     local bit position symbol attached to section ".boffs",
-		     but nevertheless we're allowing said bit position
-		     symbol to be defined anywhere between the local bit
-		     symbol and the end of this object file's local syms.  */
-		  for (isym2 = isym + 1; isym2 < isymend; isym2++)
-		    {
-	      	      if (ELF_ST_TYPE (isym2->st_info) == STT_FILE)
-		        {
-			  /* No bit position symbol defined; bail out.  */
-			  isym2 = isymend;
-			  break;
-			}
+          /* Usually (in case of tricore-as, at least), we expect the
+             next local symbol after a local bit symbol to be a
+             local bit position symbol attached to section ".boffs",
+             but nevertheless we're allowing said bit position
+             symbol to be defined anywhere between the local bit
+             symbol and the end of this object file's local syms.  */
+          for (isym2 = isym + 1; isym2 < isymend; isym2++)
+            {
+                  if (ELF_ST_TYPE (isym2->st_info) == STT_FILE)
+                {
+              /* No bit position symbol defined; bail out.  */
+              isym2 = isymend;
+              break;
+            }
 
-		      if ((isym2->st_shndx == boffs_shndx)
-		          && (ELF_ST_TYPE (isym2->st_info) == STT_NOTYPE)
-			  && (strlen (strtab + isym2->st_name) == (len + 4))
-			  && !strncmp (aname, strtab + isym2->st_name, len)
-			  && !strcmp (strtab + isym2->st_name + len, ".pos"))
-			{
-			  unsigned char byte = '\0';
+              if ((isym2->st_shndx == boffs_shndx)
+                  && (ELF_ST_TYPE (isym2->st_info) == STT_NOTYPE)
+              && (strlen (strtab + isym2->st_name) == (len + 4))
+              && !strncmp (aname, strtab + isym2->st_name, len)
+              && !strcmp (strtab + isym2->st_name + len, ".pos"))
+            {
+              unsigned char byte = '\0';
 
-			  pname = strtab + isym2->st_name;
-			  if (isym2->st_value != 0)
-			    {
-			      if (tricore_elf32_debug_relax)
-			        printf ("\n");
+              pname = strtab + isym2->st_name;
+              if (isym2->st_value != 0)
+                {
+                  if (tricore_elf32_debug_relax)
+                    printf ("\n");
 
-	                      (*_bfd_error_handler)
-		               (_("%s: bit position symbol \"%s\" has "
-			          "non-zero value %ld"),
-	  		        bfd_archive_filename (abfd), pname,
-				isym2->st_value);
-		              bfd_set_error (bfd_error_bad_value);
-			      goto error_return;
-			    }
+                          (*_bfd_error_handler)
+                       (_("%s: bit position symbol \"%s\" has "
+                      "non-zero value %ld"),
+                    bfd_archive_filename (abfd), pname,
+                isym2->st_value);
+                      bfd_set_error (bfd_error_bad_value);
+                  goto error_return;
+                }
 
-			  /* Determine next free bit address.  */
-			  if (++bpos == 8)
-			    {
-			      bpos = 0;
-			      ++baddr;
-			    }
+              /* Determine next free bit address.  */
+              if (++bpos == 8)
+                {
+                  bpos = 0;
+                  ++baddr;
+                }
 
-			  if (is_bdata)
-			    {
-			      /* Copy the bit object's original value
-			         to its new bit address.  */
-			      byte =
-			        (orig_contents[isym->st_value] & 1) << bpos;
-			      contents[baddr] &= ~(1 << bpos);
-			      contents[baddr] |= byte;
-			    }
+              if (is_bdata)
+                {
+                  /* Copy the bit object's original value
+                     to its new bit address.  */
+                  byte =
+                    (orig_contents[isym->st_value] & 1) << bpos;
+                  contents[baddr] &= ~(1 << bpos);
+                  contents[baddr] |= byte;
+                }
 
-			  if (tricore_elf32_debug_relax)
-			    {
-			      printf (".0, new addr = %ld.%d", baddr, bpos);
-			      if (is_bdata)
-			        printf (", val = 0x%02x", byte);
-			      printf ("\n");
-			    }
+              if (tricore_elf32_debug_relax)
+                {
+                  printf (".0, new addr = %ld.%d", baddr, bpos);
+                  if (is_bdata)
+                    printf (", val = 0x%02x", byte);
+                  printf ("\n");
+                }
 
-			  /* Adjust relocations against the old bit object.  */
+              /* Adjust relocations against the old bit object.  */
                           if (!tricore_elf32_adjust_bit_relocs
-			       (abfd, info, sec_shndx, isym->st_value, baddr,
-			        bpos, isym2 - isymbuf))
-			    return false;
+                   (abfd, info, sec_shndx, isym->st_value, baddr,
+                    bpos, isym2 - isymbuf))
+                return false;
 
-			  /* Finally, set the new values.  */
-			  isym->st_value = baddr;
-			  isym2->st_value = bpos;
-			  break;
-			}
-		    }
-		  if (isym2 == isymend)
-		    {
-		      if (tricore_elf32_debug_relax)
-		        printf ("\n");
+              /* Finally, set the new values.  */
+              isym->st_value = baddr;
+              isym2->st_value = bpos;
+              break;
+            }
+            }
+          if (isym2 == isymend)
+            {
+              if (tricore_elf32_debug_relax)
+                printf ("\n");
 
-	              (*_bfd_error_handler)
-		       (_("%s: missing or invalid local bit position "
-		          "symbol \"%s.pos\" in section \".boffs\""),
-	  		bfd_archive_filename (abfd), aname);
-		      bfd_set_error (bfd_error_bad_value);
-		      goto error_return;
-		    }
-		}
-	    }
-	}
+                  (*_bfd_error_handler)
+               (_("%s: missing or invalid local bit position "
+                  "symbol \"%s.pos\" in section \".boffs\""),
+            bfd_archive_filename (abfd), aname);
+              bfd_set_error (bfd_error_bad_value);
+              goto error_return;
+            }
+        }
+        }
+    }
 
       /* Walk through all global symbols in this section.  */
       symcount = (symtab_hdr->sh_size / sizeof (Elf32_External_Sym)
-      		  - symtab_hdr->sh_info);
+              - symtab_hdr->sh_info);
       beg_hashes = elf_sym_hashes (abfd);
       end_hashes = elf_sym_hashes (abfd) + symcount;
       for (sym_hashes = beg_hashes; sym_hashes < end_hashes; sym_hashes++)
         {
-	  struct elf_link_hash_entry *sym = *sym_hashes;
+      struct elf_link_hash_entry *sym = *sym_hashes;
 
-	  if ((sym->root.u.def.section == sec)
-	      && (sym->type == STT_OBJECT)
-	      && ((sym->root.type == bfd_link_hash_defined)
-	          || (sym->root.type == bfd_link_hash_defweak)))
-	    {
-	      struct elf_link_hash_entry *sym2;
-	      const char *aname = sym->root.root.string;
-	      char *pname;
-	      size_t len;
+      if ((sym->root.u.def.section == sec)
+          && (sym->type == STT_OBJECT)
+          && ((sym->root.type == bfd_link_hash_defined)
+              || (sym->root.type == bfd_link_hash_defweak)))
+        {
+          struct elf_link_hash_entry *sym2;
+          const char *aname = sym->root.root.string;
+          char *pname;
+          size_t len;
 
-	      if (sym->size != 1)
-		{
-		  /* This symbol no bit.  Gripe.  */
-	          (*_bfd_error_handler)
-		   (_("%s: bit symbol \"%s\" has size != 1 (%ld)"),
-	  	    bfd_archive_filename (abfd), aname, sym->size);
-		  bfd_set_error (bfd_error_bad_value);
-		  goto error_return;
-		}
-	      if (sym->elf_link_hash_flags
-	          & (ELF_LINK_HASH_REF_DYNAMIC | ELF_LINK_HASH_DEF_DYNAMIC))
-		{
-		  (*_bfd_error_handler)
-		   (_("%s: bit symbol \"%s\" defined or referenced by a "
-		      "shared object"),
-	  	    bfd_archive_filename (abfd), aname);
-		  bfd_set_error (bfd_error_bad_value);
-	          goto error_return;
-		}
+          if (sym->size != 1)
+        {
+          /* This symbol no bit.  Gripe.  */
+              (*_bfd_error_handler)
+           (_("%s: bit symbol \"%s\" has size != 1 (%ld)"),
+            bfd_archive_filename (abfd), aname, sym->size);
+          bfd_set_error (bfd_error_bad_value);
+          goto error_return;
+        }
+          if (sym->elf_link_hash_flags
+              & (ELF_LINK_HASH_REF_DYNAMIC | ELF_LINK_HASH_DEF_DYNAMIC))
+        {
+          (*_bfd_error_handler)
+           (_("%s: bit symbol \"%s\" defined or referenced by a "
+              "shared object"),
+            bfd_archive_filename (abfd), aname);
+          bfd_set_error (bfd_error_bad_value);
+              goto error_return;
+        }
 
-	      if (tricore_elf32_debug_relax)
-	        {
-		  printf ("  * %s (global), old addr = %ld",
-	                  aname, sym->root.u.def.value);
-	          fflush (stdout);
-		}
+          if (tricore_elf32_debug_relax)
+            {
+          printf ("  * %s (global), old addr = %ld",
+                      aname, sym->root.u.def.value);
+              fflush (stdout);
+        }
 
-	      len = strlen (aname) + 5;
-	      if ((pname = bfd_malloc (len)) == NULL)
-	        goto error_return;
+          len = strlen (aname) + 5;
+          if ((pname = bfd_malloc (len)) == NULL)
+            goto error_return;
 
-	      sprintf (pname, "%s.pos", aname);
-	      sym2 = (struct elf_link_hash_entry *)
-	      	      bfd_link_hash_lookup (info->hash, pname,
-		      			    false, false, false);
-	      if ((sym2 == NULL)
-		  || (sym2->type != STT_NOTYPE)
-		  || (sym2->root.u.def.value != 0)
-	          || strcmp (sym2->root.u.def.section->name, ".boffs"))
-		{
-	          if (tricore_elf32_debug_relax)
-		    printf ("\n");
+          sprintf (pname, "%s.pos", aname);
+          sym2 = (struct elf_link_hash_entry *)
+                  bfd_link_hash_lookup (info->hash, pname,
+                            false, false, false);
+          if ((sym2 == NULL)
+          || (sym2->type != STT_NOTYPE)
+          || (sym2->root.u.def.value != 0)
+              || strcmp (sym2->root.u.def.section->name, ".boffs"))
+        {
+              if (tricore_elf32_debug_relax)
+            printf ("\n");
 
-		  (*_bfd_error_handler)
-		   (_("%s: missing or invalid global bit position "
-		      "symbol \"%s\""),
-		    bfd_archive_filename (abfd), pname);
-		  bfd_set_error (bfd_error_bad_value);
-		  free (pname);
-		  goto error_return;
-		}
-	      else
-		{
-		  unsigned char byte = '\0';
+          (*_bfd_error_handler)
+           (_("%s: missing or invalid global bit position "
+              "symbol \"%s\""),
+            bfd_archive_filename (abfd), pname);
+          bfd_set_error (bfd_error_bad_value);
+          free (pname);
+          goto error_return;
+        }
+          else
+        {
+          unsigned char byte = '\0';
 
-		  free (pname);
+          free (pname);
 
-		  /* Determine next free bit address.  */
-		  if (++bpos == 8)
-		    {
-		      bpos = 0;
-		      ++baddr;
-		    }
-		  if (is_bdata)
-		    {
-		      /* Copy the bit object's original value
-		         to its new bit address.  */
-		      byte = (orig_contents[sym->root.u.def.value] & 1) << bpos;
-		      contents[baddr] &= ~(1 << bpos);
-		      contents[baddr] |= byte;
-		    }
+          /* Determine next free bit address.  */
+          if (++bpos == 8)
+            {
+              bpos = 0;
+              ++baddr;
+            }
+          if (is_bdata)
+            {
+              /* Copy the bit object's original value
+                 to its new bit address.  */
+              byte = (orig_contents[sym->root.u.def.value] & 1) << bpos;
+              contents[baddr] &= ~(1 << bpos);
+              contents[baddr] |= byte;
+            }
 
-	          if (tricore_elf32_debug_relax)
-		    {
-		      printf (".0, new addr = %ld.%d", baddr, bpos);
-		      if (is_bdata)
-		        printf (", val = 0x%02x", byte);
-		      printf ("\n");
-		    }
+              if (tricore_elf32_debug_relax)
+            {
+              printf (".0, new addr = %ld.%d", baddr, bpos);
+              if (is_bdata)
+                printf (", val = 0x%02x", byte);
+              printf ("\n");
+            }
 
-		  /* This catches cases in which the assembler (or other
-		     binutil) has transformed relocations against "local
-		     globals" (i.e., global symbols defined in the same
-		     module as the instructions referencing them) into
-		     relocations against section+offset, as it is usually
-		     only done with relocs against local symbols.  */
+          /* This catches cases in which the assembler (or other
+             binutil) has transformed relocations against "local
+             globals" (i.e., global symbols defined in the same
+             module as the instructions referencing them) into
+             relocations against section+offset, as it is usually
+             only done with relocs against local symbols.  */
                   if (!(tricore_elf32_adjust_bit_relocs
-			(abfd, info, sec_shndx,
-			 sym->root.u.def.value, baddr, bpos,
-			 sym2 - *beg_hashes + symtab_hdr->sh_info)))
-		    return false;
+            (abfd, info, sec_shndx,
+             sym->root.u.def.value, baddr, bpos,
+             sym2 - *beg_hashes + symtab_hdr->sh_info)))
+            return false;
 
-		  /* Finally, set the new values.  */
-		  sym->root.u.def.value = baddr;
-		  sym2->root.u.def.value = bpos;
-		}
-	    }
-	}
+          /* Finally, set the new values.  */
+          sym->root.u.def.value = baddr;
+          sym2->root.u.def.value = bpos;
+        }
+        }
+    }
 
       sec->_cooked_size = baddr + 1;
       if (is_bdata)
@@ -6188,8 +6188,8 @@ tricore_elf32_relax_section (abfd, sec, info, again)
       /* Find the highest section ID of all input sections.  */
       for (ibfd = info->input_bfds; ibfd; ibfd = ibfd->link_next)
         for (section = ibfd->sections; section; section = section->next)
-	  if (section->id > max)
-	    max = section->id;
+      if (section->id > max)
+        max = section->id;
 
       ++max;
       if (((rela_malloced = bfd_malloc (max * sizeof (boolean))) == NULL)
@@ -6200,19 +6200,19 @@ tricore_elf32_relax_section (abfd, sec, info, again)
 
       for (i = 0; i < max; ++i)
         {
-	  rela_malloced[i] = false;
-	  rela_p[i] = NULL;
-	  num_rela[i] = -1;
-	  max_rela[i] = 12;
-	}
+      rela_malloced[i] = false;
+      rela_p[i] = NULL;
+      num_rela[i] = -1;
+      max_rela[i] = 12;
+    }
 
       initialized = true;
     }
 
   /* Get a copy of the native relocations.  */
   internal_relocs = (_bfd_elf32_link_read_relocs
-  		     (abfd, sec, (PTR) NULL, (Elf_Internal_Rela *) NULL,
-		      info->keep_memory));
+             (abfd, sec, (PTR) NULL, (Elf_Internal_Rela *) NULL,
+              info->keep_memory));
   if (internal_relocs == NULL)
     goto error_return;
 
@@ -6229,25 +6229,25 @@ tricore_elf32_relax_section (abfd, sec, info, again)
 
       r_type = ELF32_R_TYPE (irel->r_info);
       if ((r_type < 0)
-       	  || (r_type < R_TRICORE_NONE)
-  	  || (r_type >= R_TRICORE_max))
-	goto error_return;
+          || (r_type < R_TRICORE_NONE)
+      || (r_type >= R_TRICORE_max))
+    goto error_return;
 
       if (r_type != R_TRICORE_24REL)
-	continue;
+    continue;
 
       r_index = ELF32_R_SYM (irel->r_info);
       if (r_index < symtab_hdr->sh_info)
         {
-	  /* This is a call/jump instruction to a local label or function.
-	     The GNU/TriCore assembler will usually already have resolved
-	     such local branches, so we won't see any relocs for them here,
-	     but maybe this input object has been generated by another
-	     vendor's assembler.  Anyway, we must assume that targets of
-	     local branches can always be reached directly, so there's no
-	     need for us to bother.  */
-	  continue;
-	}
+      /* This is a call/jump instruction to a local label or function.
+         The GNU/TriCore assembler will usually already have resolved
+         such local branches, so we won't see any relocs for them here,
+         but maybe this input object has been generated by another
+         vendor's assembler.  Anyway, we must assume that targets of
+         local branches can always be reached directly, so there's no
+         need for us to bother.  */
+      continue;
+    }
       else
         r_index -= symtab_hdr->sh_info;
 
@@ -6255,120 +6255,120 @@ tricore_elf32_relax_section (abfd, sec, info, again)
       h = elf_sym_hashes (abfd)[r_index];
       BFD_ASSERT (h != NULL);
       while ((h->root.type == bfd_link_hash_indirect)
-	     || (h->root.type == bfd_link_hash_warning))
-	h = (struct elf_link_hash_entry *) h->root.u.i.link;
+         || (h->root.type == bfd_link_hash_warning))
+    h = (struct elf_link_hash_entry *) h->root.u.i.link;
       if ((h->root.type != bfd_link_hash_defined)
           && (h->root.type != bfd_link_hash_defweak))
-	{
-	  /* This appears to be a reference to an undefined symbol.  Just
-	     ignore it; it'll be caught by the regular reloc processing.  */
-	  continue;
-	}
+    {
+      /* This appears to be a reference to an undefined symbol.  Just
+         ignore it; it'll be caught by the regular reloc processing.  */
+      continue;
+    }
       sym_name = h->root.root.string;
       sym_val = h->root.u.def.value
-		+ h->root.u.def.section->output_section->vma
-		+ h->root.u.def.section->output_offset
-		+ irel->r_addend;
+        + h->root.u.def.section->output_section->vma
+        + h->root.u.def.section->output_offset
+        + irel->r_addend;
       pc = irel->r_offset + sec->output_section->vma + sec->output_offset;
 
       /* If the target address can be reached directly or absolutely, or if
          the PC or target address are odd, we don't need to do anything, as
-	 all of this will be handled by tricore_elf32_relocate_section.  */
+     all of this will be handled by tricore_elf32_relocate_section.  */
       diff = sym_val - pc;
       if (((diff >= -16777216) && (diff <= 16777214))
           || !(sym_val & 0x0fe00000)
-	  || (sym_val & 1) || (pc & 1))
-	continue;
+      || (sym_val & 1) || (pc & 1))
+    continue;
 
       /* Get the section contents if we haven't done so already.  */
       if (contents == NULL)
         {
-	  /* Get cached copy if it exists.  */
-	  if (elf_section_data (sec)->this_hdr.contents != NULL)
-	    contents = elf_section_data (sec)->this_hdr.contents;
-	  else
-	    {
-	      /* Go get them off disk.  */
-	      contents = (bfd_byte *) bfd_malloc (sec->_raw_size);
-	      if (contents == NULL)
-	        goto error_return;
+      /* Get cached copy if it exists.  */
+      if (elf_section_data (sec)->this_hdr.contents != NULL)
+        contents = elf_section_data (sec)->this_hdr.contents;
+      else
+        {
+          /* Go get them off disk.  */
+          contents = (bfd_byte *) bfd_malloc (sec->_raw_size);
+          if (contents == NULL)
+            goto error_return;
 
-	      if (!bfd_get_section_contents (abfd, sec, contents,
-	      				     (file_ptr) 0, sec->_raw_size))
-		goto error_return;
-	    }
-	}
+          if (!bfd_get_section_contents (abfd, sec, contents,
+                             (file_ptr) 0, sec->_raw_size))
+        goto error_return;
+        }
+    }
 
       /* Get the instruction.  */
       insn = bfd_get_32 (abfd, contents + irel->r_offset);
       if (((insn & 0xff) == 0x6d) || ((insn & 0xff) == 0x61))
         {
-	  struct bfd_link_hash_entry *h;
+      struct bfd_link_hash_entry *h;
 
           h = bfd_link_hash_lookup (info->hash, "CPUBUG14",
-	  			    false, false, false);
+                    false, false, false);
           if ((h != (struct bfd_link_hash_entry *) NULL)
-	      && (h->type == bfd_link_hash_defined)
-	      && (h->u.def.value != 0))
+          && (h->type == bfd_link_hash_defined)
+          && (h->u.def.value != 0))
             add_bytes = 20;
-	  else
-	    add_bytes = 12;
-	}
+      else
+        add_bytes = 12;
+    }
       else if (((insn & 0xff) == 0x1d) || ((insn & 0xff) == 0x5d))
         add_bytes = 12;
       else
         {
-	  (*_bfd_error_handler) (_("%s: Unknown call/jump insn at offset %ld"),
-	  			 bfd_get_filename (abfd), irel->r_offset);
-	  goto error_return;
-	}
+      (*_bfd_error_handler) (_("%s: Unknown call/jump insn at offset %ld"),
+                 bfd_get_filename (abfd), irel->r_offset);
+      goto error_return;
+    }
 
       /* See if we already created a stub for this symbol.  */
       use_offset = sec->_cooked_size;
       if (rela_p[idx] != NULL)
         {
-	  int i;
+      int i;
 
-	  for (i = 0; i <= num_rela[idx]; ++i)
-	    if ((rela_p[idx][i].symoff == (r_index + symtab_hdr->sh_info))
-	        && (rela_p[idx][i].addend == irel->r_addend)
-		&& (rela_p[idx][i].size == add_bytes))
-	      {
-		/* Use the existing stub.  */
-		use_offset = rela_p[idx][i].offset;
-      		diff = use_offset - irel->r_offset;
-		if (add_bytes == 20)
-      		  {
-		    diff -= 8;
-		    use_offset -= 8;
-		  }
-	        if (diff > 16777214)
-		  goto error_return;
+      for (i = 0; i <= num_rela[idx]; ++i)
+        if ((rela_p[idx][i].symoff == (r_index + symtab_hdr->sh_info))
+            && (rela_p[idx][i].addend == irel->r_addend)
+        && (rela_p[idx][i].size == add_bytes))
+          {
+        /* Use the existing stub.  */
+        use_offset = rela_p[idx][i].offset;
+            diff = use_offset - irel->r_offset;
+        if (add_bytes == 20)
+              {
+            diff -= 8;
+            use_offset -= 8;
+          }
+            if (diff > 16777214)
+          goto error_return;
 
-		diff >>= 1;
+        diff >>= 1;
                 insn |= ((diff & 0xffff) << 16);
                 insn |= ((diff & 0xff0000) >> 8);
                 bfd_put_32 (abfd, insn, contents + irel->r_offset);
-      		irel->r_info = R_TRICORE_NONE;
-		add_bytes = 0;
-		break;
-	      }
-	}
+            irel->r_info = R_TRICORE_NONE;
+        add_bytes = 0;
+        break;
+          }
+    }
 
       if (tricore_elf32_debug_relax)
-	{
-	  printf ("  # 0x%08lx[+%ld]: \"%s %s",
-	  	  pc, irel->r_offset,
-		  ((insn & 0xff) == 0x6d) ? "call"
-		   : ((insn & 0xff) == 0x61) ? "fcall"
-		      : ((insn & 0xff) == 0x1d) ? "j" : "jl",
-      	          sym_name);
-	  if (irel->r_addend != 0)
-	    printf ("+%ld", irel->r_addend);
-	  printf ("\" @0x%08lx[+%ld,%d]->0x%08lx\n", 
-		  use_offset + sec->output_section->vma + sec->output_offset,
-		  use_offset, add_bytes, sym_val);
-	}
+    {
+      printf ("  # 0x%08lx[+%ld]: \"%s %s",
+          pc, irel->r_offset,
+          ((insn & 0xff) == 0x6d) ? "call"
+           : ((insn & 0xff) == 0x61) ? "fcall"
+              : ((insn & 0xff) == 0x1d) ? "j" : "jl",
+                  sym_name);
+      if (irel->r_addend != 0)
+        printf ("+%ld", irel->r_addend);
+      printf ("\" @0x%08lx[+%ld,%d]->0x%08lx\n",
+          use_offset + sec->output_section->vma + sec->output_offset,
+          use_offset, add_bytes, sym_val);
+    }
 
       if (add_bytes == 0)
         continue;
@@ -6383,18 +6383,18 @@ tricore_elf32_relax_section (abfd, sec, info, again)
       /* Read this BFD's local symbols if we haven't done so already.  */
       if ((isymbuf == NULL) && (symtab_hdr->sh_info != 0))
         {
-	  isymbuf = (Elf_Internal_Sym *) symtab_hdr->contents;
-	  if (isymbuf == NULL)
-	    isymbuf = bfd_elf_get_elf_syms (abfd, symtab_hdr,
-	    				    symtab_hdr->sh_info, 0,
-					    NULL, NULL, NULL);
-	  if (isymbuf == NULL)
-	    goto error_return;
-	}
+      isymbuf = (Elf_Internal_Sym *) symtab_hdr->contents;
+      if (isymbuf == NULL)
+        isymbuf = bfd_elf_get_elf_syms (abfd, symtab_hdr,
+                            symtab_hdr->sh_info, 0,
+                        NULL, NULL, NULL);
+      if (isymbuf == NULL)
+        goto error_return;
+    }
 
       /* For simplicity of coding, we are going to modify the section
          contents, the section relocs, and the BFD symbol table.  We
-	 must tell the rest of the code not to free up this information.  */
+     must tell the rest of the code not to free up this information.  */
       elf_section_data (sec)->relocs = internal_relocs;
       elf_section_data (sec)->this_hdr.contents = contents;
       symtab_hdr->contents = (unsigned char *) isymbuf;
@@ -6412,12 +6412,12 @@ tricore_elf32_relax_section (abfd, sec, info, again)
       /* Emit the additonal code.  */
       if (add_bytes == 20)
         {
-	  /* This is called by a [f]call instruction, and we need a
-	     "dsync; nop; nop" sequence as a workaround for a hw bug.  */
-	  bfd_put_32 (abfd, 0x0480000d, contents + sec->_cooked_size);
-	  bfd_put_32 (abfd, 0x00000000, contents + sec->_cooked_size + 4);
-	  doff = 8;
-	}
+      /* This is called by a [f]call instruction, and we need a
+         "dsync; nop; nop" sequence as a workaround for a hw bug.  */
+      bfd_put_32 (abfd, 0x0480000d, contents + sec->_cooked_size);
+      bfd_put_32 (abfd, 0x00000000, contents + sec->_cooked_size + 4);
+      doff = 8;
+    }
       /* This is "movh.a %a2,hi:tgt; lea %a2,[%a2]lo:tgt; nop; ji %a2".  */
       bfd_put_32 (abfd, 0x20000091, contents + sec->_cooked_size + doff);
       bfd_put_32 (abfd, 0x000022d9, contents + sec->_cooked_size + doff + 4);
@@ -6426,20 +6426,20 @@ tricore_elf32_relax_section (abfd, sec, info, again)
       /* Remember the new relocs.  */
       if (num_rela[idx] == -1)
         {
-	  if ((rela_p[idx] = (struct _rela *)
-	        bfd_malloc (max_rela[idx] * sizeof (struct _rela))) == NULL)
-	    goto error_return;
+      if ((rela_p[idx] = (struct _rela *)
+            bfd_malloc (max_rela[idx] * sizeof (struct _rela))) == NULL)
+        goto error_return;
 
-	  num_rela[idx] = 0;
-	}
+      num_rela[idx] = 0;
+    }
       else if (++num_rela[idx] == max_rela[idx])
         {
-	  max_rela[idx] *= 2;
-	  if ((rela_p[idx] = (struct _rela *)
-	  	bfd_realloc (rela_p[idx],
-			     max_rela[idx] * sizeof (struct _rela))) == NULL)
-	    goto error_return;
-	}
+      max_rela[idx] *= 2;
+      if ((rela_p[idx] = (struct _rela *)
+        bfd_realloc (rela_p[idx],
+                 max_rela[idx] * sizeof (struct _rela))) == NULL)
+        goto error_return;
+    }
       ++now_rela;
       rela_p[idx][num_rela[idx]].offset = sec->_cooked_size + doff;
       rela_p[idx][num_rela[idx]].addend = irel->r_addend;
@@ -6460,37 +6460,37 @@ tricore_elf32_relax_section (abfd, sec, info, again)
 
       if (info->keep_memory && !rela_malloced[idx])
         {
-	  /* In this case, the memory for the relocs has been
-	     bfd_alloc()ed, so we can't use bfd_realloc() to make
-	     room for the additional relocs, and we can also not
-	     free(internal_relocs).  */
-	  if ((irel = bfd_malloc ((sec->reloc_count + 2 * now_rela)
-	  			    * sizeof (Elf_Internal_Rela))) == NULL)
-	    goto error_return;
+      /* In this case, the memory for the relocs has been
+         bfd_alloc()ed, so we can't use bfd_realloc() to make
+         room for the additional relocs, and we can also not
+         free(internal_relocs).  */
+      if ((irel = bfd_malloc ((sec->reloc_count + 2 * now_rela)
+                    * sizeof (Elf_Internal_Rela))) == NULL)
+        goto error_return;
 
-	  memcpy (irel, internal_relocs,
-	  	  sec->reloc_count * sizeof (Elf_Internal_Rela));
-	  internal_relocs = irel;
-	  rela_malloced[idx] = true;
-	}
+      memcpy (irel, internal_relocs,
+          sec->reloc_count * sizeof (Elf_Internal_Rela));
+      internal_relocs = irel;
+      rela_malloced[idx] = true;
+    }
       else if ((internal_relocs =
                   bfd_realloc (internal_relocs,
-	    		       (sec->reloc_count + 2 * now_rela)
-			         * sizeof (Elf_Internal_Rela))) == NULL)
-	goto error_return;
+                       (sec->reloc_count + 2 * now_rela)
+                     * sizeof (Elf_Internal_Rela))) == NULL)
+    goto error_return;
 
       elf_section_data (sec)->relocs = internal_relocs;
       irel = internal_relocs + sec->reloc_count;
       for (i = num_rela[idx] - now_rela + 1; i <= num_rela[idx]; ++i, ++irel)
         {
-	  irel->r_addend = rela_p[idx][i].addend;
-	  irel->r_offset = rela_p[idx][i].offset;
-	  irel->r_info = ELF32_R_INFO (rela_p[idx][i].symoff, R_TRICORE_HIADJ);
-	  ++irel;
-	  irel->r_addend = rela_p[idx][i].addend;
-	  irel->r_offset = rela_p[idx][i].offset + 4;
-	  irel->r_info = ELF32_R_INFO (rela_p[idx][i].symoff, R_TRICORE_LO2);
-	}
+      irel->r_addend = rela_p[idx][i].addend;
+      irel->r_offset = rela_p[idx][i].offset;
+      irel->r_info = ELF32_R_INFO (rela_p[idx][i].symoff, R_TRICORE_HIADJ);
+      ++irel;
+      irel->r_addend = rela_p[idx][i].addend;
+      irel->r_offset = rela_p[idx][i].offset + 4;
+      irel->r_info = ELF32_R_INFO (rela_p[idx][i].symoff, R_TRICORE_LO2);
+    }
 
       /* Set the new relocation count.  */
       sec->reloc_count += 2 * now_rela;
@@ -6541,50 +6541,50 @@ error_return:
 
 /* Now #define all necessary stuff to describe this target.  */
 
-#define USE_RELA			1
-#define ELF_ARCH			bfd_arch_tricore
-#define ELF_MACHINE_CODE		EM_TRICORE
-#define ELF_MAXPAGESIZE			0x4000
-#define TARGET_LITTLE_SYM		bfd_elf32_tricore_vec
-#define TARGET_LITTLE_NAME		"elf32-tricore"
-#define bfd_elf32_bfd_relax_section	tricore_elf32_relax_section
-#define bfd_elf32_bfd_reloc_type_lookup	tricore_elf32_reloc_type_lookup
-#define bfd_elf32_object_p		tricore_elf32_object_p
+#define USE_RELA            1
+#define ELF_ARCH            bfd_arch_tricore
+#define ELF_MACHINE_CODE        EM_TRICORE
+#define ELF_MAXPAGESIZE         0x4000
+#define TARGET_LITTLE_SYM       bfd_elf32_tricore_vec
+#define TARGET_LITTLE_NAME      "elf32-tricore"
+#define bfd_elf32_bfd_relax_section tricore_elf32_relax_section
+#define bfd_elf32_bfd_reloc_type_lookup tricore_elf32_reloc_type_lookup
+#define bfd_elf32_object_p      tricore_elf32_object_p
 #define bfd_elf32_bfd_merge_private_bfd_data \
-					tricore_elf32_merge_private_bfd_data
+                    tricore_elf32_merge_private_bfd_data
 #define bfd_elf32_bfd_copy_private_bfd_data \
-					tricore_elf32_copy_private_bfd_data
+                    tricore_elf32_copy_private_bfd_data
 #define bfd_elf32_bfd_set_private_flags tricore_elf32_set_private_flags
-#define elf_info_to_howto		tricore_elf32_info_to_howto
-#define elf_info_to_howto_rel		0
-#define elf_backend_section_flags	tricore_elf32_section_flags
-#define elf_backend_relocate_section	tricore_elf32_relocate_section
-#define elf_backend_fake_sections	tricore_elf32_fake_sections
+#define elf_info_to_howto       tricore_elf32_info_to_howto
+#define elf_info_to_howto_rel       0
+#define elf_backend_section_flags   tricore_elf32_section_flags
+#define elf_backend_relocate_section    tricore_elf32_relocate_section
+#define elf_backend_fake_sections   tricore_elf32_fake_sections
 
 #if 1
-#define bfd_elf32_bfd_final_link	_bfd_elf32_gc_common_final_link
+#define bfd_elf32_bfd_final_link    _bfd_elf32_gc_common_final_link
 #define elf_backend_gc_mark_hook        tricore_elf32_gc_mark_hook
 #define elf_backend_gc_sweep_hook       tricore_elf32_gc_sweep_hook
 #define elf_backend_reloc_type_class    tricore_elf32_reloc_type_class
-#define elf_backend_check_relocs	tricore_elf32_check_relocs
+#define elf_backend_check_relocs    tricore_elf32_check_relocs
 #define elf_backend_adjust_dynamic_symbol \
-					tricore_elf32_adjust_dynamic_symbol
+                    tricore_elf32_adjust_dynamic_symbol
 #define elf_backend_finish_dynamic_symbol \
-					tricore_elf32_finish_dynamic_symbol
+                    tricore_elf32_finish_dynamic_symbol
 #define elf_backend_create_dynamic_sections \
-					_bfd_elf_create_dynamic_sections
+                    _bfd_elf_create_dynamic_sections
 #define elf_backend_size_dynamic_sections \
-					tricore_elf32_size_dynamic_sections
+                    tricore_elf32_size_dynamic_sections
 #define elf_backend_finish_dynamic_sections \
-					tricore_elf32_finish_dynamic_sections
+                    tricore_elf32_finish_dynamic_sections
 
-#define elf_backend_can_gc_sections	1
-#define elf_backend_can_refcount	1
-#define elf_backend_plt_readonly	0
-#define elf_backend_want_plt_sym	0
-#define elf_backend_want_dynbss		1
-#define elf_backend_got_header_size	4
-#define elf_backend_plt_header_size	(PLT_RESERVED_SLOTS * PLT_ENTRY_SIZE)
+#define elf_backend_can_gc_sections 1
+#define elf_backend_can_refcount    1
+#define elf_backend_plt_readonly    0
+#define elf_backend_want_plt_sym    0
+#define elf_backend_want_dynbss     1
+#define elf_backend_got_header_size 4
+#define elf_backend_plt_header_size (PLT_RESERVED_SLOTS * PLT_ENTRY_SIZE)
 #endif
 
 #include "elf32-target.h"
